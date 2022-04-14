@@ -35,11 +35,11 @@ div.scrollmenu {
     background-color: #ffffff;
     width: 70%;
     min-width: 420px;
-    padding: 35px 50px;
+    padding: 10px 50px;
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 75%;
+    top: 68%;
     border-radius: 10px;
     box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
@@ -60,7 +60,7 @@ div.scrollmenu {
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 165%;
+    top: 180%;
     border-radius: 10px;
     box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
@@ -126,3 +126,6 @@ button{
     
 }
 
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}

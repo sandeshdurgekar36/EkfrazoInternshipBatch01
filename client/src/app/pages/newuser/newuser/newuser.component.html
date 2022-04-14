@@ -1,0 +1,186 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+<body>
+    <div class="container3">
+    <h2>Add New User</h2>
+            <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Invalid User</mat-radio-button>
+            <mat-radio-button value="2" >Import User</mat-radio-button>
+          </mat-radio-group>        
+</div>
+<hr>
+</body>
+    <div class="container">
+        <form>
+            <div class="row">
+                <div class="column" id="Category">
+                    <label for="Username" >Username</label>
+                    <input type="text" id="Username" placeholder="Enter Username">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px;">
+                        Username is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="Password">Password</label>
+                    <input type="Password" id="Password" placeholder="Enter Password">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Password is Required.
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="Email">Email</label>
+                    <input type="Email" id="Email" placeholder="Enter Email">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Email is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="Phone Number">Phone Number</label>
+                    <input type="Phone Number" id="Phone Number" placeholder="Enter Phone Number">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Phone Number is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="Full Name">Full Name</label>
+                    <input type="Full Name" id="Full Name" placeholder="Enter Full Name">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Full Name is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="dateofBirth">Date Of Birth</label>
+                    <input type="date" id="dateofBirth"  placeholder="Enter Password">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Date Of Birth is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="City">City</label>
+                    <input type="City" id="City" placeholder="Enter City">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        City is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="State">State</label>
+                    <input type="State" id="State" placeholder="Enter State">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        State is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="Address">Address</label>
+                    <input type="Address" id="Address" placeholder="Enter Email">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Address is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="pincode">Pin Code</label>
+                    <input type="pincode" id="pincode" placeholder="Enter pincode">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        pincode is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="container2">
+            <button type="button" class="btn btn-outline-secondary">Submit</button>
+            <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">              
+              </div>
+        </div>
+        </form>
+
+    </div>
+
+    <div class="container4">
+        <h1>Import New File </h1>        
+    <form id="import" >
+        
+      <div class="row" >
+            <div class="column" >
+                <label for="subject" >Uplode File</label>
+                <input class="form-control" type="file" id="Image" >
+              
+            </div>               
+            
+        </div>
+        <div class="container2">
+        <button type="button" class="btn btn-outline-secondary">Submit</button>
+        <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">              
+        </div>
+    </div>
+    </form>
+    </div>
+
+    <div class="container5">             
+        <h1>All Users </h1>
+        <label>Filter</label>         
+        <table class="table">
+            <thead class="table-dark">
+              <tr style="text-align: center;">
+                  <th scope="col">sl No.</th> 
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Mobile Number</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">state</th>
+                  <th scope="col">City Name</th>
+                  <th scope="col">Pincode</th>
+                  <th scope="col">Leder</th>
+                  <th scope="col">Marketer</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+            </thead>
+            <tbody style="text-align: center;">
+                <tr >
+                    <th scope="row">48</th>
+                    <td>gagan</td>
+                    <td>gagan@gmail.com</td>
+                    <td>165161651</td>
+                    <td>ijansinj iahbsia asdasasdasca aascs</td>
+                    <td>karnataka</td>
+                    <td>Banglore</td>
+                    <td>560057</td>
+
+                  </tr>
+                  <tr>
+                    <th scope="row">50</th>
+                    <td>gagan</td>
+                    <td>gagan@gmail.com</td>
+                    <td>165161651</td>
+                    <td>ijansinj iahbsia asdasasdasca aascs</td>
+                    <td>karnataka</td>
+                    <td>Banglore</td>
+                    <td>560057</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>gagan</td>
+                    <td>gagan@gmail.com</td>
+                    <td>165161651</td>
+                    <td>ijansinj iahbsia asdasasdasca aascs</td>
+                    <td>karnataka</td>
+                    <td>Banglore</td>
+                    <td>560057</td>
+                  </tr>
+            </tbody>
+          </table><br>
+    </div>
+
+</html>
