@@ -21,6 +21,13 @@ import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
 import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
+import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
+import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
+import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
+import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
+import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
+import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
+import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 
  
 @NgModule({
@@ -32,7 +39,14 @@ import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.co
     NewuserComponent,
     ImportuserComponent,
     AddnewprComponent,
-    AllproductComponent
+    AllproductComponent,
+    AllteamComponent,
+    AddteamComponent,
+    AddtestimonialsComponent,
+    AlltestimonialsComponent,
+    AllpromocodeComponent,
+    AddpromocodeComponent,
+    AllcartitemsComponent
   ],
   imports: [
     BrowserModule,

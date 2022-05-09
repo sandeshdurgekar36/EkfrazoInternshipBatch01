@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
+import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
+import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
+import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
+import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
+import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
+import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
+import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -15,7 +22,14 @@ const routes: Routes = [
   {path:'newuser',component:NewuserComponent},
   {path:'importuser',component:ImportuserComponent},
   {path:'addnewpr',component:AddnewprComponent},
-  {path:'allproduct',component:AllproductComponent}
+  {path:'allproduct',component:AllproductComponent},
+  {path:'allteam',component:AllteamComponent},
+  {path:'addteam',component:AddteamComponent},
+  {path:'alltestimonials',component:AlltestimonialsComponent},
+  {path:'addtestimonials',component:AddtestimonialsComponent},
+  {path:'allcartitem',component:AllcartitemsComponent},
+  {path:'addpromocode',component:AddpromocodeComponent},
+  {path:'allpromocode',component:AllpromocodeComponent},
 
 ];
 

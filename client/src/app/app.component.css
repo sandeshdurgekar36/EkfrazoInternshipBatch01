@@ -1,6 +1,6 @@
 .mat-drawer-inner-container {
     width: 15rem;
-    height: 100%;
+    height: auto;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }

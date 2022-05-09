@@ -7,27 +7,8 @@
     font-family: "Poppins",sans-serif;
     font-weight: 500;
 }
-.container{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 10px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 68%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
-}
-.container2{
-    text-align: center;
-}
-.container3{
-      width: 100%;
-      padding: 25px 50px;
-      height: auto;
-      text-align: center;
-}
+
+
 .container4{
     background-color: #ffffff;
     width: 70%;
@@ -36,22 +17,11 @@
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 180%;
+    top: 40%;
     border-radius: 10px;
     box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
-.container5{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 35px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 255%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
-}
+
 h1{
     font-size: 28px;
     text-align: center;
@@ -102,6 +72,3 @@ button{
     
 }
 
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
-}
