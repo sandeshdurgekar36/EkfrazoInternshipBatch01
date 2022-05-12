@@ -1,0 +1,17 @@
+.container5{
+    background-color: #ffffff;
+    width: 70%;
+    min-width: 420px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    border-radius: 10px;
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+}
+h1{
+    font-size: 28px;
+    text-align: center;
+    color: #1c093c;
+}

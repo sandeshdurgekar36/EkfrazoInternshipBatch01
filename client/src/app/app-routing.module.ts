@@ -6,6 +6,7 @@ import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.co
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
+import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path:'masterpage',component:MasterpageComponent},
   {path:'newuser',component:NewuserComponent},
   {path:'importuser',component:ImportuserComponent},
+  {path:'alluser',component:AllusersComponent},
   {path:'addnewpr',component:AddnewprComponent},
   {path:'allproduct',component:AllproductComponent},
   {path:'allteam',component:AllteamComponent},

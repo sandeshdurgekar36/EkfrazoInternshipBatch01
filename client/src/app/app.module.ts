@@ -28,6 +28,7 @@ import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/a
 import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
 import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
 import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
+import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 
  
 @NgModule({
@@ -46,7 +47,8 @@ import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcarti
     AlltestimonialsComponent,
     AllpromocodeComponent,
     AddpromocodeComponent,
-    AllcartitemsComponent
+    AllcartitemsComponent,
+    AllusersComponent
   ],
   imports: [
     BrowserModule,

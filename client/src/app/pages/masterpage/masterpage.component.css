@@ -72,9 +72,9 @@ div.scrollmenu {
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 255%;
+    top: 245%;
     border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+    box-shadow: 20px 30px 30px   25px rgba(0,0,0,0.15);
 }
 h1{
     font-size: 28px;
