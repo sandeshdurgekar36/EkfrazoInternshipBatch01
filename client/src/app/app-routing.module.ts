@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
 import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
-import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
@@ -17,7 +16,6 @@ import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/a
 import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'masterpage',component:MasterpageComponent},
   {path:'newuser',component:NewuserComponent},

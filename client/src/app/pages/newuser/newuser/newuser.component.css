@@ -18,7 +18,7 @@
     left: 50%;
     top: 68%;
     border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+    box-shadow: 20px 30px 30px 25px rgba(0,0,0,0.15);
 }
 .container2{
     text-align: center;
@@ -29,8 +29,7 @@
       height: auto;
       text-align: center;
 }
-
-.container5{
+.container4{
     background-color: #ffffff;
     width: 70%;
     min-width: 420px;
@@ -38,10 +37,11 @@
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 155%;
+    top: 140%;
     border-radius: 10px;
     box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
+
 h1{
     font-size: 28px;
     text-align: center;

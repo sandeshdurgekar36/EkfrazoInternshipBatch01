@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newuser.component.css']
 })
 export class NewuserComponent implements OnInit {
+  isVisible: any;
+  isSelected: boolean = true;
   
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }
