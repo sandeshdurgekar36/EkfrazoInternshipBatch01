@@ -9,7 +9,8 @@ import { MatRadioModule} from '@angular/material/radio';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule} from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -63,6 +64,7 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
+    ReactiveFormsModule
 
 
 

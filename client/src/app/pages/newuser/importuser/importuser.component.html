@@ -5,7 +5,7 @@
 
 </head>
     <div class="container">
-        <form>
+        <form [formGroup]="imuser!">
             <div class="row">
                 <div class="container3">
                     <h2>Import User</h2>
@@ -24,17 +24,15 @@
             <div class="row">
                 <div class="column">
                     <label for="subject">Image</label>
-                    <input class="form-control" type="file" id="Image">
-                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">
+                    <input  formControlName="image" class="form-control"  type="file" id="Image">
+                    <div class="alert alert-danger" *ngIf="image.invalid && image.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">
                         Image is Required.
                       </div>
                 </div>
-                <div class="column">
-                    
-                </div>
+                
             </div>
             <div class="container2">
-            <button type="button" class="btn btn-outline-secondary">Submit</button>
+            <button [disabled]="imuser!.invalid" type="button" class="btn btn-outline-secondary">Submit</button>
                   </div>
         </form>
     </div>

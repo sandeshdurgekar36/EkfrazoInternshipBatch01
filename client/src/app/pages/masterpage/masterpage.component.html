@@ -20,28 +20,28 @@
 </body>
     <div class="container">
         <h1 id="addnewpc">Add New Product Category</h1>        
-        <form>
+        <form [formGroup]="msp1!">
             <div class="row">
                 <div class="column" id="Category">
                     <label for="name" >Product Category Name</label>
-                    <input type="text" id="name" placeholder="Product Category Name">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    <input formControlName="cname" type="text" id="name" placeholder="Product Category Name">
+                    <div class="alert alert-danger" *ngIf="cname.invalid && cname.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                         Product Category Name is Required.
                       </div>
                 </div>
                 <div class="column">
                     <label for="email">Product Category Description</label>
-                    <input type="email" id="email" placeholder="Product Category Description">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem; ">
+                    <input formControlName="email" type="email" id="email" placeholder="Product Category Description">
+                    <div class="alert alert-danger" *ngIf="email.invalid && email.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem; ">
                         Product Category Description is Required.
                       </div>
                 </div>
             </div>
             <div class="row">
                 <div class="column">
-                    <label for="subject">Image</label>
-                    <input class="form-control" type="file" id="Image">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    <label for="image">Image</label>
+                    <input formControlName="image" class="form-control" type="file" id="Image">
+                    <div class="alert alert-danger" *ngIf="image.invalid && image.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                         Image is Required.
                       </div>
                 </div>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="container2">
-            <button type="button" class="btn btn-outline-secondary">Add</button>
+            <button [disabled]="msp1!.invalid" type="button" class="btn btn-outline-secondary">Add</button>
             
         </div>
         </form>
@@ -114,28 +114,28 @@
 
     <div class="container5">
         <h1>Update Product Category </h1>        
-        <form>
+        <form [formGroup]="msp2!">
             <div class="row">
                 <div class="column" id="Category">
                     <label for="name" >Product Category Name</label>
-                    <input type="text" id="name" placeholder="Product Category Name">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    <input formControlName="ucname" type="text"  id="name" placeholder="Product Category Name">
+                    <div class="alert alert-danger" *ngIf="ucname.invalid && ucname.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                         Product Category Name is Required.
                       </div>
                 </div>
                 <div class="column">
                     <label for="email">Product Category Description</label>
-                    <input type="email" id="email" placeholder="Product Category Description">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem; ">
+                    <input formControlName="uemail" type="email" id="email" placeholder="Product Category Description">
+                    <div class="alert alert-danger" *ngIf="uemail.invalid && uemail.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem; ">
                         Product Category Description is Required.
                       </div>
                 </div>
             </div>
             <div class="row">
                 <div class="column">
-                    <label for="subject">Image</label>
-                    <input class="form-control" type="file" id="Image">
-                    <div class="alert alert-danger" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    <label for="image">Image</label>
+                    <input formControlName="uimage" class="form-control" type="file" id="Image">
+                    <div class="alert alert-danger" *ngIf="uimage.invalid && uimage.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                         Image is Required.
                       </div>
                 </div>
@@ -144,7 +144,7 @@
                 </div>
             </div>
             <div class="container2">
-            <button type="button" class="btn btn-outline-secondary">Update</button>
+            <button [disabled]="msp2!.invalid" type="button" class="btn btn-outline-secondary">Update</button>
             
         </div>
         </form>

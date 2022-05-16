@@ -64,10 +64,12 @@ form{
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
     grid-gap: 20px 30px;
     margin-bottom: 20px;
+    text-align: center;
 }
 label{
     color: #1c093c;
     font-size: 14px;
+    text-align: center;
 }
 textarea,
 input{
@@ -77,6 +79,7 @@ input{
     border-radius: 5px;
     border: 1.2px solid #c4cae0;
     margin-top: 5px;
+    
 }
 textarea{
     resize: none;
