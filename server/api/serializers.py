@@ -41,7 +41,11 @@ class UserRoleSerializer(serializers.ModelSerializer):
 class vehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = vehicle
+<<<<<<< Updated upstream
         fields = ['id','vehicle_Type_id','capacity','size','details','price_per_km']
+=======
+        fields = ['id','vehicleTypeName','capacity','size','details','price_per_km','min_charge','max_time_min','badge']
+>>>>>>> Stashed changes
 
 class subscriptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,6 +56,10 @@ class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = State
         fields ='__all__'
+
+
+class StateSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=100)
 
 
 class CouponSerializer(serializers.ModelSerializer):
@@ -119,3 +127,119 @@ class Account_details_serializer(serializers.ModelSerializer):
     class Meta:
         model = Account_details
         fields = ['acc_holder_name','bank','branch','account_no','ifsc_code']
+    Status_name = serializers.CharField(max_length=100)
+
+# class StateSerializer(serializers.ModelSerializer):
+#      class Meta:
+#         model = State
+#         fields = '__all__'
+
+class register1Serializer(serializers.ModelSerializer):
+    email = serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    confirm_password = serializers.CharField(write_only=True, required=True)
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email' ,'password', 'confirm_password' )
+        extra_kwargs = {
+            'first_name': {'required': True},
+            'last_name': {'required': True}
+            }
+
+        
+                 
+    def validate(self, attrs):
+        if attrs['password'] != attrs['confirm_password']:
+            raise serializers.ValidationError({"password": "Password fields didn't match."})
+        return attrs
+            
+    def create(self, validated_data):
+        user = User.objects.create(username=validated_data['username'],first_name=validated_data['first_name'],last_name=validated_data['last_name'],email=validated_data['email'])
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+        
+
+    
+
+class login1Serializer(serializers.ModelSerializer):
+    username= serializers.CharField(max_length=100)
+    password = serializers.CharField(max_length=100)
+    
+
+    class Meta:
+        model = User
+        fields = ['id','username', 'password']
+        
+        
+        
+    def validate(self, data):
+      
+        if User.objects.filter(username=data['username'], password= data['password']).exists():
+            return Response({'error': 'user already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return data
+
+       
+
+
+class forgotpasswordSerializer(serializers.Serializer):
+    email =serializers.EmailField(min_length=2)
+    redirect_url = serializers.CharField(max_length=500, required=False)
+
+    class Meta:
+        field = ['email']
+
+class verifyotpSerializer(serializers.Serializer):
+    username=serializers.CharField(max_length=500,required=False)
+    otp = serializers.IntegerField()
+
+    class Meta:
+        field =['username','otp']
+
+
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+
+    def create(self, validated_data):
+        user = User(**validated_data)
+        user.set_password(validated_data['password'])
+        user.save()
+        return user  
+    
+
+class registerownerSerializer(serializers.ModelSerializer):
+    
+
+    class Meta:
+        model = registerowner
+        fields='__all__'    
+
+    def create(self, validated_data):
+        user = registerowner.objects.create(fullname=validated_data['fullname'],email=validated_data['email'],mobile_number=validated_data['mobile_number'])
+        #password = secrets.token_urlsafe(32)
+        user.save()
+        return user
+
+class verify_registrationSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length=500,required=False)
+    password = serializers.CharField(max_length=500,required=False)
+    class Meta:
+        model =registerowner
+        fields='__all__'
+        
+    def validate(self, data):
+      
+        if registerowner.objects.filter(username=data['username'], password= data['password']).exists():
+            return Response({'error': 'user already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return data
+
+
+
+
+

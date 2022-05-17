@@ -15,6 +15,48 @@ import base64
 
 
 
+from .serializers import UserRoleSerializer, vehicleSerializer,subscriptionSerializer,register1Serializer,login1Serializer,UserSerializer,forgotpasswordSerializer,verifyotpSerializer,UserSerializer,registerownerSerializer
+from rest_framework import status,authentication,views
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import generics, permissions
+from django.contrib.auth import authenticate,login,get_user_model
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from api import serializers
+from django.contrib.auth.models import User
+import urllib.request
+from rest_framework.authtoken.models import Token
+from django.contrib import messages
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import smart_str,force_str,smart_bytes,DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from .utils import Util
+from django.http import HttpResponsePermanentRedirect
+import os,email
+import jwt
+from django.conf import settings
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+from django.core.mail import EmailMessage,send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from logistic1 import settings
+from lib2to3.pgen2.tokenize import generate_tokens
+from django.utils.encoding import force_bytes
+from . tokens import generate_token
+import random
+from django.core.mail import message, send_mail, EmailMessage
+from django.core.mail import send_mail
+import inspect
+from django.contrib import auth
+
+
+
+
 class CustomRedirect(HttpResponsePermanentRedirect):
 
     allowed_schemes = [os.environ.get('APP_SCHEME'), 'http', 'https']
@@ -787,3 +829,240 @@ class Account_details_API(APIView):
             Account_details.objects.filter(id=pk).delete()
             return Response({'Results':'Account deleted successfully'})
         return Response({'Result':'Account_id not found to delete'})
+def state_detail(request, pk):
+    state = State.objects.get(id = pk)
+    serializer = StateSerializer(state)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
+
+def coupon_detail(request, pk):
+    coupon = Coupon.objects.get(id = pk)
+    serializer = CouponSerializer(coupon)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
+
+def status_detail(request,pk):
+    status = Status.objects.get(id = pk)
+    serializer = StatusSerializer(status)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
+def state_list(request):
+    state = State.objects.all()
+    serializer = StateSerializer(state, many=True)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
+def coupon_list(request):
+    coupon = Coupon.objects.all()
+    serializer = CouponSerializer(coupon, many=True)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
+def status_list(request):
+    status = Status.objects.all()
+    serializer = StatusSerializer(status,many=True)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+    
+
+class UserDetailAPI(APIView):
+  authentication_classes = (TokenAuthentication,)
+  permission_classes = (AllowAny,)
+  queryset = get_user_model().objects.all()
+  def get(self,request,*args,**kwargs):
+    user = User.objects.get(id=request.user.id)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
+
+class Record(generics.ListCreateAPIView):
+    # get method handler
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class RegisterUserAPIView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = register1Serializer
+
+    def post(self,request,  format=None):
+        if request.method == 'POST':
+            serializer = register1Serializer(data = request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response( "Registration Succesfully")
+            return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
+
+
+    
+class login1Api(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = login1Serializer
+
+    def post(self,request):
+        data = request.data
+        username = data.get('username')
+        password = data.get('password')
+        
+        user_check =auth.authenticate(username= username,password=password)
+
+        if user_check:
+            if user_check.is_authenticated:
+                response="login Sucessfully"
+                return Response(response, status=status.HTTP_200_OK)
+            else:
+                response="account is not active"
+                return Response(response,status=status.HTTP_400_BAD_REQUEST)
+        else:
+                response="invalid credentials"
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+def grn_otp():
+    otp=random.randint(111111,999999)
+    return otp
+verify_otp=0
+
+class forgot_password_send_otp(APIView):
+
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = forgotpasswordSerializer
+    def post(self,request):
+        response={}
+        data = request.data
+        username=data.get('username')
+        check_user=User.objects.filter(username=username)
+        if check_user:
+            otp=grn_otp()
+            global verify_otp
+            verify_otp=otp
+            if '@' in username:
+                message = inspect.cleandoc('''Hi,\n%s is your OTP to Forgot Password to your logistic account.\nThis OTP is valid for next 10 minutes,
+                                      \nWith Warm Regards,\nTeam logistic,
+                                       ''' % (otp))
+                send_mail(
+                    'One Time Password (OTP)', message
+                    ,
+                    'gunjan.kr518@gmail.com',
+                    [username],
+
+                )
+                data_dict = {}
+                data_dict["Otp"] = otp
+                print(data_dict,'data_dict')
+                return Response('OTP sent successfully')
+            else:
+                return Response(otp)
+        else:
+            response='Invalid username'
+            return Response(response,status=status.HTTP_401_UNAUTHORIZED)
+
+
+class check_otp(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = verifyotpSerializer
+    
+    def post(self,request):
+        data=request.data
+        otp=data.get('otp')
+        if otp:
+            if int(verify_otp) == int(otp) :
+                return Response("otp matched")
+            else:
+                return Response("otp doesnot matched")
+        else:
+            return Response('please enter otp')        
+
+
+    
+        
+
+class ForgotPasswordUpdate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = UserSerializer
+
+    def post(self, request):
+        data = request.data
+        username = data.get('username')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+
+        user_check = User.objects.filter(username= username)
+        
+        if password == confirm_password:
+            if user_check:
+                user_data = User.objects.get(username= username)
+                user_data.set_password(password)
+                user_data.save()
+
+                response="Password Updated Sucessfully"
+                return Response(response, status=status.HTTP_200_OK)
+
+            else:
+                response="Please Enter Valid username"
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            response="Password did not matched"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+import uuid
+ranom_pass=0
+class registerowner(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = registerownerSerializer
+
+    def post(self,request):
+        serializer = registerownerSerializer(data=request.data)
+        if serializer.is_valid():
+            email = request.data['email']
+            
+            ranom_pass = uuid.uuid1()
+
+            send_mail(
+                'login credentials',
+                'Hi,\n\nis your login credentials for your logistic account. \nusername = ' +email+' \npassword= ' + str(ranom_pass)+ '\n\nWith Warm Regards \nTeam logistic',
+                'demo.django.login@gmail.com',
+                [email],
+                fail_silently=False
+            )
+            return Response({"message": "mail sent sucessfully"})
+
+class verify_registration(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = registerownerSerializer
+
+    def post(self,request):
+        data = request.data
+        email = data.get('username')
+        password = data.get('password')
+        
+    
+        if email:
+            
+            if str(ranom_pass) == str(password):
+                return Response("login succesfull")
+            else:
+                return Response("credentials doesnot match")
+        else:
+            return Response('please enter email')
+        
+
+
+       
+
+    
+
+
+
+
+
+
+

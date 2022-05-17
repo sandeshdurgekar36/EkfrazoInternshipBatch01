@@ -151,3 +151,35 @@ class Account_details(models.Model):
     branch=models.CharField(max_length=100)
     account_no=models.IntegerField(null=True)
     ifsc_code=models.IntegerField(null=True)
+
+    
+
+
+class register1(models.Model):
+    username = models.CharField(max_length=100)
+    first_name = models.TextField(max_length=100)
+    last_name = models.TextField(max_length=100)
+    email = models.EmailField(null=True)
+    password = models.CharField(max_length=128, validators=[MinLengthValidator(6)])
+
+
+
+class login1(models.Model):
+    username = models.ForeignKey(register1,on_delete=models.CASCADE,null=True)
+    password = models.CharField(max_length=10)
+
+
+class forgotpassword(models.Model):
+    username = models.ForeignKey(register1, on_delete=models.CASCADE,null=True)
+
+    
+class resetpassword(models.Model):
+    username = models.ForeignKey(register1,on_delete=models.CASCADE,null=True)
+
+class registerowner(models.Model):
+    fullname = models.CharField(max_length=500)
+    email= models.EmailField(max_length=500)
+    mobile_number = models.IntegerField(null=True)
+
+
+

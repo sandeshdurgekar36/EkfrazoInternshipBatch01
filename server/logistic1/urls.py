@@ -1,3 +1,20 @@
+"""logistic1 URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from atexit import register
+from posixpath import basename
 from django.contrib import admin
 from django.db import router
 from django.urls import path,include
@@ -57,6 +74,27 @@ urlpatterns = [
 
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
+    path('getuser/',views.UserDetailAPI.as_view()),
+
+    path('registration/',views.RegisterUserAPIView.as_view()),
+    path('registration/<int:pk>/',views.login1Api.as_view()),
+    
+
+    path('log/',views.login1Api.as_view()),
+    path('log/<int:pk>/',views.login1Api.as_view()),
+    path('forgot-password-send-otp/',views.forgot_password_send_otp.as_view()),
+    path('verify-otp/',views.check_otp.as_view()),
+    path('set-password/',views.ForgotPasswordUpdate.as_view()),
+    path('register-owner/',views.registerowner.as_view()),
+    path('verify-credentials/',views.verify_registration.as_view()),
+
+
+    path('stateinfo/<int:pk>', views.state_detail),
+    path('stateinfo/', views.state_list),
+    path('couponinfo/<int:pk>', views.coupon_detail),
+    path('couponinfo/', views.coupon_list),
+    path('statusinfo/<int:pk>',views.status_detail),
+    path('statusinfo/',views.status_list),
 ]
 
 

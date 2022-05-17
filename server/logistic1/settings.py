@@ -1,5 +1,8 @@
 from pathlib import Path
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+import os
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
