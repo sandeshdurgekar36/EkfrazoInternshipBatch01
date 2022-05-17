@@ -41,11 +41,8 @@ class UserRoleSerializer(serializers.ModelSerializer):
 class vehicleSerializer(serializers.ModelSerializer):
     class Meta:
         model = vehicle
-<<<<<<< Updated upstream
-        fields = ['id','vehicle_Type_id','capacity','size','details','price_per_km']
-=======
+        
         fields = ['id','vehicleTypeName','capacity','size','details','price_per_km','min_charge','max_time_min','badge']
->>>>>>> Stashed changes
 
 class subscriptionSerializer(serializers.ModelSerializer):
     class Meta:
