@@ -1,9 +1,6 @@
 from django.contrib import admin
 from .models import *
-from .models import Custom_user
-from .models import Driver
-from .models import Review
-from .models import Vehicles
+
 
 # Register your models here.
 @admin.register(UserRole)
@@ -12,11 +9,26 @@ class UserRoleAdmin(admin.ModelAdmin):
 
 @admin.register(vehicle)
 class vehicleAdmin(admin.ModelAdmin):
-    list_display = ['id','vehicleTypeName','capacity','size','details','price_per_km']
+    list_display = ['id','vehicleTypeName','capacity','size','details','price_per_km','min_charge','max_time_min','badge']
 
 @admin.register(subscription)
 class subscriptionAdmin(admin.ModelAdmin):
     list_display = ['id','sub_plan_name','price','validity_period']
+
+@admin.register(register1)
+class register1Admin(admin.ModelAdmin):
+    list_display = ['id','username','first_name','last_name','email','password']
+
+@admin.register(login1)
+class login1Admin(admin.ModelAdmin):
+    list_display = ['id','username', 'password']
+
+@admin.register(forgotpassword)
+class forgotpasswordAdmin(admin.ModelAdmin):
+    list_display =['id','username']
+
+
+
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):

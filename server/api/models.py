@@ -1,5 +1,10 @@
+from email.headerregistry import Address
+import profile
+from unittest.util import _MAX_LENGTH
 from xmlrpc.client import DateTime
 from django.db import models
+from django.core.validators import MinLengthValidator
+from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your models here.
 class UserRole(models.Model):
@@ -12,11 +17,15 @@ class vehicle(models.Model):
     size = models.CharField(max_length=10)
     details= models.CharField(max_length=100)
     price_per_km =models.FloatField(max_length=10)
+    min_charge = models.FloatField(max_length=10,null=True)
+    max_time_min = models.TimeField(max_length=10,null=True)
+    badge = models.CharField(max_length=100,default='')
 
 class subscription(models.Model):
     sub_plan_name =models.CharField(max_length=100)
     price = models.FloatField(max_length=10)
-    validity_period = models.DateTimeField(DateTime)
+    validity_period = models.DurationField(null=True)
+
 
 class State(models.Model):
     # State_id = models.IntegerField(null=True)

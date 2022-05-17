@@ -3,6 +3,13 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='demo.django.login@gmail.com'
+EMAIL_HOST_PASSWORD = 'Pass@123'
+EMAIL_PORT = 587
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -16,6 +23,17 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -27,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
+    'rest_framework.authtoken',
+    'allauth',
+    'rest_auth.registration',
+    
 ]
 
 MIDDLEWARE = [
@@ -111,3 +133,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAL_BACKEND ='django.core.mail.backends.console.EmailBackend'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
+  'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework.authentication.TokenAuthentication',
+      
+      
+  )
+}
+
+
+

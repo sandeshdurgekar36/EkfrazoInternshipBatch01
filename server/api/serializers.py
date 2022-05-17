@@ -1,7 +1,37 @@
+from audioop import reverse
 from dataclasses import fields
+from distutils.log import error
+import email
+from logging import exception
 from pyexpat import model
-from rest_framework import serializers
+import re
+from sre_constants import SUCCESS
+from attr import field
+from matplotlib.pyplot import get
+from requests import request
+from rest_framework import serializers,exceptions
 from .models import *
+from rest_framework.validators import UniqueValidator
+from django.contrib.auth.models import User
+from rest_framework.response import Response
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.hashers import make_password
+from rest_framework import status
+from django.conf import settings
+from django.contrib import auth
+from django.contrib.auth import authenticate,get_user_model,login
+from django.core.exceptions import ValidationError
+from django.db.models import Q
+from uuid import uuid4
+from rest_framework.exceptions import AuthenticationFailed
+
+
+
+
+
+
+
+User = get_user_model()
 
 class UserRoleSerializer(serializers.ModelSerializer):
     class Meta:

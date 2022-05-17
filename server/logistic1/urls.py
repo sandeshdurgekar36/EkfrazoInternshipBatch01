@@ -1,6 +1,9 @@
 from django.contrib import admin
-from django.urls import path
+from django.db import router
+from django.urls import path,include
 from api import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -55,3 +58,5 @@ urlpatterns = [
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
 ]
+
+

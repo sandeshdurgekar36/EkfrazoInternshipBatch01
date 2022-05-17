@@ -1,4 +1,5 @@
-from urllib import response
+import email
+from urllib import request, response
 from django.shortcuts import render
 import pkg_resources
 from rest_framework.response import Response
@@ -12,8 +13,23 @@ from django.http import HttpResponse
 import random
 import base64
 
+
+
+class CustomRedirect(HttpResponsePermanentRedirect):
+
+    allowed_schemes = [os.environ.get('APP_SCHEME'), 'http', 'https']
+
+
+class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
+    def enforce_csrf(self, request):
+        return
+
 # Create your views here.
 class UserRoleApi(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = UserRoleSerializer
+
     def get(self,request,  pk = None, format=None):
         id = pk
         if id is not None:
@@ -60,6 +76,10 @@ class UserRoleApi(APIView):
 
 
 class vehicleApi(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = vehicleSerializer
+
     def get(self,request,  pk = None, format=None):
         id = pk
         if id is not None:
@@ -105,6 +125,10 @@ class vehicleApi(APIView):
         return Response({'msg':'Data Deleted'})
 
 class subscriptionApi(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = subscriptionSerializer
+    
     def get(self,request,  pk = None, format=None):
         id = pk
         if id is not None:
@@ -121,8 +145,8 @@ class subscriptionApi(APIView):
             serializer = subscriptionSerializer(data = request.data)
             if serializer.is_valid():
                 serializer.save()
-                return Response({'msg':'Data Created Succesfully'},status=status.HTTP_201_CREATED)
-            return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+                return Response({'msg':'Data Created Succesfully'})
+            return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
 
         
     def put(self,request,pk,  format=None):
