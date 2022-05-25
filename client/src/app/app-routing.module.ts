@@ -16,6 +16,7 @@ import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/a
 import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
 
 const routes: Routes = [
+  {path:'',redirectTo:'login' , pathMatch:'full'},
   {path:'login',component:LoginComponent},
   {path:'masterpage',component:MasterpageComponent},
   {path:'newuser',component:NewuserComponent},

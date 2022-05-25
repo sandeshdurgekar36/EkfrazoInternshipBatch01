@@ -44,9 +44,9 @@
                 </div>
                 <div class="column">
                     <label for="Phone Number">Phone Number</label>
-                    <input formControlName="phone" type="Phone Number" id="Phone Number" placeholder="Enter Phone Number">
+                    <input formControlName="phone" type="Phone Number" pattern="^\d{10}$" required id="Phone Number" placeholder="Enter Phone Number">
                     <div class="alert alert-danger" *ngIf="phone.invalid && phone.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;padding: 2px; margin: 1rem;  ">
-                        Phone Number is Required.
+                        Phone Number is Required and must be 10 digit.
                       </div>
                 </div>
                 

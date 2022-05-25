@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'allauth',
     'rest_auth.registration',
+    "corsheaders",
     
 ]
 
@@ -62,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+     "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'logistic1.urls'
@@ -131,6 +134,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -149,5 +158,9 @@ REST_FRAMEWORK = {
   )
 }
 
+CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200"
+]
 
 

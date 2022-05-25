@@ -30,6 +30,8 @@ import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromoco
 import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
 import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './services/login.service';
 
  
 @NgModule({
@@ -64,12 +66,14 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
 
 
 
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

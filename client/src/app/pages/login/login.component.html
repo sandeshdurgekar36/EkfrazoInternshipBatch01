@@ -1,22 +1,22 @@
 <div class="login-wrapper">
     <div class="card">
         <div class="card-body">
-            <form [formGroup]="login!">
+            <form [formGroup]="loginform"  >
                 <div class="mb-3">
                   <label for="username" class="form-label">Username</label>
-                  <input formControlName="username" type="text" class="form-control" id="username" aria-describedby="UsernameHelp" placeholder="Enter Username" >
-                  <div class="alert alert-danger" *ngIf="username.invalid && username.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                  <input formControlName="username"  type="text" class="form-control" id="username" aria-describedby="UsernameHelp" placeholder="Enter Username" >
+                  <div class="alert alert-danger" *ngIf="username.invalid && username.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Username is Required.
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="password" class="form-label">Password</label>
                   <input formControlName="password" type="password" class="form-control" id="password" placeholder="Enter Password" >
-                  <div class="alert alert-danger" *ngIf="password.invalid && password.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                  <div class="alert alert-danger" *ngIf="password.invalid && password.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Password is Required.
                   </div>
                 </div>
-                <button [disabled]="login!.invalid" type="button" class="btn btn-outline-secondary">Login</button>
+                <button [disabled]="loginform.invalid" (click)="logins()"  type="button" class="btn btn-outline-secondary">Login</button>
               </form>
     
         </div>

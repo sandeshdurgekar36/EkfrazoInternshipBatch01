@@ -6,8 +6,8 @@ from logging import exception
 from pyexpat import model
 import re
 from sre_constants import SUCCESS
-from attr import field
-from matplotlib.pyplot import get
+# from attr import field
+# from matplotlib.pyplot import get
 from requests import request
 from rest_framework import serializers,exceptions
 from .models import *

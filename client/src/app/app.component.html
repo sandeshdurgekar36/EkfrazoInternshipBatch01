@@ -9,18 +9,54 @@
   <mat-sidenav-container >
     <mat-sidenav #sidenav style="width: 12rem; ">
         <mat-nav-list >            
-            <a mat-list-item routerLink="masterpage">Master Table</a>
-            <a mat-list-item routerLink="newuser">Add New User</a>
-            <a mat-list-item routerLink="alluser">All Users</a>
-            <a mat-list-item routerLink="addnewpr">Add New Product</a>
-            <a mat-list-item routerLink="allproduct">All Product</a>
-            <a mat-list-item routerLink="addteam">Add Team</a>
-            <a mat-list-item routerLink="allteam">All Team</a>
-            <a mat-list-item routerLink="alltestimonials">All Testimonials</a>
-            <a mat-list-item routerLink="addtestimonials">Add Testimonials</a>
-            <a mat-list-item routerLink="allcartitem">All Cart Items</a>
-            <a mat-list-item routerLink="addpromocode">Add Promocode</a>
-            <a mat-list-item routerLink="allpromocode">All Promocode</a>          
+            
+            <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    User    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a mat-list-item routerLink="newuser">Add New User</a></li>
+                  <li><a mat-list-item routerLink="alluser">All Users</a></li>
+                </ul>
+              </div>
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Product    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a mat-list-item routerLink="addnewpr">Add New Product</a></li>
+                  <li><a mat-list-item routerLink="allproduct">All Product</a></li>
+                </ul>
+              </div>  
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Teams    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a mat-list-item routerLink="addteam">Add Team</a></li>
+                  <li><a mat-list-item routerLink="allteam">All Team</a></li>
+                </ul>
+              </div> 
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Testimonials    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a mat-list-item routerLink="addtestimonials">Add Testimonials</a></li>
+                  <li><a mat-list-item routerLink="alltestimonials">All Testimonials</a></li>
+                </ul>
+              </div> 
+              <div class="dropdown">
+                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Promocode    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a mat-list-item routerLink="addpromocode">Add Promocode</a></li>
+                  <li><a mat-list-item routerLink="allpromocode">All Promocode</a></li>
+                </ul>
+              </div>     
+            <a mat-list-item routerLink="allcartitem">All Cart Items</a>          
+            <a mat-list-item routerLink="masterpage">Master </a>         
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
