@@ -41,7 +41,7 @@ div.scrollmenu {
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 88%;
+    top: 49%;
     border-radius: 10px;
     box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }

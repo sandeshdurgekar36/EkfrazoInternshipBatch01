@@ -14,65 +14,43 @@ export class AddnewprComponent implements OnInit {
 
   ngOnInit(): void {
     this.anewp! = new FormGroup({
-      'pname':new FormControl(null, Validators.required),
-      'pdesc':new FormControl(null, Validators.required),
-      'pimage':new FormControl(null, Validators.required),
-      'pvideo':new FormControl(null, Validators.required),
-      'gst':new FormControl(null, Validators.required),
-      'lprise':new FormControl(null, Validators.required),
-      'pdetail':new FormControl(null, Validators.required),
-      'psprise':new FormControl(null, Validators.required),
-      'hscode':new FormControl(null, Validators.required),
-      'status':new FormControl(null, Validators.required),
-      'washingi':new FormControl(null, Validators.required),
-      'bname':new FormControl(null, Validators.required),
-      'pcname':new FormControl(null, Validators.required),
-      'pscname':new FormControl(null, Validators.required),
+      'vehicleTypeName':new FormControl(null, Validators.required),
+      'capacity':new FormControl(null, Validators.required),
+      'size':new FormControl(null, Validators.required),
+      'details':new FormControl(null, Validators.required),
+      'price_per_km':new FormControl(null, Validators.required),
+      'min_charge':new FormControl(null, Validators.required),
+      'max_time_min':new FormControl(null, Validators.required),
+      'badge':new FormControl(null, Validators.required),
+      
       
     });
   }
-  get pname() {
-    return this.anewp!.get('pname');
+  get vehicleTypeName() {
+    return this.anewp!.get('vehicleTypeName');
   }
-  get pdesc() {
-    return this.anewp!.get('pdesc');
+  get capacity() {
+    return this.anewp!.get('capacity');
   }
-  get pimage() {
-    return this.anewp!.get('pimage');
+  get size() {
+    return this.anewp!.get('size');
   }
-  get pvideo() {
-    return this.anewp!.get('pvideo');
+  get details() {
+    return this.anewp!.get('details');
   }
-  get gst() {
-    return this.anewp!.get('gst');
+  get price_per_km() {
+    return this.anewp!.get('price_per_km');
   }
-  get lprise() {
-    return this.anewp!.get('lprise');
+  get min_charge() {
+    return this.anewp!.get('min_charge');
   }
-  get pdetail() {
-    return this.anewp!.get('pdetail');
+  get max_time_min() {
+    return this.anewp!.get('max_time_min');
   }
-  get psprise() {
-    return this.anewp!.get('psprise');
+  get badge() {
+    return this.anewp!.get('badge');
   }
-  get hscode() {
-    return this.anewp!.get('hscode');
-  }
-  get status() {
-    return this.anewp!.get('status');
-  }
-  get washingi() {
-    return this.anewp!.get('washingi');
-  }
-  get bname() {
-    return this.anewp!.get('bname');
-  }
-  get pcname() {
-    return this.anewp!.get('pcname');
-  }
-  get pscname() {
-    return this.anewp!.get('pscname');
-  }
+  
 
 
 }
