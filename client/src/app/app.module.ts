@@ -20,7 +20,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
-import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
 import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
 import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
@@ -32,6 +31,7 @@ import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcarti
 import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login.service';
+import { VehicleComponent } from './pages/vehicle/vehicle.component';
 
  
 @NgModule({
@@ -41,7 +41,6 @@ import { LoginService } from './services/login.service';
     MasterpageComponent,
     NewuserComponent,
     ImportuserComponent,
-    AddnewprComponent,
     AllproductComponent,
     AllteamComponent,
     AddteamComponent,
@@ -51,7 +50,8 @@ import { LoginService } from './services/login.service';
     AddpromocodeComponent,
     AllcartitemsComponent,
     
-    AllusersComponent
+    AllusersComponent,
+          VehicleComponent
   ],
   imports: [
     BrowserModule,

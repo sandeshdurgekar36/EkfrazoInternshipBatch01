@@ -3,11 +3,11 @@ import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-addnewpr',
-  templateUrl: './addnewpr.component.html',
-  styleUrls: ['./addnewpr.component.css']
+  selector: 'app-vehicle',
+  templateUrl: './vehicle.component.html',
+  styleUrls: ['./vehicle.component.css']
 })
-export class AddnewprComponent implements OnInit {
+export class VehicleComponent implements OnInit {
   anewp!: FormGroup;
 
   constructor() { }
@@ -50,7 +50,5 @@ export class AddnewprComponent implements OnInit {
   get badge() {
     return this.anewp!.get('badge');
   }
-  
-
 
 }

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
 import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -14,6 +13,7 @@ import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
 import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
 import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
 import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
+import { VehicleComponent } from './pages/vehicle/vehicle.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'login' , pathMatch:'full'},
@@ -22,7 +22,6 @@ const routes: Routes = [
   {path:'newuser',component:NewuserComponent},
   {path:'importuser',component:ImportuserComponent},
   {path:'alluser',component:AllusersComponent},
-  {path:'addnewpr',component:AddnewprComponent},
   {path:'allproduct',component:AllproductComponent},
   {path:'allteam',component:AllteamComponent},
   {path:'addteam',component:AddteamComponent},
@@ -31,6 +30,7 @@ const routes: Routes = [
   {path:'allcartitem',component:AllcartitemsComponent},
   {path:'addpromocode',component:AddpromocodeComponent},
   {path:'allpromocode',component:AllpromocodeComponent},
+  {path:'vehicle',component:VehicleComponent}
 
 ];
 

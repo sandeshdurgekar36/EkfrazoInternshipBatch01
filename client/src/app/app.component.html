@@ -1,4 +1,4 @@
-<mat-toolbar color="rgb(233,236,239)">
+<mat-toolbar color="rgb(233,236,239)" *ngIf="displaymenu">
     <mat-toolbar-row>
         <button mat-icon-button>
             <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
@@ -19,16 +19,7 @@
                   <li><a mat-list-item routerLink="alluser">All Users</a></li>
                 </ul>
               </div>
-              <div class="dropdown">
-                <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Product    
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a mat-list-item routerLink="addnewpr">Add New Product</a></li>
-                  <li><a mat-list-item routerLink="allproduct">All Product</a></li>
-                </ul>
-              </div>  
-              <div class="dropdown">
+                <div class="dropdown">
                 <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Teams    
                 </button>
@@ -57,6 +48,7 @@
               </div>     
             <a mat-list-item routerLink="allcartitem">All Cart Items</a>          
             <a mat-list-item routerLink="masterpage">Master </a>    
+            <a mat-list-item routerLink="vehicle">vehicle Type </a> 
             <a mat-list-item routerLink="login">Logout </a>      
         </mat-nav-list>
     </mat-sidenav>
