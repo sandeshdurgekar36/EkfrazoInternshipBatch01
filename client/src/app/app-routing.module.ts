@@ -2,17 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
 import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
+import { CustomuserComponent } from './pages/customuser/customuser/customuser.component';
+import { StateComponent } from './pages/dilevery/state/state.component';
+import { StatusComponent } from './pages/dilevery/status/status.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
+import { SubscriptionComponent } from './pages/payment/subscription/subscription.component';
 import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
 import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
 import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
 import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
 import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
 import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
+import { UserroleComponent } from './pages/userrole/userrole/userrole.component';
 import { VehicleComponent } from './pages/vehicle/vehicle.component';
 
 const routes: Routes = [
@@ -30,7 +35,12 @@ const routes: Routes = [
   {path:'allcartitem',component:AllcartitemsComponent},
   {path:'addpromocode',component:AddpromocodeComponent},
   {path:'allpromocode',component:AllpromocodeComponent},
-  {path:'vehicle',component:VehicleComponent}
+  {path:'vehicle',component:VehicleComponent},
+  {path:'customuser',component:CustomuserComponent},
+  {path:'state',component:StateComponent},
+  {path:'status',component:StatusComponent},
+  {path:'subscription',component:SubscriptionComponent},
+  {path:'userrole',component:UserroleComponent},
 
 ];
 

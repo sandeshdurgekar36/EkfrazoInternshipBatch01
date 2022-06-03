@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+<body>
+    <div class="container3">
+    <h2>Masters Table</h2>
+    <div class="scrollmenu">
+     <a href="userrole" >User Role Ref</a>
+     <a href="vehicle">vehicle Type</a>
+     <a href="state" >State </a>
+     <a href="status" >Status</a>
+     <a href="subscription" class="active">Subscription</a>
+     <a href="#blog"></a>
+     <a href="#blog"></a>
+      <a href="#blog"></a>
+   </div>    
+</div>
+</body>
+
+    
+<div class="container">   
+    <form [formGroup]="subs!">
+        <h1>Subscription </h1><br>
+        <div class="row">
+            <div class="column" id="sub_plan_name">
+                <label for="sub_plan_name" >Select Subscription Plan</label>
+                <select id="sub_plan_name" formControlName="sub_plan_name" style="width: 100%; font-weight: 400; padding: 8px 10px; border-radius: 5px; border: 1.2px solid #c4cae0; margin-top: 5px;">
+                    <option>Basic</option>
+                    <option>Gold</option>
+                    <option>Premium</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="sub_plan_name.invalid && sub_plan_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Select Subscription Plan is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="price">Price</label>
+                <input formControlName="price" type="price" id="price" placeholder="Enter Price">
+                <div class="alert alert-danger" *ngIf="price.invalid && price.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Price is Required.
+                  </div>
+                               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column" id="validity_period">
+                <label for="validity_period" >Validity Period</label>
+                <input formControlName="validity_period" type="text" id="validity_period" >
+                
+                
+            </div>
+            <div class="column">
+                
+                               
+            </div>
+            
+        </div>
+              
+        
+        
+        <div class="container2">
+            <button  type="button" class="btn btn-outline-secondary"  >submit</button>
+          
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

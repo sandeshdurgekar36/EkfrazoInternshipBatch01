@@ -32,6 +32,19 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { VehicleComponent } from './pages/vehicle/vehicle.component';
+import { PaymentdetailsComponent } from './pages/payment/paymentdetails/paymentdetails.component';
+import { AccountdetailsComponent } from './pages/payment/accountdetails/accountdetails.component';
+import { CouponsComponent } from './pages/payment/coupons/coupons.component';
+import { CustomuserComponent } from './pages/customuser/customuser/customuser.component';
+import { SubscriptionComponent } from './pages/payment/subscription/subscription.component';
+import { DropdetComponent } from './pages/dilevery/dropdet/dropdet.component';
+import { InOrderComponent } from './pages/dilevery/in-order/in-order.component';
+import { PickupdetComponent } from './pages/dilevery/pickupdet/pickupdet.component';
+import { PlaceordComponent } from './pages/dilevery/placeord/placeord.component';
+import { StateComponent } from './pages/dilevery/state/state.component';
+import { StatusComponent } from './pages/dilevery/status/status.component';
+import { UserroleComponent } from './pages/userrole/userrole/userrole.component';
+import { DriverComponent } from './pages/Driver/driver/driver.component';
 
  
 @NgModule({
@@ -51,7 +64,20 @@ import { VehicleComponent } from './pages/vehicle/vehicle.component';
     AllcartitemsComponent,
     
     AllusersComponent,
-          VehicleComponent
+          VehicleComponent,
+          PaymentdetailsComponent,
+          AccountdetailsComponent,
+          CouponsComponent,
+          CustomuserComponent,
+          SubscriptionComponent,
+          DropdetComponent,
+          InOrderComponent,
+          PickupdetComponent,
+          PlaceordComponent,
+          StateComponent,
+          StatusComponent,
+          UserroleComponent,
+          DriverComponent,
   ],
   imports: [
     BrowserModule,

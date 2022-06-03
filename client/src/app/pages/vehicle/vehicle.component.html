@@ -3,7 +3,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
 </head>
-
+<body>
+    <div class="container3">
+    <h2>Masters Table</h2>
+    <div class="scrollmenu">
+     <a href="userrole" >User Role Ref</a>
+     <a href="vehicle" class="active">vehicle Type</a>
+     <a href="state" >State </a>
+     <a href="status">Status</a>
+     <a href="subscription">Subscription</a>
+     <a href="#blog"></a>
+     <a href="#blog"></a>
+      <a href="#blog"></a>
+   </div>    
+</div>
+</body>
     
 <div class="container">   
     <form [formGroup]="anewp!">
@@ -79,9 +93,11 @@
         </div>
         
         <div class="container2">
-        <button [disabled]="anewp!.invalid" type="button" class="btn btn-outline-secondary">Submit</button>
-        
-    </div>
+            <button  type="button" class="btn btn-outline-secondary" style="position: absolute; right: 65%;"  >ADD</button>
+            <button  type="button" class="btn btn-outline-secondary">UPDATE</button>
+            <button  type="button" class="btn btn-outline-secondary"style="position: absolute; right: 8%;">DELETE</button>
+            
+        </div>
     
     </form>
 
