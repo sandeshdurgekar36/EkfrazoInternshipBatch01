@@ -7,6 +7,30 @@
     font-family: "Poppins",sans-serif;
     font-weight: 500;
 }
+div.scrollmenu {
+    background-color: #ffffff;
+    overflow: auto;
+    white-space: nowrap;
+    background-position: center;
+    
+    
+  }
+  
+  div.scrollmenu a {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 10px 35px;
+    text-decoration: none;
+    
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+  .scrollmenu a.active {
+    border-bottom: 3px solid rgb(64, 0, 255);
+  }
 .container{
     background-color: #ffffff;
     width: 70%;
@@ -15,16 +39,45 @@
     min-width: 420px;
     padding: 10px 50px;
     transform: translate(-50%,-50%);
-    position: relative;
+    position: absolute;
     left: 50%;
-    top: 64%;
+    top: 49%;
     border-radius: 10px;
-    box-shadow: 20px 30px 30px 25px rgba(0,0,0,0.15);
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
 .container2{
     text-align: center;
 }
-
+.container3{
+      width: 100%;
+      padding: 25px 50px;
+      height: auto;
+      text-align: center;
+}
+.container4{
+    background-color: #ffffff;
+    width: 70%;
+    min-width: 420px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 165%;
+    border-radius: 10px;
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+}
+.container5{
+    background-color: #ffffff;
+    width: 70%;
+    min-width: 420px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 255%;
+    border-radius: 10px;
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+}
 h1{
     font-size: 28px;
     text-align: center;
@@ -39,7 +92,7 @@ h2{
 form{
     width: 100%;
     position: relative;
-    margin: 10px auto 0 auto;
+    margin: 35px auto 0 auto;
 }
 .row{
     width: 100%;

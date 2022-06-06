@@ -20,15 +20,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
-import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
-import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
-import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
-import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
-import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
-import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
-import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
-import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
-import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { VehicleComponent } from './pages/vehicle/vehicle.component';
@@ -45,6 +36,8 @@ import { StateComponent } from './pages/dilevery/state/state.component';
 import { StatusComponent } from './pages/dilevery/status/status.component';
 import { UserroleComponent } from './pages/userrole/userrole/userrole.component';
 import { DriverComponent } from './pages/Driver/driver/driver.component';
+import { ReviewComponent } from './pages/review/review/review.component';
+import { CustaddressComponent } from './pages/custaddres/custaddress/custaddress.component';
 
  
 @NgModule({
@@ -53,18 +46,8 @@ import { DriverComponent } from './pages/Driver/driver/driver.component';
     LoginComponent,
     MasterpageComponent,
     NewuserComponent,
-    ImportuserComponent,
-    AllproductComponent,
-    AllteamComponent,
-    AddteamComponent,
-    AddtestimonialsComponent,
-    AlltestimonialsComponent,
-    AllpromocodeComponent,
-    AddpromocodeComponent,
-    AllcartitemsComponent,
-    
-    AllusersComponent,
-          VehicleComponent,
+    ImportuserComponent,    
+    VehicleComponent,
           PaymentdetailsComponent,
           AccountdetailsComponent,
           CouponsComponent,
@@ -78,6 +61,8 @@ import { DriverComponent } from './pages/Driver/driver/driver.component';
           StatusComponent,
           UserroleComponent,
           DriverComponent,
+          ReviewComponent,
+          CustaddressComponent,
   ],
   imports: [
     BrowserModule,
