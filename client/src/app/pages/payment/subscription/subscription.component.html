@@ -7,7 +7,7 @@
     <div class="container3">
     <h2>Masters Table</h2>
     <div class="scrollmenu">
-     <a href="userrole" >User Role Ref</a>
+     <a href="masterpage" >User Role Ref</a>
      <a href="vehicle">vehicle Type</a>
      <a href="state" >State </a>
      <a href="status" >Status</a>
@@ -21,7 +21,7 @@
 
     
 <div class="container">   
-    <form [formGroup]="subs!">
+    <form [formGroup]="Subsriptionform">
         <h1>Subscription </h1><br>
         <div class="row">
             <div class="column" id="sub_plan_name">
@@ -48,7 +48,10 @@
         <div class="row">
             <div class="column" id="validity_period">
                 <label for="validity_period" >Validity Period</label>
-                <input formControlName="validity_period" type="text" id="validity_period" >
+                <input formControlName="validity_period" type="datetime" id="validity_period" >
+                <div class="alert alert-danger" *ngIf="validity_period.invalid && validity_period.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Select Subscription Plan is Required.
+                  </div>
                 
                 
             </div>
@@ -62,7 +65,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary"  >submit</button>
+            <button [disabled]="Subsriptionform.invalid"   type="button" (click)="subsriptions()" class="btn btn-outline-secondary"  >submit</button>
           
             
         </div>

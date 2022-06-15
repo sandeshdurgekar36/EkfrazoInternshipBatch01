@@ -7,20 +7,18 @@
     <div class="container3">
     <h2>Masters Table</h2>
     <div class="scrollmenu">
-     <a href="userrole" >User Role Ref</a>
+     <a href="masterpage" >User Role Ref</a>
      <a href="vehicle" class="active">vehicle Type</a>
      <a href="state" >State </a>
      <a href="status">Status</a>
      <a href="subscription">Subscription</a>
-     <a href="#blog"></a>
-     <a href="#blog"></a>
-      <a href="#blog"></a>
+     
    </div>    
 </div>
 </body>
     
 <div class="container">   
-    <form [formGroup]="anewp!">
+    <form [formGroup]="vehicaleform">
         <h1>Vehicle Type </h1><br>
         <div class="row">
             <div class="column" id="Category">
@@ -93,9 +91,7 @@
         </div>
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary" style="position: absolute; right: 65%;"  >ADD</button>
-            <button  type="button" class="btn btn-outline-secondary">UPDATE</button>
-            <button  type="button" class="btn btn-outline-secondary"style="position: absolute; right: 8%;">DELETE</button>
+            <button [disabled]="vehicaleform.invalid"  type="button" (click)="vehicles()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

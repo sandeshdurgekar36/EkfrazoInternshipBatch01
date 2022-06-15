@@ -34,14 +34,16 @@ div.scrollmenu {
 .container{
     background-color: #ffffff;
     width: 70%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
     min-width: 420px;
-    padding: 35px 50px;
+    padding: 10px 50px;
     transform: translate(-50%,-50%);
     position: absolute;
     left: 50%;
-    top: 75%;
+    top: 39%;
     border-radius: 10px;
-    box-shadow: 20px 30px 30px 25px rgba(0,0,0,0.15);
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
 }
 .container2{
     text-align: center;
@@ -52,30 +54,7 @@ div.scrollmenu {
       height: auto;
       text-align: center;
 }
-.container4{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 35px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 165%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 30px 25px rgba(0,0,0,0.15);
-}
-.container5{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 35px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 245%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 30px   25px rgba(0,0,0,0.15);
-}
+
 h1{
     font-size: 28px;
     text-align: center;
@@ -90,7 +69,8 @@ h2{
 form{
     width: 100%;
     position: relative;
-    margin: 30px auto 0 auto;
+    margin: 35px auto 0 auto;
+   
 }
 .row{
     width: 100%;
@@ -124,5 +104,9 @@ button{
     padding: 10px 100px;   
     border-radius: 2px;
     
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
 }
 

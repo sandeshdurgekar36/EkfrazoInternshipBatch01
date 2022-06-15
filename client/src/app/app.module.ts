@@ -38,6 +38,9 @@ import { UserroleComponent } from './pages/userrole/userrole/userrole.component'
 import { DriverComponent } from './pages/Driver/driver/driver.component';
 import { ReviewComponent } from './pages/review/review/review.component';
 import { CustaddressComponent } from './pages/custaddres/custaddress/custaddress.component';
+import { UserroleService } from './services/userrole.service';
+import { SubsriptionService } from './services/subsription.service';
+import { VehiclesService } from './services/vehicles.service';
 
  
 @NgModule({
@@ -84,7 +87,7 @@ import { CustaddressComponent } from './pages/custaddres/custaddress/custaddress
 
 
   ],
-  providers: [LoginService],
+  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
