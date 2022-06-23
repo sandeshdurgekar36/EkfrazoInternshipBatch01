@@ -43,7 +43,7 @@ div.scrollmenu {
     left: 50%;
     top: 39%;
     border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+    box-shadow: 20px 30px 30px 25px rgba(0,0,0,0.15);
 }
 .container2{
     text-align: center;

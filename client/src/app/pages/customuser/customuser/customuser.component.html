@@ -35,7 +35,7 @@
             </div>
             <div class="column">
                 <label for="fsdisc">Mobile Number</label>
-                <input formControlName="mobile_number" pattern="^\d{10}$" required type="mobile_number" id="mobile number"  placeholder="Enter mobile_number">
+                <input formControlName="mobile_number" pattern="^\d{10}$" required type="number" id="mobile number"  placeholder="Enter mobile_number">
                 <div class="alert alert-danger" *ngIf="mobile_number.invalid && mobile_number.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
                     Mobile Number is Required and must be 10 digit.
                   </div>
@@ -73,9 +73,7 @@
         
         
         <div class="container2">
-        <button  type="button" class="btn btn-outline-secondary" style="position: absolute; right: 65%;"  >ADD</button>
-        <button  type="button" class="btn btn-outline-secondary">UPDATE</button>
-        <button  type="button" class="btn btn-outline-secondary"style="position: absolute; right: 8%;">DELETE</button>
+        <button  type="button" class="btn btn-outline-secondary">ADD</button>
         
     </div>
     

@@ -40,6 +40,8 @@ export class SubscriptionComponent implements OnInit {
     console.log(this.Subsriptionform.value)
     this.sservice.subsriptions(this.Subsriptionform.value).subscribe(response =>{
       alert("subsription Added")
+    },err=>{
+      alert("Invalid information")
     })
 
   }

@@ -15,6 +15,7 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { AccountdetailsComponent } from './pages/payment/accountdetails/accountdetails.component';
+import { CouponsComponent } from './pages/payment/coupons/coupons.component';
 import { PaymentdetailsComponent } from './pages/payment/paymentdetails/paymentdetails.component';
 import { SubscriptionComponent } from './pages/payment/subscription/subscription.component';
 import { ReviewComponent } from './pages/review/review/review.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path:'dropdet',component:DropdetComponent},
   {path:'pickupdet',component:PickupdetComponent},
   {path:'review',component:ReviewComponent},
+  {path:'coupons',component:CouponsComponent},
 
 
 

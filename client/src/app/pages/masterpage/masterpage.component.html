@@ -22,7 +22,11 @@
         <div   class="row">
             <div class="column" id="User_Role_Name">
                 <label for="User_Role_Name" >User Role Name</label>
-                <input  formControlName="User_Role_Name" type="text" id="User_Role_Name" placeholder="Enter User Role Name">
+                <select id="User_Role_Name" formControlName="User_Role_Name" style="width: 100%; font-weight: 400; padding: 8px 10px; border-radius: 5px; border: 1.2px solid #c4cae0; margin-top: 5px;">
+                    <option>User </option>
+                    <option>Driver</option>
+                    <option>Owner</option>
+                </select>
                 <div class="alert alert-danger" *ngIf="User_Role_Name.invalid && User_Role_Name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     User Role Name is Required.
                   </div>              

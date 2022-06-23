@@ -21,7 +21,7 @@
 
     
 <div class="container">   
-    <form [formGroup]="Subsriptionform">
+    <form [formGroup]="Subsriptionform" autocomplete="on" action="subscription">
         <h1>Subscription </h1><br>
         <div class="row">
             <div class="column" id="sub_plan_name">
@@ -38,7 +38,11 @@
             </div>
             <div class="column">
                 <label for="price">Price</label>
-                <input formControlName="price" type="price" id="price" placeholder="Enter Price">
+                <select id="price" formControlName="price" style="width: 100%; font-weight: 400; padding: 8px 10px; border-radius: 5px; border: 1.2px solid #c4cae0; margin-top: 5px;">
+                    <option>199</option>
+                    <option>599</option>
+                    <option>799</option>
+                </select>
                 <div class="alert alert-danger" *ngIf="price.invalid && price.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Price is Required.
                   </div>
@@ -48,7 +52,11 @@
         <div class="row">
             <div class="column" id="validity_period">
                 <label for="validity_period" >Validity Period</label>
-                <input formControlName="validity_period" type="datetime" id="validity_period" >
+                <select id="validity_period" formControlName="validity_period" style="width: 100%; font-weight: 400; padding: 8px 10px; border-radius: 5px; border: 1.2px solid #c4cae0; margin-top: 5px;">
+                    <option>30</option>
+                    <option>90</option>
+                    <option>365</option>
+                </select>
                 <div class="alert alert-danger" *ngIf="validity_period.invalid && validity_period.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Select Subscription Plan is Required.
                   </div>
