@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
+import { StateService } from 'src/app/services/state.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,21 +11,28 @@ import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./state.component.css']
 })
 export class StateComponent implements OnInit {
-  state!: FormGroup;
+  
 
-  constructor() { }
+  constructor(private sService: StateService,private fb:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
-    this.state!! = new FormGroup({
-      'State_id':new FormControl(null, Validators.required),
+    this.stateform = new FormGroup({
+      
       'State_name':new FormControl(null, Validators.required),
     });
   }
-  get State_id() {
-    return this.state!.get('State_id');
+    get State_name() {
+    return this.stateform.get('State_name');
   }
-  get State_name() {
-    return this.state!.get('State_name');
-  }
+  stateform =this.fb.group({
+    state_name : ['',Validators.required]
+  })
+  states(){
+    console.log(this.stateform.value)
+    this.sService.states(this.stateform.value).subscribe(response =>{
+      alert("State Added");
+      console.log(response)
+    })
 
+  }
 }

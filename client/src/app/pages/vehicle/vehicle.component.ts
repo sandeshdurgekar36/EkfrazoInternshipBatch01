@@ -66,6 +66,7 @@ export class VehicleComponent implements OnInit {
     console.log(this.vehicaleform.value)
     this.vService.vehicles(this.vehicaleform.value).subscribe(response =>{
       alert("Vheicle Added");
+      console.log(response)
     })
   }
 

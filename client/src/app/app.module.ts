@@ -41,6 +41,7 @@ import { CustaddressComponent } from './pages/custaddres/custaddress/custaddress
 import { UserroleService } from './services/userrole.service';
 import { SubsriptionService } from './services/subsription.service';
 import { VehiclesService } from './services/vehicles.service';
+import { StateService } from './services/state.service';
 
  
 @NgModule({
@@ -87,7 +88,7 @@ import { VehiclesService } from './services/vehicles.service';
 
 
   ],
-  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService],
+  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

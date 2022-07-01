@@ -21,15 +21,11 @@
 
     
 <div class="container">   
-    <form [formGroup]="state!">
+    <form [formGroup]="stateform">
         <h1>State </h1><br>
         <div class="row">
             <div class="column" id="Category">
-                <label for="State_id" >State Id</label>
-                <input formControlName="State_id" type="text" id="State_id" placeholder="Enter State Id">
-                <div class="alert alert-danger" *ngIf="State_id.invalid && State_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
-                    State Id is Required.
-                  </div>
+                
                 
             </div>
             <div class="column">
@@ -45,7 +41,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button [disabled]="stateform.invalid"  (click)="states()"  type="button" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     
