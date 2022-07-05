@@ -19,7 +19,8 @@ from django.contrib import admin
 from django.db import router
 from django.urls import path,include
 from api import views
-
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
@@ -29,9 +30,11 @@ urlpatterns = [
     
     path('vehicle/',views.vehicleApi.as_view()),
     path('vehicle/<int:pk>/',views.vehicleApi.as_view()),
+    path('vehiclefilter/',views.filterList.as_view()),
 
     path('subscription/',views.subscriptionApi.as_view()),
     path('subscription/<int:pk>/',views.subscriptionApi.as_view()),
+    path('subscriptionfilter/',views.SubscriptionfilterList.as_view()),
 
     path('StateAPI/', views.StateAPI.as_view()),
     path('StateAPI/<int:pk>/', views.StateAPI.as_view()),
@@ -87,7 +90,9 @@ urlpatterns = [
     path('set-password/',views.ForgotPasswordUpdate.as_view()),
     path('register-owner/',views.registerowner.as_view()),
     path('verify-credentials/',views.verify_registration.as_view()),
-
+    path('filter-vehicletype/',views.filterApi.as_view()),
+    path('find-distance/',views.find_distance.as_view()),
+    # path('booking/',views.booking.as_view()),
 
     path('stateinfo/<int:pk>', views.state_detail),
     path('stateinfo/', views.state_list),
@@ -95,6 +100,12 @@ urlpatterns = [
     path('couponinfo/', views.coupon_list),
     path('statusinfo/<int:pk>',views.status_detail),
     path('statusinfo/',views.status_list),
+
+
+    path('gettoken/',obtain_auth_token),
+    path('refreshtoken/',TokenRefreshView.as_view()),
+    path('verifytoken/',TokenVerifyView.as_view()),
+
 ]
 
 

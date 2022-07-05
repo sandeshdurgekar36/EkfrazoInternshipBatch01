@@ -8,6 +8,7 @@ import re
 from sre_constants import SUCCESS
 from attr import field
 from matplotlib.pyplot import get
+from numpy import character
 from requests import request
 from rest_framework import serializers,exceptions
 from .models import *
@@ -25,7 +26,7 @@ from django.db.models import Q
 from uuid import uuid4
 from rest_framework.exceptions import AuthenticationFailed
 
-
+import django_filters 
 
 
 
@@ -40,10 +41,17 @@ class UserRoleSerializer(serializers.ModelSerializer):
 
 class vehicleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = vehicle
+        model = vehicleType
         
-        fields = ['id','vehicleTypeName','capacity','size','details','price_per_km','min_charge','max_time_min','badge']
+        fields = ['id','vehicleTypeName','capacity','size','details','Vehicle_number','price_per_km','min_charge','max_time_min','badge']
 
+class filtervehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FilterVehicleType
+        fields = ['vehicleTypeName']
+
+
+        
 class subscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = subscription
@@ -131,70 +139,44 @@ class Account_details_serializer(serializers.ModelSerializer):
 #         model = State
 #         fields = '__all__'
 
+from django.core.validators import ValidationError,RegexValidator
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
+alphabetic = RegexValidator(r'^[a-zA-Z]{4}(\ )[a-zA-Z]*$', 'Only Letters are allowed.')
+numeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only Digits are allowed.')
+
 class register1Serializer(serializers.ModelSerializer):
+    first_name = models.CharField(max_length=100,validators=[alphabetic])
     email = serializers.EmailField(required=True,validators=[UniqueValidator(queryset=User.objects.all())])
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     confirm_password = serializers.CharField(write_only=True, required=True)
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email' ,'password', 'confirm_password' )
-        extra_kwargs = {
-            'first_name': {'required': True},
-            'last_name': {'required': True}
-            }
-
-        
-                 
-    def validate(self, attrs):
-        if attrs['password'] != attrs['confirm_password']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
-        return attrs
-            
-    def create(self, validated_data):
-        user = User.objects.create(username=validated_data['username'],first_name=validated_data['first_name'],last_name=validated_data['last_name'],email=validated_data['email'])
-        user.set_password(validated_data['password'])
-        user.save()
-        return user
-        
-
-    
-
-class login1Serializer(serializers.ModelSerializer):
-    username= serializers.CharField(max_length=100)
-    password = serializers.CharField(max_length=100)
-    
-
-    class Meta:
-        model = User
-        fields = ['id','username', 'password']
-        
-        
-        
-    def validate(self, data):
-      
-        if User.objects.filter(username=data['username'], password= data['password']).exists():
-            return Response({'error': 'user already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
-        return data
+        model = register1
+        fields = ('id','username', 'first_name', 'last_name', 'email' ,'password', 'confirm_password' )
 
        
 
+# class login1Serializer(serializers.ModelSerializer):
+#     email= serializers.CharField(max_length=100)
+#     password = serializers.CharField(max_length=100)
+#     class Meta:
+#         model = login1
+#         fields = ['id','email', 'password']
+        
 
-class forgotpasswordSerializer(serializers.Serializer):
-    email =serializers.EmailField(min_length=2)
-    redirect_url = serializers.CharField(max_length=500, required=False)
+# class forgotpasswordSerializer(serializers.Serializer):
+#     email =serializers.EmailField(min_length=2)
+#     redirect_url = serializers.CharField(max_length=500, required=False)
 
-    class Meta:
-        field = ['email']
+#     class Meta:
+#         field = ['email']
 
-class verifyotpSerializer(serializers.Serializer):
-    username=serializers.CharField(max_length=500,required=False)
-    otp = serializers.IntegerField()
+# class verifyotpSerializer(serializers.Serializer):
+#     username=serializers.CharField(max_length=500,required=False)
+#     otp = serializers.IntegerField()
 
-    class Meta:
-        field =['username','otp']
-
-
-
+#     class Meta:
+#         field =['username','otp']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -212,14 +194,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class registerownerSerializer(serializers.ModelSerializer):
     
-
     class Meta:
         model = registerowner
         fields='__all__'    
 
     def create(self, validated_data):
         user = registerowner.objects.create(fullname=validated_data['fullname'],email=validated_data['email'],mobile_number=validated_data['mobile_number'])
-        #password = secrets.token_urlsafe(32)
         user.save()
         return user
 
@@ -238,5 +218,12 @@ class verify_registrationSerializer(serializers.ModelSerializer):
 
 
 
+class mapSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = map
+        fields='__all__'
 
-
+# class bookingSerializer(serializers.Serializer):
+#     class Meta:
+#         model = booking
+#         fields ='__all__'
