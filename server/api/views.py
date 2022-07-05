@@ -11,6 +11,13 @@ from rest_framework.generics import GenericAPIView
 from django.http import HttpResponse
 import random
 import base64
+from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
+from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView,ListAPIView
+import re 
+from django.core.validators import RegexValidator
 
 # Create your views here.
 class UserRoleApi(APIView):
@@ -130,6 +137,7 @@ class subscriptionApi(APIView):
         role = subscription.objects.get(pk=id)
         serializer = subscriptionSerializer(role,data=request.data)
         if serializer.is_valid():
+
             serializer.save()
             return Response({'msg':'Data Updated'})
         return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
@@ -150,36 +158,52 @@ class subscriptionApi(APIView):
         return Response({'msg':'Data Deleted'})
 
 class StateAPI(APIView):
-    def get(self, request, pk=id):
+    permission_classes = (permissions.AllowAny,)
+    def get(self, request):
         state = State.objects.all().values()
+        filter_backends = [SearchFilter]
+        Search_fields = ['^name',]
         return Response({'result': state})
  
     def post(self,request):
         data = request.data
-        if State.objects.filter(State_id=data['State_id']).exists():
-            return Response({'error': 'State_id is already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
-        else:
-            state = State.objects.create(State_id=data['State_id'],State_name=data['State_name'])
-            return Response({'results':{'msg':'state_id is created successfully'}})
+        State_name=data.get('State_name')
+        nm = re.search("^[a-zA-z]+",State_name)
+        if not nm:
+            return Response('name should be alphabet')
+        # elif State.objects.filter(State_name=data['State_name']).exists():
+        return Response({'msg': 'State_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        # else:
+        #     state = State.objects.create(State_name=data['State_name'])
+        # return Response({'msg':'state_name is created successfully'})
+        
+
             
     def put(self,request,pk):
         data = request.data
-        if State.objects.filter(State_id=data['State_id']).exists():
-            State.objects.filter(State_id=data['State_id']).update(State_id=data['State_id'],State_name=data['State_name'])
+        if State.objects.filter(id=pk).exists():
+            State.objects.filter(id=pk).update(State_name=data['State_name'])
             return Response({'msg':'State updated successfully'})
         else:
             return Response({'error':'State_id not Found'},status=status.HTTP_404_NOT_FOUND)
 
     def delete(self,request,pk):
-        if State.objects.filter(State_id=pk).exists():
-            State.objects.filter(State_id=pk).delete()
+        if State.objects.filter(id=pk).exists():
+            State.objects.filter(id=pk).delete()
             return Response({'Results':{'Coupon':'State deleted successfully'}})
         else:
             return Response({'Result':{'Coupon':'State is not found to delete'}})
 
+class StatefilterList(ListAPIView):
+    queryset = State.objects.all()
+    serializer_class = StateSerializer
+    filter_backends = [SearchFilter]
+    search_fields =['^State_name']
+
 
 
 class CouponAPI(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         coupon = Coupon.objects.all().values()
         return Response({'result': coupon})
@@ -209,38 +233,79 @@ class CouponAPI(APIView):
             return Response({'Result':{'Coupon':'Coupon is not found to delete'}})
 
 class StatusAPI(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         status = Status.objects.all().values()
         return Response({'result': status})
 
     def post(self,request):
         data = request.data
-        if Status.objects.filter(Status_id=data['Status_id']).exists():
-            return Response({'error': 'Status_id already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        Status_name = data.get('Status_name')
+        nm = re.search("^[a-zA-z]+",Status_name)
+        if not nm:
+            return Response('Status_name should be alphabet')
+            return Response({'msg': 'Status_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        if Status.objects.filter(Status_name=data['Status_name']).exists():
+            return Response({'error': 'Status_name already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
         else:
-            statuss = Status.objects.create(Status_id=data['Status_id'],Status_name=data['Status_name'])
+            statuss = Status.objects.create(Status_name=data['Status_name'])
             return Response({'results':{'msg':'Status Created Successfully!!!'}})
 
     def put(self,request,pk):
         data = request.data
         if Status.objects.filter(id=pk).exists():
-            Status.objects.filter(id=pk).update(Status_id=data['Status_id'],Status_name=data['Status_name'])
+            Status.objects.filter(id=pk).update(Status_name=data['Status_name'])
             return Response({'msg':'Status updated successfully'})
         else:
-            return Response({'error':'Status_id not Found'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
 
     def delete(self,request,pk):
-        if Status.objects.filter(Status_id=pk).exists():
-            Status.objects.filter(Status_id=pk).delete()
-            return Response({'Results':{'Status':'Status deleted successfully'}})
-        return Response({'Result':{'Status_id':'Status_id not found to delete'}})
+        if Status.objects.filter(id=pk).exists():
+            Status.objects.filter(id=pk).delete()
+            return Response({'Results':'Status deleted successfully'})
+        return Response({'Status_id not found to delete'})
 
 class Custom_user_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request, pk=id):
         customer = Custom_user.objects.all().values()
         return Response({'result': customer})
 
     def post(self,request):
+        # data = request.data
+        # first_name = data['first_name']
+        # last_name = data['last_name']
+        # company_name = data['company_name']
+        # mobile_number= data['mobile_number']
+        # email = data['email']
+        # password = data['password']
+        # mobile_number = data['mobile_number']
+        # alternate_number = data['alternate_number']
+        # role_id = data['role_id']
+        # city_id = data['city_id']
+        # user_id = data['user_id']
+        # zip_code = data['zip_code']
+        # adhaar_card = data['adhaar_card']
+        # reset_otp = data['reset_otp']
+        # profile_image = data['profile_image']
+        # pancard_image =data ['pancard_image']
+        # if Custom_user.objects.filter(email=request.data['email']).exists():
+        #     return Response("")
+        # custom_user = Custom_user.objects.create(
+        #     first_name = request.data['first_name'],
+        #     last_name = request.data['last_name']
+        # )
+
+        # if data['profile_image']:
+        #     Custom_user.objects.filter(id=custom_user.id).update(
+        #         profile_image = request.FILE('profile_image')
+        #     )
+        # return Response("image updated successfully")
+
+
+
+
+
         data = request.data
         profile_image = data.get('profile_image')
         pancard_image = data.get('pancard_image')
@@ -259,7 +324,7 @@ class Custom_user_API(APIView):
                 ss.write(imgdata1)
                 ss.close()
 
-                add_profile_img=Custom_user.objects.filter(id=custom_user.id).update(profile_image=fname1)
+            add_profile_img=Custom_user.objects.filter(id=custom_user.id).update(profile_image=fname1)
 
             if data['pancard_image']:
                 count=str(random.randint(100,9999999))
@@ -270,12 +335,13 @@ class Custom_user_API(APIView):
                 fname2 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Pancard_image/"+count+'.png'
                 ss=  open(filename2, 'wb')
                 ss.write(imgdata2)
+
                 ss.close()
 
                 add_profile_img=Custom_user.objects.filter(id=custom_user.id).update(pancard_image=fname2)
                 
-            return Response({'results':{'msg':'Customer registered successfully'}})
-                # return Response({'msg':'plss enter all the details'})
+                return Response('Customer registered successfully')
+            return Response({'msg':'plss enter all the details'})
 
 
 
@@ -319,7 +385,16 @@ class Custom_user_API(APIView):
         else:
             return Response({'Result':{'Custom_user':'Customer_user not found to delete'}})
 
+# class Custom_userfilterList(ListAPIView):
+#     queryset = State.objects.all()
+#     serializer_class = Custom_user_Serializer
+#     filter_backends = [SearchFilter]
+
+
+#     search_fields =['^first_name']
+
 class DriverAPI(GenericAPIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         drver = Driver.objects.all().values()
         return Response({'result': drver})
@@ -348,137 +423,139 @@ class DriverAPI(GenericAPIView):
                 ss.write(imgdata3)
                 ss.close()
                 add_profile_img=Driver.objects.filter(id=driver.id).update(license_image=fname3)
+                return Response({'results':{'msg':'Driver registered successfully'}})
+        # return Response({'msg':'pls fill all the'})
+            # if data['fitness_certificate_image']:
+            #     count=str(random.randint(100,9999999999))
+            #     split_base_url_data = fitness_certificate_image.split(';base64,')[1]
+            #     imgdata4 = base64.b64decode(split_base_url_data)
+            #     filename4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
+            #     fname4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
+            #     ss=  open(filename4, 'wb')
+            #     ss.write(imgdata4)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(fitness_certificate_image=fname4)
 
-            if data['fitness_certificate_image']:
-                count=str(random.randint(100,9999999999))
-                split_base_url_data = fitness_certificate_image.split(';base64,')[1]
-                imgdata4 = base64.b64decode(split_base_url_data)
-                filename4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
-                fname4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
-                ss=  open(filename4, 'wb')
-                ss.write(imgdata4)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(fitness_certificate_image=fname4)
+            # if data['emission_test_image']:
+            #     count=str(random.randint(100,99999999))
+            #     split_base_url_data = emission_test_image.split(';base64,')[1]
+            #     imgdata5 = base64.b64decode(split_base_url_data)
+            #     filename5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
+            #     fname5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
+            #     ss=  open(filename5, 'wb')
+            #     ss.write(imgdata5)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(emission_test_image=fname5)
 
-            if data['emission_test_image']:
-                count=str(random.randint(100,99999999))
-                split_base_url_data = emission_test_image.split(';base64,')[1]
-                imgdata5 = base64.b64decode(split_base_url_data)
-                filename5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
-                fname5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
-                ss=  open(filename5, 'wb')
-                ss.write(imgdata5)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(emission_test_image=fname5)
-
-            if data['insurence_image']:
-                count=str(random.randint(100,999999999))
-                split_base_url_data = insurence_image.split(';base64,')[1]
-                imgdata6 = base64.b64decode(split_base_url_data)
-                filename6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
-                fname6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
-                ss=  open(filename6, 'wb')
-                ss.write(imgdata6)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(insurence_image=fname6)
+            # if data['insurence_image']:
+            #     count=str(random.randint(100,999999999))
+            #     split_base_url_data = insurence_image.split(';base64,')[1]
+            #     imgdata6 = base64.b64decode(split_base_url_data)
+            #     filename6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
+            #     fname6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
+            #     ss=  open(filename6, 'wb')
+            #     ss.write(imgdata6)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(insurence_image=fname6)
             
-            if data['rc_image']:
-                count=str(random.randint(100,9999999))
-                split_base_url_data = rc_image.split(';base64,')[1]
-                imgdata7 = base64.b64decode(split_base_url_data)
-                filename7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
-                fname7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
-                ss=  open(filename7, 'wb')
-                ss.write(imgdata7)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(rc_image=fname7)
+            # if data['rc_image']:
+            #     count=str(random.randint(100,9999999))
+            #     split_base_url_data = rc_image.split(';base64,')[1]
+            #     imgdata7 = base64.b64decode(split_base_url_data)
+            #     filename7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
+            #     fname7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
+            #     ss=  open(filename7, 'wb')
+            #     ss.write(imgdata7)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(rc_image=fname7)
 
-            if data['permit_expire_image']:
-                count=str(random.randint(100,9999999))
-                split_base_url_data = permit_expire_image.split(';base64,')[1]
-                imgdata8 = base64.b64decode(split_base_url_data)
-                filename8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
-                fname8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
-                ss=  open(filename8, 'wb')
-                ss.write(imgdata8)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(permit_expire_image=fname8)
+            # if data['permit_expire_image']:
+            #     count=str(random.randint(100,9999999))
+            #     split_base_url_data = permit_expire_image.split(';base64,')[1]
+            #     imgdata8 = base64.b64decode(split_base_url_data)
+            #     filename8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
+            #     fname8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
+            #     ss=  open(filename8, 'wb')
+            #     ss.write(imgdata8)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(permit_expire_image=fname8)
 
-            return Response({'results':{'msg':'Driver registered successfully'}})
+            # return Response({'results':{'msg':'Driver registered successfully'}})
 
     def put(self,request,pk):
         data = request.data
         if Driver.objects.filter(driving_license_id=pk).exists():
             Driver.objects.filter(driving_license_id=pk).update(driving_license_id=data['driving_license_id'],vehicle_status=data['vehicle_status'],badge=data['badge'])
             return Response({'msg':'updated successfully'})
-        else:
-            if data['license_image']:
-                count=str(random.randint(100,999999999))
-                split_base_url_data = license_image.split(';base64,')[1]
-                imgdata3 = base64.b64decode(split_base_url_data)
-                filename3 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/License_image/"+count+'.png'
-                fname3 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/License_image/"+count+'.png'
-                ss=  open(filename3, 'wb')
-                ss.write(imgdata3)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(license_image=fname3)
+        return Response('driving_license_id is not found')
+        # else:
+        #     if data['license_image']:
+        #         count=str(random.randint(100,999999999))
+        #         split_base_url_data = license_image.split(';base64,')[1]
+        #         imgdata3 = base64.b64decode(split_base_url_data)
+        #         filename3 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/License_image/"+count+'.png'
+        #         fname3 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/License_image/"+count+'.png'
+        #         ss=  open(filename3, 'wb')
+        #         ss.write(imgdata3)
+        #         ss.close()
+        #         add_profile_img=Driver.objects.filter(id=driver.id).update(license_image=fname3)
 
-            if data['fitness_certificate_image']:
-                count=str(random.randint(100,9999999999))
-                split_base_url_data = fitness_certificate_image.split(';base64,')[1]
-                imgdata4 = base64.b64decode(split_base_url_data)
-                filename4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
-                fname4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
-                ss=  open(filename4, 'wb')
-                ss.write(imgdata4)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(fitness_certificate_image=fname4)
+            # if data['fitness_certificate_image']:
+            #     count=str(random.randint(100,9999999999))
+            #     split_base_url_data = fitness_certificate_image.split(';base64,')[1]
+            #     imgdata4 = base64.b64decode(split_base_url_data)
+            #     filename4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
+            #     fname4 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Fitness_certificate_image/"+count+'.png'
+            #     ss=  open(filename4, 'wb')
+            #     ss.write(imgdata4)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(fitness_certificate_image=fname4)
 
-            if data['emission_test_image']:
-                count=str(random.randint(100,99999999))
-                split_base_url_data = emission_test_image.split(';base64,')[1]
-                imgdata5 = base64.b64decode(split_base_url_data)
-                filename5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
-                fname5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
-                ss=  open(filename5, 'wb')
-                ss.write(imgdata5)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(emission_test_image=fname5)
+            # if data['emission_test_image']:
+            #     count=str(random.randint(100,99999999))
+            #     split_base_url_data = emission_test_image.split(';base64,')[1]
+            #     imgdata5 = base64.b64decode(split_base_url_data)
+            #     filename5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
+            #     fname5 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Emission_image/"+count+'.png'
+            #     ss=  open(filename5, 'wb')
+            #     ss.write(imgdata5)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(emission_test_image=fname5)
 
-            if data['insurence_image']:
-                count=str(random.randint(100,999999999))
-                split_base_url_data = insurence_image.split(';base64,')[1]
-                imgdata6 = base64.b64decode(split_base_url_data)
-                filename6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
-                fname6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
-                ss=  open(filename6, 'wb')
-                ss.write(imgdata6)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(insurence_image=fname6)
+            # if data['insurence_image']:
+            #     count=str(random.randint(100,999999999))
+            #     split_base_url_data = insurence_image.split(';base64,')[1]
+            #     imgdata6 = base64.b64decode(split_base_url_data)
+            #     filename6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
+            #     fname6 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Insurence_image/"+count+'.png'
+            #     ss=  open(filename6, 'wb')
+            #     ss.write(imgdata6)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(insurence_image=fname6)
             
-            if data['rc_image']:
-                count=str(random.randint(100,9999999))
-                split_base_url_data = rc_image.split(';base64,')[1]
-                imgdata7 = base64.b64decode(split_base_url_data)
-                filename7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
-                fname7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
-                ss=  open(filename7, 'wb')
-                ss.write(imgdata7)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(rc_image=fname7)
+            # if data['rc_image']:
+            #     count=str(random.randint(100,9999999))
+            #     split_base_url_data = rc_image.split(';base64,')[1]
+            #     imgdata7 = base64.b64decode(split_base_url_data)
+            #     filename7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
+            #     fname7 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Rc_image/"+count+'.png'
+            #     ss=  open(filename7, 'wb')
+            #     ss.write(imgdata7)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(rc_image=fname7)
 
-            if data['permit_expire_image']:
-                count=str(random.randint(100,9999999))
-                split_base_url_data = permit_expire_image.split(';base64,')[1]
-                imgdata8 = base64.b64decode(split_base_url_data)
-                filename8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
-                fname8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
-                ss=  open(filename8, 'wb')
-                ss.write(imgdata8)
-                ss.close()
-                add_profile_img=Driver.objects.filter(id=driver.id).update(permit_expire_image=fname8)
+            # if data['permit_expire_image']:
+            #     count=str(random.randint(100,9999999))
+            #     split_base_url_data = permit_expire_image.split(';base64,')[1]
+            #     imgdata8 = base64.b64decode(split_base_url_data)
+            #     filename8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
+            #     fname8 = "C:/Users/Sheetal/Desktop/EkfrazoInternshipBatch01/server/images/Permit_image/"+count+'.png'
+            #     ss=  open(filename8, 'wb')
+            #     ss.write(imgdata8)
+            #     ss.close()
+            #     add_profile_img=Driver.objects.filter(id=driver.id).update(permit_expire_image=fname8)
 
-            return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
+            # return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
 
     def delete(self,request,pk):
         if Driver.objects.filter(id=pk).exists():
@@ -487,13 +564,19 @@ class DriverAPI(GenericAPIView):
         return Response({'Result':{'driver':'driver_id not found to delete'}})
     
 class ReviewAPI(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         review = Review.objects.all().values()
         return Response({'result': review})
 
     def post(self,request):
         data =  request.data
-        vehicle = Review.objects.create(review_stars=data['review_stars'],review_type=data['review_type'],comments=data['comments'],linked_id=data['linked_id'])
+        review_stars = data.get('review_stars')
+        if review_stars  > str(1) or review_stars < str(5):
+            return Response('pls give rating between 1 to 5')
+        else:
+
+            vehicle = Review.objects.create(review_stars=data['review_stars'],review_type=data['review_type'],comments=data['comments'],linked_id=data['linked_id'])
         return Response({'message': "Review cteated successfully"})
     
     def put(self,request,pk):
@@ -509,39 +592,36 @@ class ReviewAPI(APIView):
             return Response({'Results':{'Review':'Review deleted successfully'}})
         return Response({'Result':{'Review':'Review not found to delete'}})
         
-class VehiclesAPI(APIView):
-    def get(self, request):
-        vehicles = Vehicles.objects.all().values()
-        return Response({'result':vehicles})
+# class VehiclesAPI(APIView):
+#     permission_classes = (permissions.AllowAny,)
+#     def get(self, request):
+#         vehicles = Vehicles.objects.all().values()
+#         return Response({'result':vehicles})
    
-    def post(self,request):
-        data =  request.data
-        if Vehicles.objects.filter(name=data['name']).exists():
-            return Response({'error': "name is already exist"}, status=status.HTTP_406_NOT_ACCEPTABLE)
-        vehicles = Vehicles.objects.create(name=data['name'],vehicles_type_id_id=data['vehicles_type_id'],vehicles_number=data['vehicles_number'])
-        return Response({'message': "vehicle cteated successfully"})
+#     def post(self,request):
+#         data =  request.data
+#         if Vehicles.objects.filter(name=data['name']).exists():
+#             return Response({'error': "name is already exist"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+#         vehicles = Vehicles.objects.create(name=data['name'],vehicles_type_id_id=data['vehicles_type_id'],vehicles_number=data['vehicles_number'])
+#         return Response({'message': "vehicle cteated successfully"})
 
-    def put(self,request,pk):
-        data = request.data
-   
-        # if Vehicles.objects.filter(name=data['name'],id=pk).exists():
-        #     Vehicles.objects.filter(name=data['name']).update(name=data['name'],vehicles_type_id_id=data['vehicles_type_id'],vehicles_number=data['vehicles_number'])
-        #     return Response({'msg':'updated successfully'})
-        # return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
-        if Vehicles.objects.filter(id=pk).exists():
-            Vehicles.objects.filter(id=pk).update(name=data['name'],vehicles_type_id_id=data['vehicles_type_id'],vehicles_number=data['vehicles_number'])
-            return Response({'msg':'updated successfully'})
-        else:
-            return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
+#     def put(self,request,pk):
+#         data = request.data
+#         if Vehicles.objects.filter(id=pk).exists():
+#             Vehicles.objects.filter(id=pk).update(name=data['name'],vehicles_type_id_id=data['vehicles_type_id'],vehicles_number=data['vehicles_number'])
+#             return Response({'msg':'updated successfully'})
+#         else:
+#             return Response({'error':'id not Found'},status=status.HTTP_404_NOT_FOUND)
 
 
-    def delete(self,request,pk):
-        if Vehicles.objects.filter(id=pk).exists():
-            Vehicles.objects.filter(id=pk).delete()
-            return Response({'Results':{'Vehicles':'Vehicle deleted successfully'}})
-        return Response({'Result':{'Vehicles':'Vehicle not found to delete'}})
+#     def delete(self,request,pk):
+#         if Vehicles.objects.filter(id=pk).exists():
+#             Vehicles.objects.filter(id=pk).delete()
+#             return Response({'Results':{'Vehicles':'Vehicle deleted successfully'}})
+#         return Response({'Result':{'Vehicles':'Vehicle not found to delete'}})
 
 class Customer_address_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self,request):
         customer_address = Customer_address.objects.all().values()
         return Response({'result':customer_address})
@@ -572,22 +652,13 @@ class Customer_address_API(APIView):
         return Response({'Result':'Customer_address not found to delete'})
 
 class Pickup_details_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         pickup_details = Pickup_details.objects.all().values()
         return Response({'result': pickup_details})
 
-    # def post(self,request,pk):
-    #     data =  request.data
-        
-    #     if Pickup_details.objects.filter(Customer_address_id=data['Customer_address_id']).exists():
-    #         return Response({'error': "Customer_address_id is already exist"}, status=status.HTTP_406_NOT_ACCEPTABLE)
-    #         pickup_details = Pickup_details.objects.create(Customer_address_id=data['Customer_address_id'],pickup_data_time=data['pickup_data_time'],pickup_date=data['pickup_date'],pickup_time=data['pickup_time'])
-    #     return Response({'message': 'Pickup_details is cteated successfully'})
-
     def post(self,request):
         data =  request.data
-        # pickup_details = Pickup_details.objects.create(Customer_address_id_id=data['Customer_address_id'],pickup_data_time=data['pickup_data_time'],pickup_date=data['pickup_date'],pickup_time=data['pickup_time'])
-        # return Response({'message': "Pickup_details cteated successfully"})
         serializer = Pickup_details_serializer(data=request.data)
         if serializer.is_valid():
             pickup = serializer.save()
@@ -613,6 +684,7 @@ class Pickup_details_API(APIView):
         return Response({'Result':'Customer_address_id not found to delete'})
 
 class Drop_details_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         drop_details = Drop_details.objects.all().values()
         return Response({'result':drop_details})
@@ -634,10 +706,9 @@ class Drop_details_API(APIView):
                 Drop_details.objects.filter(id=pk).update(Customer_address_id_id=data['Customer_address_id'],drop_data_time=data['drop_data_time'],drop_date=data['drop_date'],drop_time=data['drop_time'],priority=data['priority'],drop_id_list=data['drop_id_list'])
                 return Response({'msg': 'Drop_detail updated successfully!!'})
             return Response({'msg':'Drop_id is not found'})
-        else:
-            return Response({'error':'priority is not found!!'})
-
-
+        # else:
+        #    return Response({'ms'})
+             
     def delete(self,request,pk):
         if Drop_details.objects.filter(id=pk).exists():
             Drop_details.objects.filter(id=pk).delete()
@@ -645,6 +716,7 @@ class Drop_details_API(APIView):
         return Response({'Result':'Drop_details_id'})
         
 class Place_order_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         place_order = Place_order.objects.all().values()
         return Response({'result':place_order})
@@ -666,7 +738,7 @@ class Place_order_API(APIView):
                 return Response({'msg':'Place_order details updated successfully'})
             return Response({'error':'Place_order is not found'})
         else:
-            return Response({'msg':'pls pass all the deatils!!'})
+            return Response({'msg':'place_order details updated successfully'})
 
     def delete(self,request,pk):
         if Place_order.objects.filter(id=pk).exists():
@@ -675,6 +747,7 @@ class Place_order_API(APIView):
         return Response({'Result':'Place_order_id not found to delete'})
 
 class In_order_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         in_order = In_order.objects.all().values()
         return Response({'result':in_order})
@@ -696,15 +769,17 @@ class In_order_API(APIView):
                 return Response({'msg':'In_order_details upadated successfully!!'})
             return Response({'msg':'In_order id is not found'})
         else:
-            return Response({'error':'plss pass all the details'})
+         return Response({'error':'plss pass all the details'})
 
     def delete(self,request,pk):
         if In_order.objects.filter(id=pk).exists():
+
             In_order.objects.filter(id=pk).delete()
             return Response({'Results':'In_order_id deleted successfully'})
         return Response({'Result':'In_order_id not found to delete'})
 
 class Payment_details_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         payment_details = Payment_details.objects.all().values()
         return Response({'result':payment_details})
@@ -735,6 +810,7 @@ class Payment_details_API(APIView):
         return Response({'Result':'In_order_id not found to delete'})
 
 class Account_details_API(APIView):
+    permission_classes = (permissions.AllowAny,)
     def get(self, request):
         account = Account_details.objects.all().values()
         return Response({'result':account})
@@ -763,3 +839,29 @@ class Account_details_API(APIView):
             Account_details.objects.filter(id=pk).delete()
             return Response({'Results':'Account deleted successfully'})
         return Response({'Result':'Account_id not found to delete'})
+
+# class Order_tracker_API(APIView):
+    # permission_classes = (permissions.AllowAny,)
+    # def order_tracker(request):
+    #     if request.method=="POST":
+    #         orderId = request.POST.get('orderId', '')
+    #     try:
+    #         order=Order.objects.filter(pk=orderId)
+
+    #         if len(order)>0:
+    #             update = Order.objects.filter(pk=orderId)
+    #             updates = []
+    #             for order in update:
+    #                 # change order status to scheduled
+    #                 if order.status == 'processing':
+    #                     order.status = 'scheduled'
+    #                     order.save()
+    #                 updates.append({'status' : order.status})
+    #                 response = json.dumps(updates)
+    #                 return HttpResponse(response)
+    #         else:
+    #             return HttpResponse('{}')
+    #     except Exception as e:
+    #         return HttpResponse('{}')
+    # return render(request,"tracker.html")
+    

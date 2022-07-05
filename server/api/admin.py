@@ -3,7 +3,7 @@ from .models import *
 from .models import Custom_user
 from .models import Driver
 from .models import Review
-from .models import Vehicles
+
 
 # Register your models here.
 @admin.register(UserRole)
@@ -20,7 +20,7 @@ class subscriptionAdmin(admin.ModelAdmin):
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
-    list_display = ['id','State_name']
+    list_display = ['State_name']
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
@@ -28,7 +28,7 @@ class CouponAdmin(admin.ModelAdmin):
 
 @admin.register(Status)
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ['id','Status_name']
+    list_display = ['Status_name']
 
 @admin.register(Custom_user)
 class Custom_user_Admin(admin.ModelAdmin):
@@ -42,9 +42,9 @@ class Driver_Admin(admin.ModelAdmin):
 class Review_Admin(admin.ModelAdmin):
     list_display = ['review_stars','review_type','comments','linked_id']
 
-@admin.register(Vehicles)
-class Vehicles_Admin(admin.ModelAdmin):
-    list_display = ['name','vehicles_number','vehicles_type_id']
+# @admin.register(Vehicles)
+# class Vehicles_Admin(admin.ModelAdmin):
+#     list_display = ['name','vehicles_number','vehicles_type_id']
 
 @admin.register(Customer_address)
 class Customer_address(admin.ModelAdmin):

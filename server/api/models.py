@@ -45,8 +45,8 @@ class Custom_user(models.Model):
     adhaar_card = models.IntegerField(null=True)
     password = models.IntegerField(null=True)
     reset_otp = models.IntegerField(null=True)
-    profile_image = models.FileField(upload_to='images/Profile_image',null=True)
-    pancard_image = models.FileField(upload_to='images/Pancard_image',null=True)
+    profile_image = models.ImageField(upload_to='images/Profile_image',null=True)
+    pancard_image = models.ImageField(upload_to='images/Pancard_image',null=True)
 
 class Driver(models.Model):
     driving_license_id = models.IntegerField(null=True)
@@ -71,16 +71,16 @@ class Driver(models.Model):
 
 class Review(models.Model):
    # name = models.CharField(max_length=100)
-    review_stars = models.CharField(max_length=50)
+    review_stars = models.IntegerField(null=True)
     review_type = models.CharField(max_length=50)
     comments = models.CharField(max_length=100)
     linked_id = models.IntegerField(null=True)
 
 
-class Vehicles(models.Model):
-    name = models.CharField(max_length=100)
-    vehicles_number = models.IntegerField(null=True)
-    vehicles_type_id = models.ForeignKey(vehicle,on_delete=models.CASCADE,null=True)
+# class Vehicles(models.Model):
+#     name = models.CharField(max_length=100)
+#     vehicles_number = models.IntegerField(null=True)
+#     vehicles_type_id = models.ForeignKey(vehicle,on_delete=models.CASCADE,null=True)
 
 class Customer_address(models.Model):
     #customer_address_id= models.IntegerField(null=True)
@@ -102,7 +102,7 @@ class Pickup_details(models.Model):
     Customer_address_id = models.ForeignKey(Customer_address,on_delete=models.CASCADE,null=True)
     pickup_data_time = models.CharField(max_length=100)
     pickup_date = models.DateField(null=True)
-    pickup_time = models.CharField(max_length=10)
+    pickup_time = models.TimeField(max_length=10)
 
 class Drop_details(models.Model):
     Customer_address_id = models.ForeignKey(Customer_address,on_delete=models.CASCADE,null=True)
@@ -142,3 +142,8 @@ class Account_details(models.Model):
     branch=models.CharField(max_length=100)
     account_no=models.IntegerField(null=True)
     ifsc_code=models.IntegerField(null=True)
+
+
+
+
+    

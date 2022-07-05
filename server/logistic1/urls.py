@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path
 from api import views
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +17,8 @@ urlpatterns = [
 
     path('StateAPI/', views.StateAPI.as_view()),
     path('StateAPI/<int:pk>/', views.StateAPI.as_view()),
+
+    path('Statefilter/',views.StatefilterList.as_view()),
     
     path('CouponAPI/', views.CouponAPI.as_view()),
     path('CouponAPI/<int:pk>/', views.CouponAPI.as_view()),
@@ -24,6 +28,8 @@ urlpatterns = [
 
     path('Custom_user_API/', views.Custom_user_API.as_view()),
     path('Custom_user_API/<int:pk>/',views.Custom_user_API.as_view()),
+
+    # path('Custom_userfilterList/',views.Custom_userfilterList.as_view()),
     
     path('DriverAPI/', views.DriverAPI.as_view()),
     path('DriverAPI/<int:pk>/', views.DriverAPI.as_view()),
@@ -31,8 +37,8 @@ urlpatterns = [
     path('ReviewAPI/', views.ReviewAPI.as_view()),
     path('ReviewAPI/<int:pk>/', views.ReviewAPI.as_view()),
     
-    path('VehiclesAPI/', views.VehiclesAPI.as_view()),
-    path('VehiclesAPI/<int:pk>/', views.VehiclesAPI.as_view()), 
+    # path('VehiclesAPI/', views.VehiclesAPI.as_view()),
+    # path('VehiclesAPI/<int:pk>/', views.VehiclesAPI.as_view()), 
 
     path('Customer_address_API/',views.Customer_address_API.as_view()),
     path('Customer_address_API/<int:pk>/',views.Customer_address_API.as_view()),
@@ -54,4 +60,9 @@ urlpatterns = [
 
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
+
+    # path('Order_tracker_API/',views.Order_tracker_API.as_view()),
+    # path('Order_tracker_API/<int:pk>/',views.Order_tracker_API.as_view()),
 ]
+# if settings.DEBUG:  
+#         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

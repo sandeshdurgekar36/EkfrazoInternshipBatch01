@@ -21,7 +21,7 @@ class subscriptionSerializer(serializers.ModelSerializer):
 class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = State
-        fields ='__all__'
+        fields =['State_name']
 
 
 class CouponSerializer(serializers.ModelSerializer):
@@ -32,7 +32,7 @@ class CouponSerializer(serializers.ModelSerializer):
 class StatusSerializer(serializers.Serializer):
     class Meta:
         model = Status
-        fileds ='__all__'
+        fileds =['Status_name']
 
 class Custom_user_Serializer(serializers.ModelSerializer):
     class Meta:
@@ -50,10 +50,11 @@ class Review_Serializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-class Vehicles_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vehicles
-        fields = '__all__'
+
+# class Vehicles_Serializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Vehicles
+#         fields = '__all__'
 
 class Customer_address_Serializer(serializers.ModelSerializer):
     class Meta:
@@ -89,3 +90,6 @@ class Account_details_serializer(serializers.ModelSerializer):
     class Meta:
         model = Account_details
         fields = ['acc_holder_name','bank','branch','account_no','ifsc_code']
+# class Order_tracker_serializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = 
