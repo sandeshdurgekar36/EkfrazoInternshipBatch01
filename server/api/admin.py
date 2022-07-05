@@ -10,13 +10,37 @@ from .models import Review
 class UserRoleAdmin(admin.ModelAdmin):
     list_display =['id','User_Role_Name']
 
-@admin.register(vehicle)
+@admin.register(vehicleType)
 class vehicleAdmin(admin.ModelAdmin):
-    list_display = ['id','vehicleTypeName','capacity','size','details','price_per_km']
+    list_display = ['id','vehicleTypeName','capacity','size','details','Vehicle_number','price_per_km','min_charge','max_time_min','badge']
 
 @admin.register(subscription)
 class subscriptionAdmin(admin.ModelAdmin):
     list_display = ['id','sub_plan_name','price','validity_period']
+
+@admin.register(register1)
+class register1Admin(admin.ModelAdmin):
+    list_display = ['id','username','first_name','last_name','email','password']
+
+# @admin.register(login1)
+# class login1Admin(admin.ModelAdmin):
+#     list_display = ['id','email', 'password']
+
+# @admin.register(forgotpassword)
+# class forgotpasswordAdmin(admin.ModelAdmin):
+#     list_display =['id','email']
+
+# @admin.register(resetpassword)
+# class resetpasswordAdmin(admin.ModelAdmin):
+#     list_display =['id','email','password']
+
+@admin.register(registerowner)
+class registerownerAdmin(admin.ModelAdmin):
+    list_display= ['fullname','email','mobile_number']
+
+# @admin.register(booking)
+# class register1Admin(admin.ModelAdmin):
+#     list_display = ['id','first_name','vehicleTypeName']
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):

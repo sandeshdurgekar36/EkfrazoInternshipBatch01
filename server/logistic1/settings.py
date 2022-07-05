@@ -1,9 +1,44 @@
 from pathlib import Path
+<<<<<<< HEAD
 import os
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+=======
+import django
+
+from pandas import Timedelta
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+import os
+# from datetime import timedelta
+
+
+
+
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME':Timedelta(minutes=5),
+#     'REFRESH_TOKEN_LIFETIME':Timedelta(days=1),
+#     'ROTATE_TOKEN_LIFETIME':False,
+# }
+
+#JWT
+JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
+# JWT_SECRET_KEY = 'wcwef*rax1mz3gr$f&)gzo@bdbx)rml19ykmz+51*tj!j_yyp-'
+
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER ='patil6soumya@gmail.com'
+EMAIL_HOST_PASSWORD = '@Soumya1234'
+EMAIL_PORT = 587
+
+
+>>>>>>> b502b8b1409a3addea9a3c2e357870fcf729e753
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
