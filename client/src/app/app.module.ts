@@ -20,16 +20,28 @@ import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
-import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
-import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
-import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
-import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
-import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
-import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
-import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
-import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
-import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
-import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './services/login.service';
+import { VehicleComponent } from './pages/vehicle/vehicle.component';
+import { PaymentdetailsComponent } from './pages/payment/paymentdetails/paymentdetails.component';
+import { AccountdetailsComponent } from './pages/payment/accountdetails/accountdetails.component';
+import { CouponsComponent } from './pages/payment/coupons/coupons.component';
+import { CustomuserComponent } from './pages/customuser/customuser/customuser.component';
+import { SubscriptionComponent } from './pages/payment/subscription/subscription.component';
+import { DropdetComponent } from './pages/dilevery/dropdet/dropdet.component';
+import { InOrderComponent } from './pages/dilevery/in-order/in-order.component';
+import { PickupdetComponent } from './pages/dilevery/pickupdet/pickupdet.component';
+import { PlaceordComponent } from './pages/dilevery/placeord/placeord.component';
+import { StateComponent } from './pages/dilevery/state/state.component';
+import { StatusComponent } from './pages/dilevery/status/status.component';
+import { UserroleComponent } from './pages/userrole/userrole/userrole.component';
+import { DriverComponent } from './pages/Driver/driver/driver.component';
+import { ReviewComponent } from './pages/review/review/review.component';
+import { CustaddressComponent } from './pages/custaddres/custaddress/custaddress.component';
+import { UserroleService } from './services/userrole.service';
+import { SubsriptionService } from './services/subsription.service';
+import { VehiclesService } from './services/vehicles.service';
+import { StateService } from './services/state.service';
 
  
 @NgModule({
@@ -38,18 +50,23 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
     LoginComponent,
     MasterpageComponent,
     NewuserComponent,
-    ImportuserComponent,
-    AddnewprComponent,
-    AllproductComponent,
-    AllteamComponent,
-    AddteamComponent,
-    AddtestimonialsComponent,
-    AlltestimonialsComponent,
-    AllpromocodeComponent,
-    AddpromocodeComponent,
-    AllcartitemsComponent,
-    
-    AllusersComponent
+    ImportuserComponent,    
+    VehicleComponent,
+          PaymentdetailsComponent,
+          AccountdetailsComponent,
+          CouponsComponent,
+          CustomuserComponent,
+          SubscriptionComponent,
+          DropdetComponent,
+          InOrderComponent,
+          PickupdetComponent,
+          PlaceordComponent,
+          StateComponent,
+          StatusComponent,
+          UserroleComponent,
+          DriverComponent,
+          ReviewComponent,
+          CustaddressComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,12 +81,14 @@ import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
 
 
 
   ],
-  providers: [],
+  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

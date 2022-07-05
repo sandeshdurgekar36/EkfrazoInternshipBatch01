@@ -84,6 +84,7 @@ urlpatterns = [
     
 
     path('log/',views.login1Api.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
     path('log/<int:pk>/',views.login1Api.as_view()),
     path('forgot-password-send-otp/',views.forgot_password_send_otp.as_view()),
     path('verify-otp/',views.check_otp.as_view()),

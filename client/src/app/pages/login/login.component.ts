@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';  '../services/login.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'; 
+
 
 @Component({
   selector: 'app-login',
@@ -7,18 +11,37 @@ import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    login!: FormGroup;
+
+  
+      
+    constructor(private lService: LoginService,private fb:FormBuilder,private router:Router) { }
  
   ngOnInit(): void {
-    this.login! = new FormGroup({
-     'username':new FormControl(null, Validators.required),
-     'password':new FormControl(null, Validators.required)
-  });
+    this.loginform = new FormGroup({
+      'username':new FormControl(null, Validators.required),
+      'password':new FormControl(null, Validators.required)
+    }); 
+ 
   }
   get username() {
-    return this.login!.get('username');
+    return this.loginform.get('username');
   }
   get password() {
-    return this.login!.get('password');
+    return this.loginform.get('password');
   }
+    loginform = this.fb.group({
+    username : ['',Validators.required],
+    password : ['',Validators.required]
+    })
+  logins(){ 
+    console.log(this.loginform.value)
+    this.lService.logins(this.loginform.value).subscribe(response =>{
+      alert("login successful");
+     console.log(response)
+     this.router.navigate(['masterpage']) 
+    },err=>{
+      alert("Invalid Username Password")
+    })
+  }
+  
 }

@@ -6,19 +6,8 @@
 </head>
     <div class="container">
         <form [formGroup]="nuser!">
-            <div class="row">
-                <div class="container3">
-                    <h2>Add New User</h2>
-                            <mat-radio-group aria-label="Select an option">
-                            <mat-radio-button value="0"checked routerLink="/newuser">Individual User</mat-radio-button>
-                            <mat-radio-button value="1" routerLink="/importuser" >Import User</mat-radio-button>
-                          </mat-radio-group>        
-                </div>
-                
-
-            </div>
-
-            <div class="row">
+            <h2>Add User</h2>
+             <div class="row">
                 <div class="column" id="Category">
                     <label for="Username" >Username</label>
                     <input formControlName="username" type="text" id="Username" placeholder="Enter Username">
@@ -27,81 +16,48 @@
                       </div>
                 </div>
                 <div class="column">
-                    <label for="Password">Password</label>
-                    <input formControlName="password" type="Password" id="Password" placeholder="Enter Password">
-                    <div class="alert alert-danger" *ngIf="password.invalid && password.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
-                        Password is Required.
+                    <label for="first_name">First Name</label>
+                    <input formControlName="first_name" type="first_name" id="first_name" placeholder="Enter First Name">
+                    <div class="alert alert-danger" *ngIf="first_name.invalid && first_name.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
+                        First Name is Required.
                       </div>
                 </div>
             </div>
             <div class="row">
                 <div class="column">
-                    <label for="Email">Email</label>
-                    <input formControlName="email" type="Email" id="Email" placeholder="Enter Email">
-                    <div class="alert alert-danger" *ngIf="email.invalid && email.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
+                    <label for="last_name">Last Name</label>
+                    <input formControlName="last_name" type="last_name" id="last_name" placeholder="Enter Last Name">
+                    <div class="alert alert-danger" *ngIf="last_name.invalid && last_name.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
+                        Last Name is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="email">Email</label>
+                    <input formControlName="email" type="email"  placeholder="Enter Email">
+                    <div class="alert alert-danger" *ngIf="email.invalid && email.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;padding: 2px; margin: 1rem;  ">
                         Email is Required.
                       </div>
                 </div>
-                <div class="column">
-                    <label for="Phone Number">Phone Number</label>
-                    <input formControlName="phone" type="Phone Number" id="Phone Number" placeholder="Enter Phone Number">
-                    <div class="alert alert-danger" *ngIf="phone.invalid && phone.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;padding: 2px; margin: 1rem;  ">
-                        Phone Number is Required.
-                      </div>
-                </div>
                 
             </div>
             <div class="row">
                 <div class="column">
-                    <label for="Full Name">Full Name</label>
-                    <input formControlName="funame"  type="Full Name" id="Full Name" placeholder="Enter Full Name">
-                    <div class="alert alert-danger" *ngIf="funame.invalid && funame.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        Full Name is Required.
+                    <label for="password">Password</label>
+                    <input formControlName="password"  type="password" id="password" placeholder="Enter Password">
+                    <div class="alert alert-danger" *ngIf="password.invalid && password.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                        Password is Required.
                       </div>
                 </div>
                 <div class="column">
-                    <label for="dateofBirth">Date Of Birth</label>
-                    <input formControlName="dob" type="date" id="dateofBirth"  placeholder="Enter Password">
-                    <div class="alert alert-danger"*ngIf="dob.invalid && dob.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        Date Of Birth is Required.
+                    <label for="confirm_password">Confirm Password</label>
+                    <input formControlName="confirm_password" type="password" id="confirm_password"  placeholder="Confirm Password">
+                    <div class="alert alert-danger"*ngIf="password.invalid && password.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                         Password is Required.
                       </div>
                 </div>
                 
             </div>
-            <div class="row">
-                <div class="column">
-                    <label for="City">City</label>
-                    <input formControlName="city" type="City" id="City" placeholder="Enter City">
-                    <div class="alert alert-danger" *ngIf="city.invalid && city.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        City is Required.
-                      </div>
-                </div>
-                <div class="column">
-                    <label for="State">State</label>
-                    <input formControlName="state" type="State" id="State" placeholder="Enter State">
-                    <div class="alert alert-danger" *ngIf="state.invalid && state.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        State is Required.
-                      </div>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="Address">Address</label>
-                    <input formControlName="address" type="Address" id="Address" placeholder="Enter Email">
-                    <div class="alert alert-danger" *ngIf="address.invalid && address.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        Address is Required.
-                      </div>
-                </div>
-                <div class="column">
-                    <label for="pincode">Pin Code</label>
-                    <input formControlName="pincode" type="pincode" id="pincode" placeholder="Enter pincode">
-                    <div class="alert alert-danger" *ngIf="pincode.invalid && pincode.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                        pincode is Required.
-                      </div>
-                </div>
-                
-            </div>
+            
             <div class="container2">
             <button [disabled]="nuser!.invalid" type="button" class="btn btn-outline-secondary">Submit</button>
                   </div>
