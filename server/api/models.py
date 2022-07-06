@@ -1,5 +1,19 @@
+from email.headerregistry import Address
+from pickle import TRUE
+import profile,re
+from unittest.util import _MAX_LENGTH
 from xmlrpc.client import DateTime
 from django.db import models
+from django.core.validators import MinLengthValidator
+from rest_framework_simplejwt.tokens import RefreshToken
+from sqlalchemy import true
+# from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import ValidationError,RegexValidator
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
+alphabetic = RegexValidator(r'^[a-zA-Z]{4}(\ )[a-zA-Z]*$', 'Only Letters are allowed.')
+numeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only Digits are allowed.')
+
 
 # Create your models here.
 class UserRole(models.Model):
@@ -11,16 +25,18 @@ class UserRole(models.Model):
         ) 
     User_Role_Name= models.CharField(max_length=100,choices= User_TYPES)
 
+   
+
 class vehicleType(models.Model):
     vehicleTypeName = models.CharField(max_length=100)
     capacity = models.CharField(max_length=10)
     size = models.CharField(max_length=10)
-    details= models.CharField(max_length=100)
-    price_per_km =models.FloatField(max_length=10)
-    Vehicle_number= models.IntegerField(null=True)
-    min_charge = models.IntegerField(null=True)
-    max_time_min = models.IntegerField(null=True)
-    badge = models.CharField(max_length=50)
+    details= models.CharField(max_length=1000)
+    Vehicle_number = models.CharField(max_length = 100,null=true)
+    price_per_km =models.FloatField(max_length=100)
+    min_charge = models.FloatField(max_length=100,null=True)
+    max_time_min = models.TimeField(max_length=100,null=True)
+    badge = models.CharField(max_length=100,default='')
 
 class FilterVehicleType(models.Model):
     vehicleTypeName= models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
@@ -33,9 +49,11 @@ Subscription_TYPES = (
         ) 
 
 class subscription(models.Model):
-    sub_plan_name =models.CharField(max_length=100)
-    price = models.FloatField(max_length=10)
-    validity_period = models.DateTimeField(DateTime)
+    
+    sub_plan_name =models.CharField(max_length=100,choices=Subscription_TYPES)
+    price = models.FloatField(max_length=10, null=True)
+    validity_period = models.DurationField(null=True)
+
 
 class State(models.Model):
     # State_id = models.IntegerField(null=True)
@@ -164,5 +182,40 @@ class Account_details(models.Model):
 
 
 
+class register1(models.Model):
+    username = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100,validators=[alphabetic])
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
+    password = models.CharField(max_length=128, validators=[MinLengthValidator(6)])
+    confirm_password = models.CharField(max_length=128, validators=[MinLengthValidator(6)],null=True)
+
+
+
+# class login1(models.Model):
+#     email = models.ForeignKey(register1,on_delete=models.CASCADE,null=True)
+#     password = models.CharField(max_length=10)
+
+
+# class forgotpassword(models.Model):
+#     email = models.ForeignKey(register1, on_delete=models.CASCADE,null=True)
 
     
+# class resetpassword(models.Model):
+#     email = models.ForeignKey(register1,on_delete=models.CASCADE,null=True)
+#     password= models.CharField(max_length=128,null=true)
+
+class registerowner(models.Model):
+    fullname = models.CharField(max_length=500)
+    email= models.EmailField(max_length=500)
+    mobile_number = models.IntegerField(null=True)
+
+
+class map(models.Model):
+    source = models.CharField(max_length=100)
+    destination= models.CharField(max_length=100)
+
+# class book(models.Model):
+#     first_name = models.ForeignKey(register1, on_delete=models.CASCADE,null=TRUE)
+#     vehicleTypeName = models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=true)
+

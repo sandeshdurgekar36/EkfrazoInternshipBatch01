@@ -13,7 +13,11 @@ urlpatterns = [
     
     path('vehicle/',views.vehicleApi.as_view()),
     path('vehicle/<int:pk>/',views.vehicleApi.as_view()),
+<<<<<<< HEAD
     # path('vehiclefilter/',views.filterList.as_view()),
+=======
+    path('vehiclefilter/',views.filterList.as_view()),
+>>>>>>> b502b8b1409a3addea9a3c2e357870fcf729e753
 
     path('subscription/',views.subscriptionApi.as_view()),
     path('subscription/<int:pk>/',views.subscriptionApi.as_view()),
@@ -65,8 +69,39 @@ urlpatterns = [
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
 
+<<<<<<< HEAD
     # path('Order_tracker_API/',views.Order_tracker_API.as_view()),
     # path('Order_tracker_API/<int:pk>/',views.Order_tracker_API.as_view()),
+=======
+    path('registration/',views.RegisterUserAPIView.as_view()),
+    path('registration/<int:pk>/',views.login1Api.as_view()),
+    
+
+    path('log/',views.login1Api.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
+    path('log/<int:pk>/',views.login1Api.as_view()),
+    path('forgot-password-send-otp/',views.forgot_password_send_otp.as_view()),
+    path('verify-otp/',views.check_otp.as_view()),
+    path('set-password/',views.ForgotPasswordUpdate.as_view()),
+    path('register-owner/',views.registerowner.as_view()),
+    path('verify-credentials/',views.verify_registration.as_view()),
+    path('filter-vehicletype/',views.filterApi.as_view()),
+    path('find-distance/',views.find_distance.as_view()),
+    # path('booking/',views.booking.as_view()),
+
+    path('stateinfo/<int:pk>', views.state_detail),
+    path('stateinfo/', views.state_list),
+    path('couponinfo/<int:pk>', views.coupon_detail),
+    path('couponinfo/', views.coupon_list),
+    path('statusinfo/<int:pk>',views.status_detail),
+    path('statusinfo/',views.status_list),
+
+
+    path('gettoken/',obtain_auth_token),
+    path('refreshtoken/',TokenRefreshView.as_view()),
+    path('verifytoken/',TokenVerifyView.as_view()),
+
+>>>>>>> b502b8b1409a3addea9a3c2e357870fcf729e753
 ]
 # if settings.DEBUG:  
 #         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -34,9 +34,9 @@ class subscriptionAdmin(admin.ModelAdmin):
 # class resetpasswordAdmin(admin.ModelAdmin):
 #     list_display =['id','email','password']
 
-# @admin.register(registerowner)
-# class registerownerAdmin(admin.ModelAdmin):
-#     list_display= ['fullname','email','mobile_number']
+@admin.register(registerowner)
+class registerownerAdmin(admin.ModelAdmin):
+    list_display= ['fullname','email','mobile_number']
 
 # @admin.register(booking)
 # class register1Admin(admin.ModelAdmin):

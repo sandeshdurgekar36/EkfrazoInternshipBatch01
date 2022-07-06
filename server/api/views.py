@@ -1,13 +1,19 @@
-from urllib import response
+
+# from curses.ascii import isalpha
+import email
+from re import search
+from urllib import request, response
+from aiohttp import Payload
+from argon2 import verify_password
 from django.shortcuts import render
-# from pandas import value_counts
+from pandas import value_counts
 import pkg_resources
-# from pytest import Instance
-# from regex import Regex
+from pytest import Instance
+from regex import Regex
 from rest_framework.response import Response
-# from sympy import per, source
-# from yaml import emit
-# from logistic1.settings import EMAIL_HOST_USER
+from sympy import per, source
+from yaml import emit
+from logistic1.settings import EMAIL_HOST_USER
 from .backend import CheckAuth
 from .models import *
 from .serializers import UserRoleSerializer, vehicleSerializer,subscriptionSerializer
@@ -18,13 +24,65 @@ from rest_framework.generics import GenericAPIView, ListAPIView
 from django.http import HttpResponse
 import random
 import base64
-from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import AllowAny
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework import permissions
-from rest_framework.generics import GenericAPIView, RetrieveUpdateAPIView,ListAPIView
-import re 
-from django.core.validators import RegexValidator
+import smtplib
+from .serializers import *
+# UserRoleSerializer, vehicleSerializer,subscriptionSerializer,register1Serializer,login1Serializer,UserSerializer,forgotpasswordSerializer,verifyotpSerializer,UserSerializer,registerownerSerializer
+from rest_framework import status,authentication,views
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework import generics, permissions
+from django.contrib.auth import authenticate,login,get_user_model
+from rest_framework.authtoken.serializers import AuthTokenSerializer
+from api import serializers
+from django.contrib.auth.models import User
+import urllib.request
+from rest_framework.authtoken.models import Token
+from django.contrib import messages
+
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.utils.encoding import smart_str,force_str,smart_bytes,DjangoUnicodeDecodeError
+from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from .utils import Util
+from django.http import HttpResponsePermanentRedirect
+import os,email
+import jwt
+from django.conf import settings
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+from django.core.mail import EmailMessage,send_mail
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from logistic1 import settings
+from lib2to3.pgen2.tokenize import generate_tokens
+from django.utils.encoding import force_bytes
+from . tokens import generate_token
+import random
+from django.core.mail import message, send_mail, EmailMessage
+from django.core.mail import send_mail
+import inspect
+from django.contrib import auth
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from datetime import datetime,timedelta
+from rest_framework.filters import SearchFilter,OrderingFilter
+from jose import jwt
+from jose.constants import ALGORITHMS
+from django.views.decorators.csrf import csrf_exempt
+import string
+
+
+
+
+class CustomRedirect(HttpResponsePermanentRedirect):
+
+    allowed_schemes = [os.environ.get('APP_SCHEME'), 'http', 'https']
+
+
+class CsrfExemptSessionAuthentication(authentication.SessionAuthentication):
+    def enforce_csrf(self, request):
+        return
 
 # Create your views here.
 class UserRoleApi(APIView):
@@ -158,25 +216,25 @@ class vehicleApi(APIView):
             return Response({'Result':{'Vehicle-Type':'Data not found to delete'}})
 
 
-# class filterApi(APIView):
-#     permission_classes = (permissions.AllowAny,)
-#     authentication_classes = (CsrfExemptSessionAuthentication,)
-#     serializer_class = filtervehicleSerializer
+class filterApi(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    serializer_class = filtervehicleSerializer
 
-#     def post(self, request):
-#         data= request.data
-#         if vehicleType.objects.filter(vehicleTypeName=data['vehicleTypeName']).exists():
-#             role=vehicleType.objects.filter(vehicleTypeName=data['vehicleTypeName']).count()
+    def post(self, request):
+        data= request.data
+        if vehicleType.objects.filter(vehicleTypeName=data['vehicleTypeName']).exists():
+            role=vehicleType.objects.filter(vehicleTypeName=data['vehicleTypeName']).count()
             
-#             return Response(role)
-#         else:
-#             return Response('please enter correct name')
+            return Response(role)
+        else:
+            return Response('please enter correct name')
 
-# class filterList(ListAPIView):
-#     queryset = vehicleType.objects.all()
-#     serializer_class = vehicleSerializer
-#     filter_backends = [SearchFilter]
-#     search_fields =['vehicleTypeName']
+class filterList(ListAPIView):
+    queryset = vehicleType.objects.all()
+    serializer_class = vehicleSerializer
+    filter_backends = [SearchFilter]
+    search_fields =['vehicleTypeName']
 
 
 
@@ -192,13 +250,7 @@ class subscriptionApi(APIView):
         serializer = subscriptionSerializer(role, many=True)
         return Response(serializer.data)
 
-    def post(self,request,  format=None):
-        if request.method == 'POST':
-            serializer = subscriptionSerializer(data = request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response({'msg':'Data Created Succesfully'},status=status.HTTP_201_CREATED)
-            return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+   
 
     def post(self,request):
         data= request.data 
@@ -800,6 +852,9 @@ class Pickup_details_API(APIView):
 
 class Drop_details_API(APIView):
     permission_classes = (permissions.AllowAny,)
+    authentication_classes = [CsrfExemptSessionAuthentication]
+    serializer_class =  Drop_details_serializer
+
     def get(self, request):
         drop_details = Drop_details.objects.all().values()
         return Response({'result':drop_details})
@@ -832,6 +887,10 @@ class Drop_details_API(APIView):
         
 class Place_order_API(APIView):
     permission_classes = (permissions.AllowAny,)
+    authentication_classes = [CsrfExemptSessionAuthentication]
+    serializer_class = Place_order_serializer
+    queryset = Place_order.objects.all()
+
     def get(self, request):
         place_order = Place_order.objects.all().values()
         return Response({'result':place_order})
@@ -956,6 +1015,12 @@ class Account_details_API(APIView):
             return Response({'Results':'Account deleted successfully'})
         return Response({'Result':'Account_id not found to delete'})
 
+def state_detail(request, pk):
+    state = State.objects.get(id = pk)
+    serializer = StateSerializer(state)
+    json_data = JSONRenderer().render(serializer.data)
+    return HttpResponse(json_data,content_type='application/json')
+
 # class Order_tracker_API(APIView):
     # permission_classes = (permissions.AllowAny,)
     # def order_tracker(request):
@@ -981,3 +1046,412 @@ class Account_details_API(APIView):
     #         return HttpResponse('{}')
     # return render(request,"tracker.html")
     
+
+class UserDetailAPI(APIView):
+  authentication_classes = (TokenAuthentication,)
+  permission_classes = (AllowAny,)
+  queryset = get_user_model().objects.all()
+  def get(self,request,*args,**kwargs):
+    user = User.objects.get(id=request.user.id)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
+
+
+class Record(generics.ListCreateAPIView):
+    # get method handler
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+import re
+from django.core.validators import ValidationError,RegexValidator
+from django.contrib.auth.hashers import make_password, check_password
+
+class RegisterUserAPIView(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = register1Serializer
+    queryset = register1.objects.all()
+   
+    @csrf_exempt
+    def get(self, request):
+        CheckAuth(request)
+        
+        roldata= register1.objects.all().values()
+        return Response(roldata)
+
+        
+
+    # def post(self,request):
+    #     data= request.data
+    #     username = data.get('username')
+    #     first_name = data.get('first_name')
+    #     last_name =data.get('last_name')
+    #     email =data.get('email')
+    #     password= data.get('password')
+    #     confirm_password= data.get('confirm_password')
+    #     val = re.search("^[a-zA-Z]+",first_name)
+    #     val1 = re.search("^[a-zA-Z]+",last_name)
+    #     if data:
+            
+    #         if register1.objects.filter(email=data['email']).exists():
+            #     return Response( "email  already exist", status=status.HTTP_406_NOT_ACCEPTABLE)
+            # elif password != confirm_password:
+            #     return Response("Password fields didn't match.")
+            # elif len(password)< 6:
+            #     return Response('password length should be min 6')
+            
+            # elif not val :
+            #      return Response('name should be alphabet')
+            # elif not val1 :
+            #      return Response('Last name should be alphabet')
+            # elif '@gmail.com' not in email:
+            #     return Response('please enter valid email')
+
+
+            # else:
+            #     user = register1.objects.create(username=data['username'],first_name=data['first_name'],last_name=data['last_name'],email=data['email'],password=data['password'],confirm_password=data['confirm_password'])
+                
+            #     # return Response({'message': "Registration successfull"})
+
+            #     auth_token = jwt.encode(
+            #                 {'user_id': user.id, 'username': user.username,'first_name':user.first_name,'last_name':user.last_name,'email':user.email,
+            #                 }, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+            #     authorization = 'Bearer'+' '+auth_token
+
+            #     response_result = {}
+            #     response_result['Result'] = 'Registration Succesfull'
+            #     header = {}
+            #     header['Authorization'] =authorization
+                
+                
+            #     return Response(response_result['Result'], headers=header,status=status.HTTP_200_OK)
+                
+
+        # else:
+        #     return Response({'result': 'Please fill all the OPTIONS'})
+
+
+    def post(self, request):
+        data = request.data
+        username = data.get('username')
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        email = data.get('email')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+
+        
+
+        if register1.objects.filter(email=email).exists():
+            return Response({'error':{"email already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        if register1.objects.filter(username=username).exists():
+            return Response({'error': {"username already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            
+
+
+            user = register1.objects.create(username=username, first_name=first_name, last_name=last_name,
+                                             email=email, password=make_password(password))
+
+            auth_token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=12)}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+            authorization = 'Bearer'+' '+auth_token
+            print(authorization)
+
+            response = {}
+            response['Authorization']=authorization
+            return Response({'result': {'registration': 'user registered successfully'}}, headers=response, status=status.HTTP_200_OK)
+    
+
+class login1Api(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = [CsrfExemptSessionAuthentication]
+    # serializer_class = login1Serializer
+
+    def post(self, request):
+        data = request.data
+        email = data.get('email')
+        password = data.get('password')
+
+        user = register1.objects.filter(email=email)
+        
+        for user in user:
+            print(user)
+            username = user.username
+            user_id = user.id
+            data = check_password(password, user.password)
+        if user and data:
+                print("========================",str(settings.JWT_SECRET_KEY))
+                auth_token = jwt.encode({'user_id': user.id, 'username': user.username, 'password':user.password, 'exp': datetime.utcnow() + timedelta(days=5)}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+                authorization = auth_token
+                print(authorization)
+
+                response = {}
+                response['Authorization']=authorization
+                
+                return Response({'result': { 'user_info': {'username': username, 'user_id': user_id,  'token': response['Authorization']}, 'message': 'login successfull'}}, headers=response, status=status.HTTP_200_OK)
+        return Response({'result': {'error': 'invalid credential'}}, status=status.HTTP_401_UNAUTHORIZED)
+
+    # def post(self,request):
+    #     data = request.data
+    #     email = data.get('email')
+    #     password = data.get('password')
+
+    #     check_user=register1.objects.get(email=email)
+        
+    #     if data: 
+    #         if (check_user & password ==check_user.password):
+    #             auth_token = jwt.encode(
+    #                         {'user_id': check_user.id, 'username': check_user.username, 'password':check_user.password}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+    #             authorization = 'Bearer'+' '+auth_token
+
+    #             response_result = {}
+    #             response_result['Result'] =  'Login Succesfull'
+    #             header = {}
+    #             header['Authorization'] =authorization
+    #             return Response(response_result['Result'], headers=header,status=status.HTTP_200_OK)
+                
+    #         else:
+    #             response="please check your credentials"
+    #             return Response(response,status=status.HTTP_400_BAD_REQUEST)
+                    
+
+            
+
+
+    
+
+
+
+# def grn_otp():
+#     otp=random.randint(111111,999999)
+#     return otp
+# verify_otp=0
+
+# class forgot_password_send_otp(APIView):
+
+#     permission_classes = (permissions.AllowAny,)
+#     authentication_classes = (CsrfExemptSessionAuthentication,)
+#     serializer_class = forgotpasswordSerializer
+#     def post(self,request):
+#         response={}
+#         data = request.data
+#         email=data.get('email')
+#         check_user=register1.objects.filter(email=email)
+#         if check_user:
+#             otp=grn_otp()
+#             global verify_otp
+#             verify_otp=otp
+#             if '@gmail' in email:
+#                 message = inspect.cleandoc('''Hi,\n%s is your OTP to Forgot Password to your logistic account.\nThis OTP is valid for next 10 minutes,
+#                                       \nWith Warm Regards,\nTeam logistic,
+#                                        ''' % (otp))
+#                 send_mail(
+#                     'One Time Password (OTP)', message
+#                     ,
+#                     'pallavisn099@gmail.com',
+#                     [email],
+
+#                 )
+                
+#                 data_dict = {}
+#                 data_dict["Otp"] = otp
+#                 print(data_dict,'data_dict')
+#                 return Response('OTP sent successfully')
+#             else:
+#                 return Response(otp)
+#         else:
+#             response='Invalid username'
+#             return Response(response,status=status.HTTP_401_UNAUTHORIZED)
+
+class forgot_password_send_otp(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    # serializer_class = forgotpasswordSerializer
+
+    def post(self, request):
+
+        data = request.data
+        response = {}
+        response_result = {}
+        response_login = {}
+
+        email = data.get('email')
+        user_check = register1.objects.get(email=email)
+        if user_check:
+
+            user_data = register1.objects.get(email=email)
+            custom_user = register1.objects.get(id=user_data.id)
+            message = 'Hello!\nIf you\'ve lost your Password or Wish to Reset it, use the below\n\n reset_id=' + \
+                str(user_data.id)+'\n\n If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.\n\nThanks\nAdmin'
+            subject = 'Reset Password - Robas '
+
+            email = EmailMessage(subject, message, to=[email])
+            email.send()
+            auth_token = jwt.encode(
+                {'user_id': user_check.id, 'username': user_check.username, 'email': user_check.email}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+
+            serializer = register1Serializer(user_check)
+
+            authorization = 'Bearer'+' '+auth_token
+            response_result['result'] = {
+                'detail': 'link send in your email-id successfully', 'status': status.HTTP_200_OK}
+            response_login['Authorization'] = authorization
+            response_login['status'] = status.HTTP_200_OK
+
+        else:
+            header_response = {}
+            response_login['error'] = {'error': {
+                'detail': 'Invalid credentials', 'status': status.HTTP_401_UNAUTHORIZED}}
+            header_response['status'] = status.HTTP_401_UNAUTHORIZED
+            header_response['detail'] = 'Invalid credentials'
+
+            return Response(response_login['error'], headers=header_response)
+
+        return Response(response_result, headers=response_login)
+
+class check_otp(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    # serializer_class = verifyotpSerializer
+    
+    def post(self,request):
+        data=request.data
+        otp=data.get('otp')
+        if otp:
+            if int(verify_otp) == int(otp) :
+                return Response("otp matched")
+            else:
+                return Response("otp doesnot matched")
+        else:
+            return Response('please enter otp')        
+
+
+    
+        
+
+class ForgotPasswordUpdate(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    # serializer_class = login1Serializer
+
+    def post(self, request):
+        data = request.data
+        email = data.get('email')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+
+        user_check = register1.objects.filter(email= email)
+        
+        if password == confirm_password:
+            if user_check:
+                
+                
+                user = register1.objects.filter(email=data['email']).update(password=data['password'],confirm_password=data['confirm_password'])
+                response="Password Updated Sucessfully"
+                return Response(response, status=status.HTTP_200_OK)
+
+            else:
+                response="Please Enter Valid username"
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            response="Password did not matched"
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+import uuid
+ranom_pass=0
+class registerowner(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = registerownerSerializer
+
+    def post(self,request):
+        serializer = registerownerSerializer(data=request.data)
+        if serializer.is_valid():
+            email = request.data['email']
+            
+            ranom_pass = uuid.uuid1()
+            print(email,ranom_pass)
+
+            send_mail(
+                'login credentials',
+                'Hi,\n\nis your login credentials for your logistic account. \nusername = ' +email+' \npassword= ' + str(ranom_pass)+ '\n\nWith Warm Regards \nTeam logistic',
+                'demo.django.login@gmail.com',
+                [email],
+                fail_silently=False
+            )
+            
+            return Response({"message": "mail sent sucessfully"})
+            
+    
+class verify_registration(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = registerownerSerializer
+
+    def post(self,request):
+        data = request.data
+        email = data.get('email')
+        password = data.get('password')
+        print(email,password)
+    
+        # if email and password:
+            
+        if str(ranom_pass) == str(password):
+                
+            return Response("login succesfull")
+        else:
+            return Response("credentials doesnot match")
+        # else:
+        #     return Response('please enter email')
+
+
+from pgeocode import GeoDistance        
+import googlemaps
+import ssl
+ssl.get_default_verify_paths()
+ssl._create_default_https_context = ssl._create_unverified_context
+
+class find_distance(APIView):
+    permission_classes = (AllowAny,)
+    serializer_class = mapSerializer
+
+    def post(self,request):
+        data= request.data
+        source = data.get('source')
+        destination = data.get('destination')
+        val1 = re.search("[0-9]",source)
+        val2 = re.search("[0-9]",destination)
+        dist = GeoDistance('in')
+        if data:
+            if not val1:
+                return Response("please enter correct pincode and only digits allowed")
+            elif not val2:
+                return Response("please enter correct pincode and only digits allowed")
+            elif len(source)> 6:
+                return Response("Please eneter correct pincode")
+            elif len(destination)> 6:
+                return Response("Destinatio pincode is incorrect")
+            else:
+                find_dist = dist.query_postal_code(source, destination)
+                total_price = find_dist * 30
+                statement = "total distance is " +str(find_dist)+ "km  and Total Price is " +str(total_price)
+                return Response(statement )
+        else:
+            return Response("Please enter correct Pincode")
+
+# class booking(APIView):
+#     permission_classes = (AllowAny,)
+#     def post(self,request):
+#         data= request.data
+#         vehicleTypeName = data.get('vehicleTypeName')
+#         if vehicleType.objects.all().filter(vehicleTypeName=vehicleTypeName).exists:
+            
+#             return Response('The vehicle you are searching is available ')
+
+
+       
+    
+        
+
+
+
+
+
+
