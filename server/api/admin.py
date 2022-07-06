@@ -18,9 +18,9 @@ class vehicleAdmin(admin.ModelAdmin):
 class subscriptionAdmin(admin.ModelAdmin):
     list_display = ['id','sub_plan_name','price','validity_period']
 
-@admin.register(register1)
-class register1Admin(admin.ModelAdmin):
-    list_display = ['id','username','first_name','last_name','email','password']
+# @admin.register(register1)
+# class register1Admin(admin.ModelAdmin):
+#     list_display = ['id','username','first_name','last_name','email','password']
 
 # @admin.register(login1)
 # class login1Admin(admin.ModelAdmin):
@@ -34,9 +34,9 @@ class register1Admin(admin.ModelAdmin):
 # class resetpasswordAdmin(admin.ModelAdmin):
 #     list_display =['id','email','password']
 
-@admin.register(registerowner)
-class registerownerAdmin(admin.ModelAdmin):
-    list_display= ['fullname','email','mobile_number']
+# @admin.register(registerowner)
+# class registerownerAdmin(admin.ModelAdmin):
+#     list_display= ['fullname','email','mobile_number']
 
 # @admin.register(booking)
 # class register1Admin(admin.ModelAdmin):
