@@ -1,5 +1,8 @@
 from django.contrib import admin
 from .models import *
+from .models import Custom_user
+from .models import Driver
+from .models import Review
 
 
 # Register your models here.
@@ -15,9 +18,9 @@ class vehicleAdmin(admin.ModelAdmin):
 class subscriptionAdmin(admin.ModelAdmin):
     list_display = ['id','sub_plan_name','price','validity_period']
 
-@admin.register(register1)
-class register1Admin(admin.ModelAdmin):
-    list_display = ['id','username','first_name','last_name','email','password']
+# @admin.register(register1)
+# class register1Admin(admin.ModelAdmin):
+#     list_display = ['id','username','first_name','last_name','email','password']
 
 # @admin.register(login1)
 # class login1Admin(admin.ModelAdmin):
@@ -41,7 +44,7 @@ class registerownerAdmin(admin.ModelAdmin):
 
 @admin.register(State)
 class StateAdmin(admin.ModelAdmin):
-    list_display = ['id','State_name']
+    list_display = ['State_name']
 
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
@@ -49,7 +52,7 @@ class CouponAdmin(admin.ModelAdmin):
 
 @admin.register(Status)
 class StatusAdmin(admin.ModelAdmin):
-    list_display = ['id','Status_name']
+    list_display = ['Status_name']
 
 @admin.register(Custom_user)
 class Custom_user_Admin(admin.ModelAdmin):
@@ -63,9 +66,9 @@ class Driver_Admin(admin.ModelAdmin):
 class Review_Admin(admin.ModelAdmin):
     list_display = ['review_stars','review_type','comments','linked_id']
 
-@admin.register(Vehicles)
-class Vehicles_Admin(admin.ModelAdmin):
-    list_display = ['name','vehicles_number','vehicles_type_id']
+# @admin.register(Vehicles)
+# class Vehicles_Admin(admin.ModelAdmin):
+#     list_display = ['name','vehicles_number','vehicles_type_id']
 
 @admin.register(Customer_address)
 class Customer_address(admin.ModelAdmin):
@@ -76,6 +79,7 @@ class Pickup_details(admin.ModelAdmin):
     list_display = ['Customer_address_id','pickup_data_time','pickup_date','pickup_time']
 
 @admin.register(Drop_details)
+
 class Drop_details(admin.ModelAdmin):
     list_display = ['Customer_address_id','drop_data_time','drop_date','drop_time','priority','drop_id_list']
 

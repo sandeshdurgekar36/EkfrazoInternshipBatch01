@@ -1,15 +1,6 @@
-from audioop import reverse
 from dataclasses import fields
-from distutils.log import error
-import email
-from logging import exception
 from pyexpat import model
-import re
-from sre_constants import SUCCESS
-# from attr import field
-# from matplotlib.pyplot import get
-from requests import request
-from rest_framework import serializers,exceptions
+from rest_framework import serializers
 from .models import *
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.models import User
@@ -59,11 +50,7 @@ class subscriptionSerializer(serializers.ModelSerializer):
 class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = State
-        fields ='__all__'
-
-
-class StateSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
+        fields =['State_name']
 
 
 class CouponSerializer(serializers.ModelSerializer):
@@ -74,7 +61,7 @@ class CouponSerializer(serializers.ModelSerializer):
 class StatusSerializer(serializers.Serializer):
     class Meta:
         model = Status
-        fileds ='__all__'
+        fileds =['Status_name']
 
 class Custom_user_Serializer(serializers.ModelSerializer):
     class Meta:
@@ -92,10 +79,11 @@ class Review_Serializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-class Vehicles_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vehicles
-        fields = '__all__'
+
+# class Vehicles_Serializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Vehicles
+#         fields = '__all__'
 
 class Customer_address_Serializer(serializers.ModelSerializer):
     class Meta:

@@ -1,13 +1,13 @@
 <div class="login-wrapper">
     <div class="card">
         <div class="card-body">
-          <label for="username"  class="lbllogin"><b style="position:absolute; left:44%; bottom: 91%;">Login</b></label>
+          <label for="email"  class="lbllogin"><b style="position:absolute; left:44%; bottom: 91%;">Login</b></label>
             <form [formGroup]="loginform"  >
                 <div class="mb-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input formControlName="username"  type="text" class="form-control" id="username" aria-describedby="UsernameHelp" placeholder="Enter Username" >
-                  <div class="alert alert-danger" *ngIf="username.invalid && username.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
-                    Username is Required.
+                  <label for="email" class="form-label">Username</label>
+                  <input formControlName="email"  type="text" class="form-control" id="usernemailaemailme" aria-describedby="emailHelp" placeholder="Enter Email" >
+                  <div class="alert alert-danger" *ngIf="email.invalid && email.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Email is Required.
                   </div>
                 </div>
                 <div class="mb-3">
