@@ -51,6 +51,13 @@ import { AccountService } from './services/account.service';
 import { PaymentdetService } from './services/paymentdet.service';
 import { ReviewService } from './services/review.service';
 import { DriverService } from './services/driver.service';
+import { CustomusertComponent } from './pages/tables/customusert/customusert.component';
+import { DrivertComponent } from './pages/tables/drivert/drivert.component';
+import { CustomaddtComponent } from './pages/tables/customaddt/customaddt.component';
+import { DileverytComponent } from './pages/tables/dileveryt/dileveryt.component';
+import { CouponstComponent } from './pages/tables/couponst/couponst.component';
+import { StaustComponent } from './pages/tables/staust/staust.component';
+import { StatetComponent } from './pages/tables/statet/statet.component';
 
  
 @NgModule({
@@ -76,6 +83,14 @@ import { DriverService } from './services/driver.service';
           DriverComponent,
           ReviewComponent,
           CustaddressComponent,
+          CustomusertComponent,
+          DrivertComponent,
+          CustomaddtComponent,
+          DileverytComponent,
+          CouponstComponent,
+          StaustComponent,
+          StatetComponent,
+          CustomusertComponent
   ],
   imports: [
     BrowserModule,

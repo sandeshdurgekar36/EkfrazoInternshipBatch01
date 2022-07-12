@@ -21,6 +21,7 @@ import { SubscriptionComponent } from './pages/payment/subscription/subscription
 import { ReviewComponent } from './pages/review/review/review.component';
 import { UserroleComponent } from './pages/userrole/userrole/userrole.component';
 import { VehicleComponent } from './pages/vehicle/vehicle.component';
+import { CustomusertComponent } from './pages/tables/customusert/customusert.component'; 
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
   {path:'pickupdet',component:PickupdetComponent},
   {path:'review',component:ReviewComponent},
   {path:'coupons',component:CouponsComponent},
+  {path:'customusert',component:CustomusertComponent},
 
 
 
