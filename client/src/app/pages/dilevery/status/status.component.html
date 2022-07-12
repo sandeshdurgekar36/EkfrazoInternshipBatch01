@@ -21,23 +21,19 @@
 
     
 <div class="container">   
-    <form [formGroup]="status!">
+    <form [formGroup]="statusform">
         <h1>Status </h1><br>
         <div class="row">
             <div class="column" id="Category">
-                <label for="Status_id" >Status Id</label>
-                <input formControlName="status_id" type="text" id="status_id" placeholder="Enter Status Id">
-                <div class="alert alert-danger" *ngIf="status_id.invalid && status_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
-                    Status Id is Required.
-                  </div>
-                
-            </div>
-            <div class="column">
                 <label for="Status_name">Status Name</label>
                 <input formControlName="status_name" type="Status_name" id="Status_name" placeholder="Enter Status Name">
                 <div class="alert alert-danger" *ngIf="status_name.invalid && status_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Status Name is Required.
                   </div>
+                
+            </div>
+            <div class="column">
+                
                
             </div>
         </div>
@@ -45,7 +41,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="status()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

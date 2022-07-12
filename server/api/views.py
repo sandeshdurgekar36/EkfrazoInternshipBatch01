@@ -337,12 +337,12 @@ class StateAPI(APIView):
         State_name=data.get('State_name')
         nm = re.search("^[a-zA-z]+",State_name)
         if not nm:
-            return Response('name should be alphabet')
-        # elif State.objects.filter(State_name=data['State_name']).exists():
-        return Response({'msg': 'State_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
-        # else:
-        #     state = State.objects.create(State_name=data['State_name'])
-        # return Response({'msg':'state_name is created successfully'})
+            return Response({'name should be alphabet'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif State.objects.filter(State_name=data['State_name']).exists():
+            return Response({'msg': 'State_name is created successfully!!'})
+        else:
+            state = State.objects.create(State_name=data['State_name'])
+        return Response({'msg':'state_name is created successfully'})
         
 
             

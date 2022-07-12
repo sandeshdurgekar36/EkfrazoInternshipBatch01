@@ -5,7 +5,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="dropd!">
+    <form [formGroup]="dropdetform">
         <h1>Drop Details</h1><br>
         <div class="row">
             <div class="column" id="Customer_address_id">
@@ -63,7 +63,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="drops()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

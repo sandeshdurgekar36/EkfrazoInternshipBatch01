@@ -42,6 +42,15 @@ import { UserroleService } from './services/userrole.service';
 import { SubsriptionService } from './services/subsription.service';
 import { VehiclesService } from './services/vehicles.service';
 import { StateService } from './services/state.service';
+import { StatusService } from './services/status.service';
+import { PlaceordService } from './services/placeord.service';
+import { PickupdetService } from './services/pickupdet.service';
+import { InordService } from './services/inord.service';
+import { DropdetService } from './services/dropdet.service';
+import { AccountService } from './services/account.service';
+import { PaymentdetService } from './services/paymentdet.service';
+import { ReviewService } from './services/review.service';
+import { DriverService } from './services/driver.service';
 
  
 @NgModule({
@@ -88,7 +97,7 @@ import { StateService } from './services/state.service';
 
 
   ],
-  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService],
+  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService,StatusService,PlaceordService,PickupdetService,InordService,DropdetService,AccountService,PaymentdetService,ReviewService,DriverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

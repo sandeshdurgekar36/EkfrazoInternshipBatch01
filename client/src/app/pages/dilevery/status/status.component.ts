@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
+import { StatusService } from 'src/app/services/status.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,21 +10,28 @@ import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
-  status!: FormGroup;
+  
 
-  constructor() { }
+  constructor(private sService: StatusService,private fb:FormBuilder,private router:Router) { }
 
   ngOnInit(): void {
-    this.status!! = new FormGroup({
-      'status_id':new FormControl(null, Validators.required),
+    this.statusform = new FormGroup({
       'status_name':new FormControl(null, Validators.required),
     });
   }
-  get status_id() {
-    return this.status!.get('status_id');
+   get status_name() {
+    return this.statusform.get('status_name');
   }
-  get status_name() {
-    return this.status!.get('status_name');
-  }
+  statusform =this.fb.group({
+    status_name : ['',Validators.required]
+  })
+  status(){
+    console.log(this.statusform.value)
+    this.sService.status(this.statusform.value).subscribe(response =>{
+      alert("alert");
+      console.log(response)
+    })
 
+  }
 }
+

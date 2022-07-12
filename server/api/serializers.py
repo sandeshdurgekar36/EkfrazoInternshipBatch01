@@ -119,7 +119,7 @@ class Account_details_serializer(serializers.ModelSerializer):
     class Meta:
         model = Account_details
         fields = ['acc_holder_name','bank','branch','account_no','ifsc_code']
-    Status_name = serializers.CharField(max_length=100)
+    
 
 # class StateSerializer(serializers.ModelSerializer):
 #      class Meta:

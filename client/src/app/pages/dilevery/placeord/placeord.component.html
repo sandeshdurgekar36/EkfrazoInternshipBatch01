@@ -5,7 +5,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="plco!">
+    <form [formGroup]="plcoform">
         <h1>Place Order </h1><br>
         <div class="row">
             <div class="column" id="user_id">
@@ -74,7 +74,7 @@
         </div>
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="placeords()"  class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

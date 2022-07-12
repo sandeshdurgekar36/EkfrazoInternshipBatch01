@@ -5,7 +5,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="acdet!">
+    <form [formGroup]="acdetform">
         <h1>Account Details</h1><br>
         <div class="row">
             <div class="column" id="acc_holder_name">
@@ -58,7 +58,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="accounts()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     
