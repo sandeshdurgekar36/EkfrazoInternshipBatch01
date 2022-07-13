@@ -1,7 +1,7 @@
 from pathlib import Path
 import django
 
-from pandas import Timedelta
+# from pandas import Timedelta
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 import os
 # from datetime import timedelta
@@ -45,17 +45,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-
-SWAGGER_SETTINGS = {
-    'SECURITY_DEFINITIONS': {
-        'Bearer': {
-            'type': 'apiKey',
-            'name': 'Authorization',
-            'in': 'header'
-        }
-    }
-}
 
 # Application definition
 
@@ -68,11 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'api',
-    'rest_framework.authtoken',
-    'allauth',
-    'rest_auth.registration',
-    "corsheaders",
-    
+    'django_filters'
 ]
 
 MIDDLEWARE = [
@@ -83,8 +71,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
-     "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'logistic1.urls'
@@ -156,33 +142,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ]
-}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-EMAL_BACKEND ='django.core.mail.backends.console.EmailBackend'
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'],
-  'DEFAULT_AUTHENTICATION_CLASSES': (
-      'rest_framework.authentication.TokenAuthentication',
-      
-      
-  )
-}
-
-CORS_ORIGIN_ALLOW_ALL = True 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200"
-]
-
-

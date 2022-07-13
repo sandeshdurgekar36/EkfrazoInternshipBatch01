@@ -1,23 +1,6 @@
-"""logistic1 URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from atexit import register
-from posixpath import basename
 from django.contrib import admin
-from django.db import router
-from django.urls import path,include
+from django.conf import settings
+from django.urls import path
 from api import views
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from rest_framework.authtoken.views import obtain_auth_token
@@ -30,7 +13,7 @@ urlpatterns = [
     
     path('vehicle/',views.vehicleApi.as_view()),
     path('vehicle/<int:pk>/',views.vehicleApi.as_view()),
-    path('vehiclefilter/',views.filterList.as_view()),
+    # path('vehiclefilter/',views.filterList.as_view()),
 
     path('subscription/',views.subscriptionApi.as_view()),
     path('subscription/<int:pk>/',views.subscriptionApi.as_view()),
@@ -38,6 +21,8 @@ urlpatterns = [
 
     path('StateAPI/', views.StateAPI.as_view()),
     path('StateAPI/<int:pk>/', views.StateAPI.as_view()),
+
+    path('Statefilter/',views.StatefilterList.as_view()),
     
     path('CouponAPI/', views.CouponAPI.as_view()),
     path('CouponAPI/<int:pk>/', views.CouponAPI.as_view()),
@@ -47,6 +32,8 @@ urlpatterns = [
 
     path('Custom_user_API/', views.Custom_user_API.as_view()),
     path('Custom_user_API/<int:pk>/',views.Custom_user_API.as_view()),
+
+    # path('Custom_userfilterList/',views.Custom_userfilterList.as_view()),
     
     path('DriverAPI/', views.DriverAPI.as_view()),
     path('DriverAPI/<int:pk>/', views.DriverAPI.as_view()),
@@ -54,8 +41,8 @@ urlpatterns = [
     path('ReviewAPI/', views.ReviewAPI.as_view()),
     path('ReviewAPI/<int:pk>/', views.ReviewAPI.as_view()),
     
-    path('VehiclesAPI/', views.VehiclesAPI.as_view()),
-    path('VehiclesAPI/<int:pk>/', views.VehiclesAPI.as_view()), 
+    # path('VehiclesAPI/', views.VehiclesAPI.as_view()),
+    # path('VehiclesAPI/<int:pk>/', views.VehiclesAPI.as_view()), 
 
     path('Customer_address_API/',views.Customer_address_API.as_view()),
     path('Customer_address_API/<int:pk>/',views.Customer_address_API.as_view()),
@@ -77,36 +64,9 @@ urlpatterns = [
 
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
-    path('getuser/',views.UserDetailAPI.as_view()),
 
-    path('registration/',views.RegisterUserAPIView.as_view()),
-    path('registration/<int:pk>/',views.login1Api.as_view()),
-    
-
-    path('log/',views.login1Api.as_view()),
-    path('api-auth/', include('rest_framework.urls')),
-    path('log/<int:pk>/',views.login1Api.as_view()),
-    path('forgot-password-send-otp/',views.forgot_password_send_otp.as_view()),
-    path('verify-otp/',views.check_otp.as_view()),
-    path('set-password/',views.ForgotPasswordUpdate.as_view()),
-    path('register-owner/',views.registerowner.as_view()),
-    path('verify-credentials/',views.verify_registration.as_view()),
-    path('filter-vehicletype/',views.filterApi.as_view()),
-    path('find-distance/',views.find_distance.as_view()),
-    # path('booking/',views.booking.as_view()),
-
-    path('stateinfo/<int:pk>', views.state_detail),
-    path('stateinfo/', views.state_list),
-    path('couponinfo/<int:pk>', views.coupon_detail),
-    path('couponinfo/', views.coupon_list),
-    path('statusinfo/<int:pk>',views.status_detail),
-    path('statusinfo/',views.status_list),
-
-
-    path('gettoken/',obtain_auth_token),
-    path('refreshtoken/',TokenRefreshView.as_view()),
-    path('verifytoken/',TokenVerifyView.as_view()),
-
+    # path('Order_tracker_API/',views.Order_tracker_API.as_view()),
+    # path('Order_tracker_API/<int:pk>/',views.Order_tracker_API.as_view()),
 ]
-
-
+# if settings.DEBUG:  
+#         urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
