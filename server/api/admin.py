@@ -63,9 +63,9 @@ class Driver_Admin(admin.ModelAdmin):
 class Review_Admin(admin.ModelAdmin):
     list_display = ['review_stars','review_type','comments','linked_id']
 
-@admin.register(Vehicles)
-class Vehicles_Admin(admin.ModelAdmin):
-    list_display = ['name','vehicles_number','vehicles_type_id']
+# @admin.register(Vehicles)
+# class Vehicles_Admin(admin.ModelAdmin):
+#     list_display = ['name','vehicles_number','vehicles_type_id']
 
 @admin.register(Customer_address)
 class Customer_address(admin.ModelAdmin):

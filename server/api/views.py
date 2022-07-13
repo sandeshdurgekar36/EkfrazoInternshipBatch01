@@ -101,38 +101,36 @@ class UserRoleApi(APIView):
         serializer = UserRoleSerializer(role, many=True)
         return Response(serializer.data)
 
-    def post(self,request,  format=None):
-        if request.method == 'POST':
-            serializer = UserRoleSerializer(data = request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response('Role Added Succesfully',status=status.HTTP_201_CREATED)
-            return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+    def post(self,request):
+        data= request.data
+        if data:
+            user= subscription.objects.create( User_Role_Name= data['User_Role_Name'])
+            return Response('Subscription added Succesfully')
 
         
-    def put(self,request,pk,  format=None):
-        id = pk
-        role = UserRole.objects.get(pk=id)
-        serializer = UserRoleSerializer(role,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Role Updated'})
-        return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+    def put(self,request,pk):
+        data = request.data
+        if vehicleType.objects.filter(id=pk).exists():
+            vehicleType.objects.filter(id=pk).update(User_Role_Name=data['User_Role_Name'])
+            return Response('Vehicle data updated ')
+        else:
+            return Response('vehicle_id not Found',status=status.HTTP_404_NOT_FOUND)
 
-    def patch(self,request,pk,  format=None):
-        id = pk
-        role = UserRole.objects.get(pk=id)
-        serializer = UserRoleSerializer(role,data=request.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Partial Data Updated'})
-        return Response(serializer.errors)
+    # def patch(self,request,pk,  format=None):
+    #     id = pk
+    #     role = UserRole.objects.get(pk=id)
+    #     serializer = UserRoleSerializer(role,data=request.data,partial=True)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response({'msg':'Partial Data Updated'})
+    #     return Response(serializer.errors)
 
-    def delete(self,request,pk,  format=None):
-        id=pk
-        role = UserRole.objects.get(pk=id)
-        role.delete()
-        return Response({'msg':'Role Deleted'})
+    def delete(self,request,pk):
+        if UserRole.objects.filter(id=pk).exists():
+            UserRole.objects.filter(id=pk).delete()
+            return Response('Deleted successfully')
+        else:
+            return Response('Data not found to delete')
 
 
 class vehicleApi(APIView):
@@ -151,13 +149,6 @@ class vehicleApi(APIView):
         serializer = vehicleSerializer(role, many=True)
         return Response(serializer.data)
 
-    # def post(self,request):
-    #     if request.method == 'POST':
-    #         serializer = vehicleSerializer(data = request.data)
-    #         if serializer.is_valid():
-    #             serializer.save()
-    #             return Response('Vehicles data Added',status=status.HTTP_201_CREATED)
-    #         return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
 
     def post(self,request):
         data= request.data
@@ -191,37 +182,36 @@ class vehicleApi(APIView):
                 return Response("Vehicle_number: only integers allowed")
 
             else:
-                user = vehicleType.objects.create(vehicleTypeName= data['vehicleTypeName'],capacity=data['capacity'],details=data['details'],Vehicle_number=data['Vehicle_number'],price_per_km=data['price_per_km'],min_charge= data['min_charge'],max_time_min=data['max_time_min'])
+                user = vehicleType.objects.create(vehicleTypeName= data['vehicleTypeName'],capacity=data['capacity'],details=data['details'],Vehicle_number=data['Vehicle_number'],price_per_km=data['price_per_km'],min_charge= data['min_charge'],max_time_min=data['max_time_min'],badge=data['badge'])
                 return Response('vehicle added succesfully')
 
 
 
 
-    def put(self,request,pk,  format=None):
-        id = pk
-        role = vehicleType.objects.get(pk=id)
-        serializer = vehicleSerializer(role,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Data Updated'})
-        return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+    def put(self,request,pk):
+        data = request.data
+        if vehicleType.objects.filter(id=pk).exists():
+            vehicleType.objects.filter(id=pk).update(vehicleTypeName= data['vehicleTypeName'],capacity=data['capacity'],details=data['details'],Vehicle_number=data['Vehicle_number'],price_per_km=data['price_per_km'],min_charge= data['min_charge'],max_time_min=data['max_time_min'],badge=data['badge'])
+            return Response('Vehicle data updated ')
+        else:
+            return Response('vehicle_id not Found',status=status.HTTP_404_NOT_FOUND)
 
-    def patch(self,request,pk,  format=None):
-        id = pk
-        role = vehicleType.objects.get(pk=id)
-        serializer = vehicleSerializer(role,data=request.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Partial Data Updated'})
-        return Response(serializer.errors)
+    # def patch(self,request,pk,  format=None):
+    #     id = pk
+    #     role = vehicleType.objects.get(pk=id)
+    #     serializer = vehicleSerializer(role,data=request.data,partial=True)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response({'msg':'Partial Data Updated'})
+    #     return Response(serializer.errors)
 
     
     def delete(self,request,pk):
         if vehicleType.objects.filter(id=pk).exists():
             vehicleType.objects.filter(id=pk).delete()
-            return Response({'Results':{'Vehicle-Type':'Deleted successfully'}})
+            return Response('Deleted successfully')
         else:
-            return Response({'Result':{'Vehicle-Type':'Data not found to delete'}})
+            return Response('Data not found to delete')
 
 
 class filterApi(APIView):
@@ -264,70 +254,55 @@ class subscriptionApi(APIView):
 
    
 
+    # def post(self,request):
+    #     data= request.data 
+    #     sub_plan_name = request.data['sub_plan_name']
+    #     if data:
+    #             if sub_plan_name == 'Basic':
+    #                 # price=199
+    #                 # validity_period = '1 Month'
+    #                 # user= subscription.objects.create(sub_plan_name= data['sub_plan_name'],price=data['price'],validity_period=['validity_period'].days)
+    #                 return Response("you have choosed Basic Subscription,Price = 199 and Validity period is 1 Month")
+    #             elif sub_plan_name == 'Gold':
+    #                 # price=599
+    #                 # validity_period = '6 Monnths'
+    #                 return Response("you have choosed Gold Subscription Price = 599 and Validity period is 6 Month")
+    #             elif sub_plan_name == 'Premium':
+    #                 # price=999
+    #                 # validity_period = '1 year'
+    #                 return Response("you have choosed Premium Subscription Price=999 and Validity period is 1 Year")
+    #             # user= subscription.objects.create(sub_plan_name= data['sub_plan_name'],price=data['price'],validity_period=['validity_period'].days)
+    #             return Response('''please choose plan.Basic Gold Premium''')
+    #     else:
+            
+    #          return Response('Please choose the valid plan')
+
+
     def post(self,request):
-        data= request.data 
-        sub_plan_name = request.data['sub_plan_name']
-        if data:
-            
-            # if subscription.objects.filter(sub_plan_name=data['sub_plan_name']).exists():
-            #     return Response('subscription plan already exists')
-            # else:
-                if sub_plan_name == 'Basic':
-                    # price=199
-                    # validity_period = '1 Month'
-                    # user= subscription.objects.create(sub_plan_name= data['sub_plan_name'],price=data['price'],validity_period=['validity_period'].days)
-                    return Response("you have choosed Basic Subscription,Price = 199 and Validity period is 1 Month")
-                elif sub_plan_name == 'Gold':
-                    # price=599
-                    # validity_period = '6 Monnths'
-                    return Response("you have choosed Gold Subscription Price = 599 and Validity period is 6 Month")
-                elif sub_plan_name == 'Premium':
-                    # price=999
-                    # validity_period = '1 year'
-                    return Response("you have choosed Premium Subscription Price=999 and Validity period is 1 Year")
-                # user= subscription.objects.create(sub_plan_name= data['sub_plan_name'],price=data['price'],validity_period=['validity_period'].days)
-                return Response('''please choose plan.Basic Gold Premium''')
+        data= request.data
+        if subscription.objects.filter(sub_plan_name=data['sub_plan_name']).exists():
+             return Response('subscription plan already exists')
         else:
-            
-             return Response('Please choose the valid plan')
-
-
-    # def post(self,request,  format=None):
-    #     data= request.data
-    #     serializer = subscriptionSerializer(data = request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response('Subscription added Succesfully')
-    #     return Response(serializer.errors,status=status.HTTP_406_NOT_ACCEPTABLE)
-
-
-
+            user= subscription.objects.create(sub_plan_name=data['sub_plan_name'],price=data['price'],validity_period=data['validity_period'])
+            return Response('Subscription added Succesfully')
+        
+    
+    def put(self,request,pk):
+        data = request.data
+        if subscription.objects.filter(id=pk).exists():
+            subscription.objects.filter(id=pk).update(sub_plan_name=data['sub_plan_name'],price=data['price'],validity_period=data['validity_period'])
+            return Response('Subscription updated successfully')
+        else:
+            return Response('Subscription_id not Found',status=status.HTTP_404_NOT_FOUND)
 
     
-    
-    def put(self,request,pk,  format=None):
-        id = pk
-        role = subscription.objects.get(pk=id)
-        serializer = subscriptionSerializer(role,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response( 'Subscription Data Updated')
-        return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+    def delete(self,request,pk):
+        if subscription.objects.filter(id=pk).exists():
+            subscription.objects.filter(id=pk).delete()
+            return Response('Subscription plan deleted successfully')
+        else:
+            return Response('subscription plan is not found to delete')
 
-    def patch(self,request,pk,  format=None):
-        id = pk
-        role = subscription.objects.get(pk=id)
-        serializer = subscriptionSerializer(role,data=request.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'msg':'Subscription Data Updated Partially'})
-        return Response(serializer.errors)
-
-    def delete(self,request,pk,  format=None):
-        id=pk
-        role = subscription.objects.get(pk=id)
-        role.delete()
-        return Response({'msg':'Subscription plan Deleted'})
 
 class SubscriptionfilterList(ListAPIView):
     queryset = subscription.objects.all()
@@ -336,6 +311,8 @@ class SubscriptionfilterList(ListAPIView):
     search_fields =['sub_plan_name']
 
 class StateAPI(APIView):
+    # permission_classes = (permissions.AllowAny,)
+    # queryset = State.objects.all()
     def get(self, request, pk=id):
         state = State.objects.all().values()
         return Response({'result': state})
@@ -1032,85 +1009,92 @@ class RegisterUserAPIView(APIView):
 
         
 
-    # def post(self,request):
-    #     data= request.data
-    #     username = data.get('username')
-    #     first_name = data.get('first_name')
-    #     last_name =data.get('last_name')
-    #     email =data.get('email')
-    #     password= data.get('password')
-    #     confirm_password= data.get('confirm_password')
-    #     val = re.search("^[a-zA-Z]+",first_name)
-    #     val1 = re.search("^[a-zA-Z]+",last_name)
-    #     if data:
-            
-    #         if register1.objects.filter(email=data['email']).exists():
-            #     return Response( "email  already exist", status=status.HTTP_406_NOT_ACCEPTABLE)
-            # elif password != confirm_password:
-            #     return Response("Password fields didn't match.")
-            # elif len(password)< 6:
-            #     return Response('password length should be min 6')
-            
-            # elif not val :
-            #      return Response('name should be alphabet')
-            # elif not val1 :
-            #      return Response('Last name should be alphabet')
-            # elif '@gmail.com' not in email:
-            #     return Response('please enter valid email')
-
-
-            # else:
-            #     user = register1.objects.create(username=data['username'],first_name=data['first_name'],last_name=data['last_name'],email=data['email'],password=data['password'],confirm_password=data['confirm_password'])
-                
-            #     # return Response({'message': "Registration successfull"})
-
-            #     auth_token = jwt.encode(
-            #                 {'user_id': user.id, 'username': user.username,'first_name':user.first_name,'last_name':user.last_name,'email':user.email,
-            #                 }, str(settings.JWT_SECRET_KEY), algorithm="HS256")
-            #     authorization = 'Bearer'+' '+auth_token
-
-            #     response_result = {}
-            #     response_result['Result'] = 'Registration Succesfull'
-            #     header = {}
-            #     header['Authorization'] =authorization
-                
-                
-            #     return Response(response_result['Result'], headers=header,status=status.HTTP_200_OK)
-                
-
-        # else:
-        #     return Response({'result': 'Please fill all the OPTIONS'})
-
-
-    def post(self, request):
-        data = request.data
+    def post(self,request):
+        data= request.data
         username = data.get('username')
         first_name = data.get('first_name')
-        last_name = data.get('last_name')
-        email = data.get('email')
-        password = data.get('password')
-        confirm_password = data.get('confirm_password')
+        last_name =data.get('last_name')
+        email =data.get('email')
+        password= data.get('password')
+        confirm_password= data.get('confirm_password')
+        val = re.search("^[a-zA-Z]+",first_name)
+        val1 = re.search("^[a-zA-Z]+",last_name)
+        if data:
+            
+            if register1.objects.filter(email=data['email']).exists():
+                return Response( "email  already exist", status=status.HTTP_406_NOT_ACCEPTABLE)
+            elif password != confirm_password:
+                return Response("Password fields didn't match.")
+            elif len(password)< 6:
+                return Response('password length should be min 6')
+            
+            elif not val :
+                 return Response('name should be alphabet')
+            elif not val1 :
+                 return Response('Last name should be alphabet')
+            elif '@gmail.com' not in email:
+                return Response('please enter valid email')
+
+
+            else:
+                user = register1.objects.create(username=username, first_name=first_name, last_name=last_name,
+                                             email=email, password=make_password(password))
+                # return Response({'message': "Registration successfull"})
+
+                # auth_token = jwt.encode(
+                #             {'user_id': user.id, 'username': user.username,'first_name':user.first_name,'last_name':user.last_name,'email':user.email,
+                #             }, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+                # authorization = 'Bearer'+' '+auth_token
+
+                # response_result = {}
+                # response_result['Result'] = 'Registration Succesfull'
+                # header = {}
+                # header['Authorization'] =authorization
+                
+                
+                # return Response(response_result['Result'], headers=header,status=status.HTTP_200_OK)
+                auth_token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=12)}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+                authorization = 'Bearer'+' '+auth_token
+                print(authorization)
+
+                response = {}
+                response['Authorization']=authorization
+                return Response({'result': {'registration': 'user registered successfully'}}, headers=response, status=status.HTTP_200_OK)
+        
+
+        else:
+            return Response({'result': 'Please fill all the OPTIONS'})
+
+
+    # def post(self, request):
+    #     data = request.data
+    #     username = data.get('username')
+    #     first_name = data.get('first_name')
+    #     last_name = data.get('last_name')
+    #     email = data.get('email')
+    #     password = data.get('password')
+    #     confirm_password = data.get('confirm_password')
 
         
 
-        if register1.objects.filter(email=email).exists():
-            return Response({'error':{"email already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
-        if register1.objects.filter(username=username).exists():
-            return Response({'error': {"username already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
-        else:
+    #     if register1.objects.filter(email=email).exists():
+    #         return Response({'error':{"email already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
+    #     if register1.objects.filter(username=username).exists():
+    #         return Response({'error': {"username already Taken"}}, status=status.HTTP_406_NOT_ACCEPTABLE)
+    #     else:
             
 
 
-            user = register1.objects.create(username=username, first_name=first_name, last_name=last_name,
-                                             email=email, password=make_password(password))
+            # user = register1.objects.create(username=username, first_name=first_name, last_name=last_name,
+            #                                  email=email, password=make_password(password))
 
-            auth_token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=12)}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
-            authorization = 'Bearer'+' '+auth_token
-            print(authorization)
+            # auth_token = jwt.encode({'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=12)}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+            # authorization = 'Bearer'+' '+auth_token
+            # print(authorization)
 
-            response = {}
-            response['Authorization']=authorization
-            return Response({'result': {'registration': 'user registered successfully'}}, headers=response, status=status.HTTP_200_OK)
+            # response = {}
+            # response['Authorization']=authorization
+            # return Response({'result': {'registration': 'user registered successfully'}}, headers=response, status=status.HTTP_200_OK)
     
 
 class login1Api(APIView):
@@ -1173,92 +1157,92 @@ class login1Api(APIView):
 
 
 
-# def grn_otp():
-#     otp=random.randint(111111,999999)
-#     return otp
-# verify_otp=0
-
-# class forgot_password_send_otp(APIView):
-
-#     permission_classes = (permissions.AllowAny,)
-#     authentication_classes = (CsrfExemptSessionAuthentication,)
-#     serializer_class = forgotpasswordSerializer
-#     def post(self,request):
-#         response={}
-#         data = request.data
-#         email=data.get('email')
-#         check_user=register1.objects.filter(email=email)
-#         if check_user:
-#             otp=grn_otp()
-#             global verify_otp
-#             verify_otp=otp
-#             if '@gmail' in email:
-#                 message = inspect.cleandoc('''Hi,\n%s is your OTP to Forgot Password to your logistic account.\nThis OTP is valid for next 10 minutes,
-#                                       \nWith Warm Regards,\nTeam logistic,
-#                                        ''' % (otp))
-#                 send_mail(
-#                     'One Time Password (OTP)', message
-#                     ,
-#                     'pallavisn099@gmail.com',
-#                     [email],
-
-#                 )
-                
-#                 data_dict = {}
-#                 data_dict["Otp"] = otp
-#                 print(data_dict,'data_dict')
-#                 return Response('OTP sent successfully')
-#             else:
-#                 return Response(otp)
-#         else:
-#             response='Invalid username'
-#             return Response(response,status=status.HTTP_401_UNAUTHORIZED)
+def grn_otp():
+    otp=random.randint(111111,999999)
+    return otp
+verify_otp=0
 
 class forgot_password_send_otp(APIView):
+
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    # serializer_class = forgotpasswordSerializer
-
-    def post(self, request):
-
+    serializer_class = register1Serializer
+    def post(self,request):
+        response={}
         data = request.data
-        response = {}
-        response_result = {}
-        response_login = {}
+        email=data.get('email')
+        check_user=register1.objects.filter(email=email)
+        if check_user:
+            otp=grn_otp()
+            global verify_otp
+            verify_otp=otp
+            if '@gmail' in email:
+                message = inspect.cleandoc('''Hi,\n%s is your OTP to Forgot Password to your logistic account.\nThis OTP is valid for next 10 minutes,
+                                      \nWith Warm Regards,\nTeam logistic,
+                                       ''' % (otp))
+                send_mail(
+                    'One Time Password (OTP)', message
+                    ,
+                    'pallavisn099@gmail.com',
+                    [email],
 
-        email = data.get('email')
-        user_check = register1.objects.get(email=email)
-        if user_check:
-
-            user_data = register1.objects.get(email=email)
-            custom_user = register1.objects.get(id=user_data.id)
-            message = 'Hello!\nIf you\'ve lost your Password or Wish to Reset it, use the below\n\n reset_id=' + \
-                str(user_data.id)+'\n\n If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.\n\nThanks\nAdmin'
-            subject = 'Reset Password - Robas '
-
-            email = EmailMessage(subject, message, to=[email])
-            email.send()
-            auth_token = jwt.encode(
-                {'user_id': user_check.id, 'username': user_check.username, 'email': user_check.email}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
-
-            serializer = register1Serializer(user_check)
-
-            authorization = 'Bearer'+' '+auth_token
-            response_result['result'] = {
-                'detail': 'link send in your email-id successfully', 'status': status.HTTP_200_OK}
-            response_login['Authorization'] = authorization
-            response_login['status'] = status.HTTP_200_OK
-
+                )
+                
+                data_dict = {}
+                data_dict["Otp"] = otp
+                print(data_dict,'data_dict')
+                return Response('OTP sent successfully')
+            else:
+                return Response(otp)
         else:
-            header_response = {}
-            response_login['error'] = {'error': {
-                'detail': 'Invalid credentials', 'status': status.HTTP_401_UNAUTHORIZED}}
-            header_response['status'] = status.HTTP_401_UNAUTHORIZED
-            header_response['detail'] = 'Invalid credentials'
+            response='Invalid username'
+            return Response(response,status=status.HTTP_401_UNAUTHORIZED)
 
-            return Response(response_login['error'], headers=header_response)
+# class forgot_password_send_otp(APIView):
+    # permission_classes = (permissions.AllowAny,)
+    # authentication_classes = (CsrfExemptSessionAuthentication,)
+    # # serializer_class = forgotpasswordSerializer
 
-        return Response(response_result, headers=response_login)
+    # def post(self, request):
+
+    #     data = request.data
+        # response = {}
+        # response_result = {}
+        # response_login = {}
+
+        # email = data.get('email')
+        # user_check = register1.objects.get(email=email)
+        # if user_check:
+
+        #     user_data = register1.objects.get(email=email)
+        #     custom_user = register1.objects.get(id=user_data.id)
+        #     message = 'Hello!\nIf you\'ve lost your Password or Wish to Reset it, use the below\n\n reset_id=' + \
+        #         str(user_data.id)+'\n\n If you did not request a password reset, you can safely ignore this email. Only a person with access to your email can reset your account password.\n\nThanks\nAdmin'
+        #     subject = 'Reset Password - Robas '
+
+        #     email = EmailMessage(subject, message, to=[email])
+        #     email.send()
+        #     auth_token = jwt.encode(
+        #         {'user_id': user_check.id, 'username': user_check.username, 'email': user_check.email}, str(settings.JWT_SECRET_KEY), algorithm="HS256")
+
+        #     serializer = register1Serializer(user_check)
+
+        #     authorization = 'Bearer'+' '+auth_token
+        #     response_result['result'] = {
+        #         'detail': 'link send in your email-id successfully', 'status': status.HTTP_200_OK}
+        #     response_login['Authorization'] = authorization
+        #     response_login['status'] = status.HTTP_200_OK
+
+        # else:
+        #     header_response = {}
+        #     response_login['error'] = {'error': {
+        #         'detail': 'Invalid credentials', 'status': status.HTTP_401_UNAUTHORIZED}}
+        #     header_response['status'] = status.HTTP_401_UNAUTHORIZED
+        #     header_response['detail'] = 'Invalid credentials'
+
+        #     return Response(response_login['error'], headers=header_response)
+
+        # return Response(response_result, headers=response_login)
 
 class check_otp(APIView):
     permission_classes = (permissions.AllowAny,)
@@ -1318,8 +1302,9 @@ class registerowner(APIView):
         serializer = registerownerSerializer(data=request.data)
         if serializer.is_valid():
             email = request.data['email']
-            
             ranom_pass = uuid.uuid1()
+            global random_pass
+            random_pass =ranom_pass
             print(email,ranom_pass)
 
             send_mail(
@@ -1342,16 +1327,13 @@ class verify_registration(APIView):
         email = data.get('email')
         password = data.get('password')
         print(email,password)
-    
-        # if email and password:
             
-        if str(ranom_pass) == str(password):
+        if str(random_pass) == str(password):
                 
             return Response("login succesfull")
         else:
             return Response("credentials doesnot match")
-        # else:
-        #     return Response('please enter email')
+        
 
 
 from pgeocode import GeoDistance        
@@ -1387,23 +1369,4 @@ class find_distance(APIView):
                 return Response(statement )
         else:
             return Response("Please enter correct Pincode")
-
-# class booking(APIView):
-#     permission_classes = (AllowAny,)
-#     def post(self,request):
-#         data= request.data
-#         vehicleTypeName = data.get('vehicleTypeName')
-#         if vehicleType.objects.all().filter(vehicleTypeName=vehicleTypeName).exists:
-            
-#             return Response('The vehicle you are searching is available ')
-
-
-       
-    
-        
-
-
-
-
-
 

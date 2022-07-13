@@ -92,10 +92,10 @@ class Review_Serializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-class Vehicles_Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vehicles
-        fields = '__all__'
+# class Vehicles_Serializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Vehicles
+#         fields = '__all__'
 
 class Customer_address_Serializer(serializers.ModelSerializer):
     class Meta:
