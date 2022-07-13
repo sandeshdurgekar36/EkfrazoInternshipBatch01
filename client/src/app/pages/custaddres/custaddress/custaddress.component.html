@@ -5,7 +5,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="custaddres!">
+    <form [formGroup]="custaddresform">
         <h1>Customer Address</h1><br>
         <div class="row">
             <div class="column" id="id">
@@ -63,7 +63,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="custaddrs()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

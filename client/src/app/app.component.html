@@ -1,4 +1,4 @@
-<mat-toolbar color="rgb(233,236,239)" *ngIf="displaymenu">
+<mat-toolbar color="rgb(233,236,239)">
     <mat-toolbar-row>
         <button mat-icon-button>
             <mat-icon (click)="sidenav.toggle();">menu</mat-icon>
@@ -8,6 +8,11 @@
   </mat-toolbar>
   <mat-sidenav-container >
     <mat-sidenav #sidenav style="width: 12rem; ">
+<<<<<<< HEAD
+        <mat-nav-list >
+            <a mat-list-item >Home</a>
+            <a mat-list-item routerLink="masterpage">Master Table</a>
+=======
         <mat-nav-list >            
             
             <div class="dropdown">
@@ -17,11 +22,30 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a mat-list-item routerLink="newuser">Add New User</a></li>
                   <li><a mat-list-item routerLink="customuser">Custom User</a></li>
+                  <li><a mat-list-item routerLink="">all Custom User</a></li>
                </ul>
-              </div>          
-              <a mat-list-item routerLink="driver">Driver</a>          
-            <a mat-list-item routerLink="review">Review </a>    
-            <a mat-list-item routerLink="custaddress">Customer Address </a> 
+              </div>
+              <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Driver    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="driver"> Driver</a></li>
+                  <li><a mat-list-item routerLink="">all Driver</a></li>
+               </ul>
+              </div>             
+            <!--  <a mat-list-item routerLink="driver">Driver</a>-->          
+            <a mat-list-item routerLink="review">Review </a>   
+            <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Customer Address    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="custaddress"> Customer Address</a></li>
+                  <li><a mat-list-item routerLink="">all Customer Address</a></li>
+               </ul>
+              </div>   
+            <!--<a mat-list-item routerLink="custaddress">Customer Address </a> --> 
             <div class="dropdown">
               <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Dilevery    
@@ -29,16 +53,80 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li><a mat-list-item routerLink="pickupdet">Pickup Details</a></li>
                 <li><a mat-list-item routerLink="dropdet">Drop Details</a></li>
+                <li><a mat-list-item routerLink="dropdet">all Pickup Details</a></li>
+                <li><a mat-list-item routerLink="dropdet">all Drop Details</a></li>
              </ul>
             </div>  
-            <a mat-list-item routerLink="coupons">Coupons</a> 
+            <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Coupons    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="coupons"> Coupons</a></li>
+                  <li><a mat-list-item routerLink="">all Coupons</a></li>
+               </ul>
+              </div> 
+              <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    state    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="state"> state</a></li>
+                  <li><a mat-list-item routerLink="">all state</a></li>
+               </ul>
+              </div> <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    status    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="status"> status</a></li>
+                  <li><a mat-list-item routerLink="">all status</a></li>
+               </ul>
+              </div>
+               <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Place Order    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="placeord"> Place Order</a></li>
+                  <li><a mat-list-item routerLink="">all Place Order</a></li>
+               </ul>
+              </div> <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    In Order    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="in-order"> In Order</a></li>
+                  <li><a mat-list-item routerLink="">all In Order</a></li>
+               </ul>
+              </div> 
+              <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Payment Details    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="paymentdetails"> Payment Details</a></li>
+                  <li><a mat-list-item routerLink="">all Payment Details</a></li>
+               </ul>
+              </div> 
+              <div class="dropdown">
+                <button  class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account    
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a mat-list-item routerLink="accountdetails"> Account</a></li>
+                  <li><a mat-list-item routerLink="">all Account</a></li>
+               </ul>
+              </div> 
+           <!-- <a mat-list-item routerLink="coupons">Coupons</a> 
             <a mat-list-item routerLink="state">state</a>  
             <a mat-list-item routerLink="status">status</a>
             <a mat-list-item routerLink="placeord">Place Order</a>
             <a mat-list-item routerLink="in-order">In Order</a>
             <a mat-list-item routerLink="paymentdetails">Payment Details</a>
-            <a mat-list-item routerLink="accountdetails">Account</a>
+            <a mat-list-item routerLink="accountdetails">Account</a>--> 
             <a mat-list-item routerLink="masterpage">Masterpage </a>
+>>>>>>> 6fc0f60b6683a1c5a200dc2360fb80bb5c99a16c
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

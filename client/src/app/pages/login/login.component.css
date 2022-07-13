@@ -9,13 +9,3 @@ button{
     
     
 }
-.lbllogin{
-    font-size: large;
-    padding: 8px;
-}
-.form-control.ng-touched.ng-invalid {
-    border:1px solid red;
-   }
-   .form-control.ng-touched.ng-valid {
-    border:1px solid green;
-   }

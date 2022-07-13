@@ -6,7 +6,7 @@
 <body><h1>Custom User </h1>
     <hr>
 <div class="container">   
-    <form [formGroup]="customu!">
+    <form [formGroup]="customuform">
         <div class="row">
             <div class="column" id="Category">
                 <label for="Name" >First Name</label>
@@ -73,7 +73,7 @@
         
         
         <div class="container2">
-        <button  type="button" class="btn btn-outline-secondary">ADD</button>
+        <button  type="button" (click)="custusers()" class="btn btn-outline-secondary">ADD</button>
         
     </div>
     

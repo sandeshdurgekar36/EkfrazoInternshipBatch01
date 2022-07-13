@@ -6,7 +6,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="review!">
+    <form [formGroup]="reviewform">
         <h1>Review</h1><br>
         <div class="row">
             <div class="column" id="review_stars">
@@ -47,9 +47,9 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary" style="position: absolute; right: 65%;"  >ADD</button>
-            <button  type="button" class="btn btn-outline-secondary">UPDATE</button>
-            <button  type="button" class="btn btn-outline-secondary"style="position: absolute; right: 8%;">DELETE</button>
+            
+            <button  type="button" (click)="reviews()"  class="btn btn-outline-secondary">ADD</button>
+            
             
         </div>
     

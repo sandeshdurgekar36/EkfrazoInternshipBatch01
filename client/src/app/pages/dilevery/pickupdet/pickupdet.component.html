@@ -6,7 +6,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="pickupd!">
+    <form [formGroup]="pickupdform">
         <h1>Pickup Details</h1><br>
         <div class="row">
             <div class="column" id="Customer_address_id">
@@ -47,7 +47,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="pickups()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

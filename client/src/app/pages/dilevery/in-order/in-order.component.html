@@ -5,7 +5,7 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="inplc!">
+    <form [formGroup]="inplcform">
         <h1>IN Order </h1><br>
         <div class="row">
             <div class="column" id="place_order_id">
@@ -62,7 +62,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="inords()" class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

@@ -5,11 +5,11 @@
 </head>
     
 <div class="container">   
-    <form [formGroup]="cupons!">
+    <form [formGroup]="cuponsform">
         <h1>Coupons</h1><br>
         <div class="row">
             <div class="column" id="id">
-                <label for="id" >Account Holder Name</label>
+                <label for="id" >Id</label>
                 <input formControlName="id" type="text" id="id" placeholder="Enter id">
                 <div class="alert alert-danger" *ngIf="id.invalid && id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     id is Required.
@@ -17,8 +17,8 @@
                 
             </div>
             <div class="column">
-                <label for="Coupon_name">Bank</label>
-                <input formControlName="Coupon_name" type="Coupon_name" id="Coupon_name" placeholder="Enter Coupon_name">
+                <label for="Coupon_name">Coupon Name</label>
+                <input formControlName="Coupon_name" type="Coupon_name" id="Coupon_name" placeholder="Enter Coupon Name">
                 <div class="alert alert-danger" *ngIf="Coupon_name.invalid && Coupon_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     Coupon_name is Required.
                   </div>
@@ -27,8 +27,8 @@
         </div>
         <div class="row">
             <div class="column">
-                <label for="Coupon_discount">Coupon_discount</label>
-                <input formControlName="Coupon_discount" type="Coupon_discount" id="Coupon_discount" placeholder="Enter Coupon_discount">
+                <label for="Coupon_discount">Coupon Discount</label>
+                <input formControlName="Coupon_discount" type="Coupon_discount" id="Coupon_discount" placeholder="Enter Coupon Discount">
                     <div class="alert alert-danger" *ngIf="Coupon_discount.invalid && Coupon_discount.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                         Coupon_discount is Required.
                       </div>
@@ -42,7 +42,7 @@
         
         
         <div class="container2">
-            <button  type="button" class="btn btn-outline-secondary">ADD</button>
+            <button  type="button" (click)="cupons()"  class="btn btn-outline-secondary">ADD</button>
             
         </div>
     

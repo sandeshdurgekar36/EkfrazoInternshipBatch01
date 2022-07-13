@@ -8,9 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatRadioModule} from '@angular/material/radio';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatInputModule} from '@angular/material/input';
-import { MatNativeDateModule} from '@angular/material/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MatNativeDateModule} from '@angular/material/core'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,8 +16,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { MasterpageComponent } from './pages/masterpage/masterpage.component';
+import { HomeComponent } from './pages/home/home.component';
 import { NewuserComponent } from './pages/newuser/newuser/newuser.component';
 import { ImportuserComponent } from './pages/newuser/importuser/importuser.component';
+<<<<<<< HEAD
+import { AddnewprComponent } from './pages/addnewpr/addnewpr/addnewpr.component';
+import { AllproductComponent } from './pages/allproduct/allproduct/allproduct.component';
+import { AllteamComponent } from './pages/Teams/allteam/allteam.component';
+import { AddteamComponent } from './pages/Teams/addteam/addteam.component';
+import { AddtestimonialsComponent } from './pages/testimonials/addtestimonials/addtestimonials.component';
+import { AlltestimonialsComponent } from './pages/testimonials/alltestimonials/alltestimonials.component';
+import { AllpromocodeComponent } from './pages/promocode/allpromocode/allpromocode.component';
+import { AddpromocodeComponent } from './pages/promocode/addpromocode/addpromocode.component';
+import { AllcartitemsComponent } from './pages/allcartitem/allcartitems/allcartitems.component';
+import { AllusersComponent } from './pages/newuser/allusers/allusers.component';
+=======
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { VehicleComponent } from './pages/vehicle/vehicle.component';
@@ -42,6 +53,23 @@ import { UserroleService } from './services/userrole.service';
 import { SubsriptionService } from './services/subsription.service';
 import { VehiclesService } from './services/vehicles.service';
 import { StateService } from './services/state.service';
+import { StatusService } from './services/status.service';
+import { PlaceordService } from './services/placeord.service';
+import { PickupdetService } from './services/pickupdet.service';
+import { InordService } from './services/inord.service';
+import { DropdetService } from './services/dropdet.service';
+import { AccountService } from './services/account.service';
+import { PaymentdetService } from './services/paymentdet.service';
+import { ReviewService } from './services/review.service';
+import { DriverService } from './services/driver.service';
+import { CustomusertComponent } from './pages/tables/customusert/customusert.component';
+import { DrivertComponent } from './pages/tables/drivert/drivert.component';
+import { CustomaddtComponent } from './pages/tables/customaddt/customaddt.component';
+import { DileverytComponent } from './pages/tables/dileveryt/dileveryt.component';
+import { CouponstComponent } from './pages/tables/couponst/couponst.component';
+import { StaustComponent } from './pages/tables/staust/staust.component';
+import { StatetComponent } from './pages/tables/statet/statet.component';
+>>>>>>> 6fc0f60b6683a1c5a200dc2360fb80bb5c99a16c
 
  
 @NgModule({
@@ -49,7 +77,21 @@ import { StateService } from './services/state.service';
     AppComponent,
     LoginComponent,
     MasterpageComponent,
+    HomeComponent,
     NewuserComponent,
+<<<<<<< HEAD
+    ImportuserComponent,
+    AddnewprComponent,
+    AllproductComponent,
+    AllteamComponent,
+    AddteamComponent,
+    AddtestimonialsComponent,
+    AlltestimonialsComponent,
+    AllpromocodeComponent,
+    AddpromocodeComponent,
+    AllcartitemsComponent,
+    AllusersComponent
+=======
     ImportuserComponent,    
     VehicleComponent,
           PaymentdetailsComponent,
@@ -67,6 +109,15 @@ import { StateService } from './services/state.service';
           DriverComponent,
           ReviewComponent,
           CustaddressComponent,
+          CustomusertComponent,
+          DrivertComponent,
+          CustomaddtComponent,
+          DileverytComponent,
+          CouponstComponent,
+          StaustComponent,
+          StatetComponent,
+          CustomusertComponent
+>>>>>>> 6fc0f60b6683a1c5a200dc2360fb80bb5c99a16c
   ],
   imports: [
     BrowserModule,
@@ -81,14 +132,15 @@ import { StateService } from './services/state.service';
     MatDatepickerModule,
     MatInputModule,
     MatNativeDateModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
 
 
 
   ],
-  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService],
+<<<<<<< HEAD
+  providers: [],
+=======
+  providers: [LoginService,UserroleService,SubsriptionService,VehiclesService,StateService,StatusService,PlaceordService,PickupdetService,InordService,DropdetService,AccountService,PaymentdetService,ReviewService,DriverService],
+>>>>>>> 6fc0f60b6683a1c5a200dc2360fb80bb5c99a16c
   bootstrap: [AppComponent]
 })
 export class AppModule { }
