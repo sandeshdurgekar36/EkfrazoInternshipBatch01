@@ -3,16 +3,16 @@
 import email
 from re import search
 from urllib import request, response
-from aiohttp import Payload
-from argon2 import verify_password
+# # from aiohttp import Payload
+# from argon2 import verify_password
 from django.shortcuts import render
-from pandas import value_counts
-import pkg_resources
-from pytest import Instance
-from regex import Regex
+# from pandas import value_counts
+# import pkg_resources
+# from pytest import Instance
+# from regex import Regex
 from rest_framework.response import Response
-from sympy import per, source
-from yaml import emit
+# from sympy import per, source
+# from yaml import emit
 from logistic1.settings import EMAIL_HOST_USER
 from .backend import CheckAuth
 from .models import *
@@ -50,8 +50,8 @@ from django.http import HttpResponsePermanentRedirect
 import os,email
 import jwt
 from django.conf import settings
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+# from drf_yasg.utils import swagger_auto_schema
+# from drf_yasg import openapi
 from django.core.mail import EmailMessage,send_mail
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -67,8 +67,8 @@ from django.contrib import auth
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from datetime import datetime,timedelta
 from rest_framework.filters import SearchFilter,OrderingFilter
-from jose import jwt
-from jose.constants import ALGORITHMS
+# from jose import jwt
+# from jose.constants import ALGORITHMS
 from django.views.decorators.csrf import csrf_exempt
 import string
 
@@ -328,24 +328,20 @@ class StateAPI(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request):
         state = State.objects.all().values()
-        filter_backends = [SearchFilter]
-        Search_fields = ['^name',]
         return Response({'result': state})
- 
+    
     def post(self,request):
         data = request.data
         State_name=data.get('State_name')
         nm = re.search("^[a-zA-z]+",State_name)
         if not nm:
-            return Response('name should be alphabet')
-        # elif State.objects.filter(State_name=data['State_name']).exists():
-        return Response({'msg': 'State_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
-        # else:
-        #     state = State.objects.create(State_name=data['State_name'])
-        # return Response({'msg':'state_name is created successfully'})
+            return Response({'name should be alphabet'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif State.objects.filter(State_name=data['State_name']).exists():
+            return Response({'msg': 'State_name is created successfully!!'})
+        else:
+            state = State.objects.create(State_name=data['State_name'])
+        return Response({'msg':'state_name is created successfully'})
         
-
-            
     def put(self,request,pk):
         data = request.data
         if State.objects.filter(id=pk).exists():
@@ -411,7 +407,7 @@ class StatusAPI(APIView):
         nm = re.search("^[a-zA-z]+",Status_name)
         if not nm:
             return Response('Status_name should be alphabet')
-            return Response({'msg': 'Status_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
+            return Response({'msg': 'Status_name is created successfully!!'})
         if Status.objects.filter(Status_name=data['Status_name']).exists():
             return Response({'error': 'Status_name already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
         else:
@@ -866,6 +862,7 @@ class Drop_details_API(APIView):
             drop = serializer.save()
             return Response({'message': 'Drop_details is cteated successfully'})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
     def put(self,request,pk):
@@ -1402,11 +1399,11 @@ class verify_registration(APIView):
         #     return Response('please enter email')
 
 
-from pgeocode import GeoDistance        
-import googlemaps
-import ssl
-ssl.get_default_verify_paths()
-ssl._create_default_https_context = ssl._create_unverified_context
+# from pgeocode import GeoDistance        
+# import googlemaps
+# import ssl
+# ssl.get_default_verify_paths()
+# ssl._create_default_https_context = ssl._create_unverified_context
 
 class find_distance(APIView):
     permission_classes = (AllowAny,)

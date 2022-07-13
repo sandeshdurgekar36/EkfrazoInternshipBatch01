@@ -114,10 +114,10 @@ class Review(models.Model):
     linked_id = models.IntegerField(null=True)
 
 
-class Vehicles(models.Model):
-    name = models.CharField(max_length=100)
-    vehicles_number = models.IntegerField(null=True)
-    vehicles_type_id = models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
+# class Vehicles(models.Model):
+#     name = models.CharField(max_length=100)
+#     vehicles_number = models.IntegerField(null=True)
+#     vehicles_type_id = models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
 
 class Customer_address(models.Model):
     #customer_address_id= models.IntegerField(null=True)

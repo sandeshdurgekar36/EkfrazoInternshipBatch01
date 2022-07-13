@@ -1,7 +1,7 @@
 from pathlib import Path
 import django
 
-from pandas import Timedelta
+# from pandas import Timedelta
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 import os
 # from datetime import timedelta
