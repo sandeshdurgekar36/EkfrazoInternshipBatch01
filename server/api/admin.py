@@ -79,6 +79,7 @@ class Pickup_details(admin.ModelAdmin):
     list_display = ['Customer_address_id','pickup_data_time','pickup_date','pickup_time']
 
 @admin.register(Drop_details)
+
 class Drop_details(admin.ModelAdmin):
     list_display = ['Customer_address_id','drop_data_time','drop_date','drop_time','priority','drop_id_list']
 

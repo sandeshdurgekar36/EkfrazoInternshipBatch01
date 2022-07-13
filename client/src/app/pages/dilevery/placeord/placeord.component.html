@@ -1,0 +1,85 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="plcoform">
+        <h1>Place Order </h1><br>
+        <div class="row">
+            <div class="column" id="user_id">
+                <label for="user_id" >User ID</label>
+                <input formControlName="user_id" type="text" id="user_id" placeholder="Enter User ID">
+                <div class="alert alert-danger" *ngIf="user_id.invalid && user_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    User ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="pickup_id">Pickup Id</label>
+                <input formControlName="pickup_id" type="pickup_id" id="pickup_id" placeholder="Enter Pickup Id">
+                <div class="alert alert-danger" *ngIf="pickup_id.invalid && pickup_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Pickup Id is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="drop_id_list">Drop Id List</label>
+                <input formControlName="drop_id_list" type="drop_id_list" id="drop_id_list" placeholder="Enter Drop Id List">
+                    <div class="alert alert-danger" *ngIf="drop_id_list.invalid && drop_id_list.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Drop Id List is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="vehicles_type_id">vehicles Type Id</label>
+                <input formControlName="vehicles_type_id" type="vehicles_type_id" id="vehicles_type_id" placeholder="Enter vehicles_type_id">
+                <div class="alert alert-danger"  *ngIf="vehicles_type_id.invalid && vehicles_type_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    vehicles Type Id is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="total_estimated_KM">Total Estimated KM</label>
+                <input formControlName="total_estimated_KM" type="total_estimated_KM" id="total_estimated_KM" placeholder="Enter Total Estimated KM">
+                <div class="alert alert-danger"  *ngIf="total_estimated_KM.invalid && total_estimated_KM.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Total Estimated KM is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="total_estimated_AMT">Total Estimated AMT</label>
+                <input formControlName="total_estimated_AMT" type="total_estimated_AMT" id="total_estimated_AMT"  placeholder="Enter Total Estimated AMT">
+                <div class="alert alert-danger"  *ngIf="total_estimated_AMT.invalid && total_estimated_AMT.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Total Estimated AMT is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="ristrict_no_of_drop">Ristrict No of Drop</label>
+                <input formControlName="ristrict_no_of_drop" type="ristrict_no_of_drop" id="ristrict_no_of_drop" placeholder="Enter Ristrict No of Drop">
+                <div class="alert alert-danger" *ngIf="ristrict_no_of_drop.invalid && ristrict_no_of_drop.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem; ">
+                    Ristrict No of Drop is Required.
+                  </div>
+            </div>
+            <div class="column">
+                
+            </div>
+            
+        </div>
+        
+        <div class="container2">
+            <button  type="button" (click)="placeords()"  class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

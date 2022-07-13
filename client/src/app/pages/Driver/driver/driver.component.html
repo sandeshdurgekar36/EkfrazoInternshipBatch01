@@ -1,0 +1,103 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+<body><h1>Driver </h1>
+    <hr>
+<div class="container">   
+    <form [formGroup]="driverform">
+        <div class="row">
+            <div class="column" id="driving_license_id">
+                <label for="driving_license_id" >Driving License ID</label>
+                <input formControlName="driving_license_id" type="text" id="driving_license_id" placeholder="Enter  Driving License ID">
+                <div class="alert alert-danger" *ngIf="driving_license_id.invalid && driving_license_id.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Driving License ID is Required.
+                 </div>
+                
+            </div>
+            <div class="column">
+                <label for="vehicle_status">vehicle status</label>
+                <input formControlName="vehicle_status" type="vehicle_status" id="vehicle_status" placeholder="Enter vehicle status">
+                <div class="alert alert-danger" *ngIf="vehicle_status.invalid && vehicle_status.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    vehicle status is Required.
+                 </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="badge">Badge</label>
+                <input formControlName="badge" type="badge" id="badge" placeholder="Enter Badge">
+                <div class="alert alert-danger" *ngIf="badge.invalid && badge.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Badge is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="Image">License Image</label>
+                    <input formControlName="license_image" class="form-control" type="file" id="license_image">
+                    <div class="alert alert-danger" *ngIf="license_image.invalid && license_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        License Image is Required.
+                      </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="Image">Fitness Certificate Image</label>
+                    <input formControlName="fitness_certificate_image" class="form-control" type="file" id="fitness_certificate_image">
+                    <div class="alert alert-danger" *ngIf="fitness_certificate_image.invalid && fitness_certificate_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Fitness Certificate Image is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="Image">Emission Test Image</label>
+                    <input formControlName="emission_test_image" class="form-control" type="file" id="emission_test_image">
+                    <div class="alert alert-danger" *ngIf="emission_test_image.invalid && emission_test_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Emission Test Image is Required.
+                      </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="Image">Insurance Image</label>
+                    <input formControlName="insurence_image" class="form-control" type="file" id="insurence_image">
+                    <div class="alert alert-danger" *ngIf="insurence_image.invalid && insurence_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Insurance Image is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="Image">RC Image</label>
+                    <input formControlName="rc_image" class="form-control" type="file" id="rc_image">
+                    <div class="alert alert-danger" *ngIf="rc_image.invalid && rc_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        RC Image is Required.
+                      </div>
+                
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="Image">Permit Expire Image</label>
+                    <input formControlName="permit_expire_image" class="form-control" type="file" id="permit_expire_image">
+                    <div class="alert alert-danger" *ngIf="permit_expire_image.invalid && permit_expire_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Permit Expire Image is Required.
+                      </div>
+            </div>
+            <div class="column">
+                
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+        <button  type="button" (click)="drivers()" class="btn btn-outline-secondary">ADD</button>
+        
+    </div>
+    
+    </form>
+
+</div>
+</body>
+</html>

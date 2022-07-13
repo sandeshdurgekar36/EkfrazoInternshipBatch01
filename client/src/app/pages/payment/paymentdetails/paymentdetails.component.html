@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="paymentform">
+        <h1>Payment Details</h1><br>
+        <div class="row">
+            <div class="column" id="In_order_id">
+                <label for="In_order_id" >In Order ID</label>
+                <input formControlName="In_order_id" type="text" id="In_order_id" placeholder="Enter In Order ID">
+                <div class="alert alert-danger" *ngIf="In_order_id.invalid && In_order_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    In Order ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="amount">Amount Id</label>
+                <input formControlName="amount" type="amount" id="amount" placeholder="Enter Amount Id">
+                <div class="alert alert-danger" *ngIf="amount.invalid && amount.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Amount Id is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="provider">Provider</label>
+                <input formControlName="provider" type="provider" id="provider" placeholder="Enter Provider">
+                    <div class="alert alert-danger" *ngIf="provider.invalid && provider.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Provider is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="status_id">Status Id</label>
+                <input formControlName="status_id" type="status_id" id="status_id" placeholder="Enter Status Id">
+                <div class="alert alert-danger"  *ngIf="status_id.invalid && status_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Status Id is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="user_id">User ID</label>
+                <input formControlName="user_id" type="user_id" id="user_id" placeholder="Enter User ID">
+                <div class="alert alert-danger"  *ngIf="user_id.invalid && user_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    User ID is Required.
+                  </div>
+            </div>
+            <div class="column">
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="payments()"  class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

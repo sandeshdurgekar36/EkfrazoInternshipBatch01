@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="inplcform">
+        <h1>IN Order </h1><br>
+        <div class="row">
+            <div class="column" id="place_order_id">
+                <label for="place_order_id" >Place order ID</label>
+                <input formControlName="place_order_id" type="text" id="place_order_id" placeholder="Enter Place order ID">
+                <div class="alert alert-danger" *ngIf="place_order_id.invalid && place_order_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Place order ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="Coupon_id">Coupon Id</label>
+                <input formControlName="Coupon_id" type="Coupon_id" id="Coupon_id" placeholder="Enter Coupon Id">
+                <div class="alert alert-danger" *ngIf="Coupon_id.invalid && Coupon_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Coupon Id is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="final_amount">Final Amount</label>
+                <input formControlName="final_amount" type="final_amount" id="final_amount" placeholder="Enter Final Amount">
+                    <div class="alert alert-danger" *ngIf="final_amount.invalid && final_amount.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Final Amount is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="comment">comment</label>
+                <input formControlName="comment" type="comment" id="comment" placeholder="Enter comment">
+                <div class="alert alert-danger"  *ngIf="comment.invalid && comment.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    comment is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="driver_user_id">Driver User ID</label>
+                <input formControlName="driver_user_id" type="driver_user_id" id="driver_user_id" placeholder="Enter Driver User ID">
+                <div class="alert alert-danger"  *ngIf="driver_user_id.invalid && driver_user_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Driver User ID is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="Status_id">Status ID</label>
+                <input formControlName="Status_id" type="Status_id" id="Status_id"  placeholder="Enter Status ID">
+                <div class="alert alert-danger"  *ngIf="Status_id.invalid && Status_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Status ID is Required.
+                  </div>
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="inords()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

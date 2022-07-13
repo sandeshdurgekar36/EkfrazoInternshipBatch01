@@ -1,0 +1,69 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="acdetform">
+        <h1>Account Details</h1><br>
+        <div class="row">
+            <div class="column" id="acc_holder_name">
+                <label for="acc_holder_name" >Account Holder Name</label>
+                <input formControlName="acc_holder_name" type="text" id="acc_holder_name" placeholder="Enter Account Holder Name">
+                <div class="alert alert-danger" *ngIf="acc_holder_name.invalid && acc_holder_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Account Holder Name is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="bank">Bank</label>
+                <input formControlName="bank" type="bank" id="bank" placeholder="Enter Bank">
+                <div class="alert alert-danger" *ngIf="bank.invalid && bank.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Bank is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="branch">Branch</label>
+                <input formControlName="branch" type="branch" id="branch" placeholder="Enter Branch">
+                    <div class="alert alert-danger" *ngIf="branch.invalid && branch.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Branch is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="account_no">Account Number</label>
+                <input formControlName="account_no" type="account_no" id="account_no" placeholder="Enter Account Number">
+                <div class="alert alert-danger"  *ngIf="account_no.invalid && account_no.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Account Number is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="ifsc_code">IFSC Code</label>
+                <input formControlName="ifsc_code" type="ifsc_code" id="ifsc_code" placeholder="Enter IFSC Code">
+                <div class="alert alert-danger"  *ngIf="ifsc_code.invalid && ifsc_code.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    IFSC Code is Required.
+                  </div>
+            </div>
+            <div class="column">
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="accounts()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

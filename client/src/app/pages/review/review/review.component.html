@@ -1,0 +1,60 @@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="reviewform">
+        <h1>Review</h1><br>
+        <div class="row">
+            <div class="column" id="review_stars">
+                <label for="review_stars" >Review Stars</label>
+                <input formControlName="review_stars" type="text" id="review_stars" placeholder="Enter Review Stars">
+                <div class="alert alert-danger" *ngIf="review_stars.invalid && review_stars.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Review Stars is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="review_type">Review Type</label>
+                <input formControlName="review_type" type="review_type" id="review_type" placeholder="Enter  Review Type">
+                <div class="alert alert-danger" *ngIf="review_type.invalid && review_type.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Review Type is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="comments">Comments</label>
+                <input formControlName="comments" type="comments" id="comments" placeholder="Enter Comments">
+                    <div class="alert alert-danger" *ngIf="comments.invalid && comments.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Comments is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="linked_id">Linked ID</label>
+                <input formControlName="linked_id" type="linked_id" id="linked_id" placeholder="Enter Linked ID">
+                <div class="alert alert-danger"  *ngIf="linked_id.invalid && linked_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Linked ID is Required.
+                  </div>
+            </div>
+            
+        </div>
+       
+        
+        
+        <div class="container2">
+            
+            <button  type="button" (click)="reviews()"  class="btn btn-outline-secondary">ADD</button>
+            
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+<body><h1>Custom User </h1>
+    <hr>
+<div class="container">   
+    <form [formGroup]="customuform">
+        <div class="row">
+            <div class="column" id="Category">
+                <label for="Name" >First Name</label>
+                <input formControlName="first_name" type="text" id="fname" placeholder="Enter  First Name">
+                <div class="alert alert-danger" *ngIf="first_name.invalid && first_name.touched"  role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    First Name is Required.
+                 </div>
+                
+            </div>
+            <div class="column">
+                <label for="Category">Last Name</label>
+                <input formControlName="last_name" type="lname" id="lname" placeholder="Enter Last Name">
+                <div class="alert alert-danger" *ngIf="last_name.invalid && last_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Last Name is Required.
+                 </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="rating">Company Name</label>
+                <input formControlName="company_name" type="cname" id="cname" placeholder="Enter Company Name">
+                <div class="alert alert-danger" *ngIf="company_name.invalid && company_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Company Name is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="fsdisc">Mobile Number</label>
+                <input formControlName="mobile_number" pattern="^\d{10}$" required type="number" id="mobile number"  placeholder="Enter mobile_number">
+                <div class="alert alert-danger" *ngIf="mobile_number.invalid && mobile_number.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Mobile Number is Required and must be 10 digit.
+                  </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="rating">Addhar Card</label>
+                <input formControlName="adhaar_card" type="adhaar_card" id="adhaar_card" placeholder="Enter Addhar Card">
+                <div class="alert alert-danger" *ngIf="adhaar_card.invalid && adhaar_card.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Addhar Card is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="Image">Profile Image</label>
+                    <input formControlName="profile_image" class="form-control" type="file" id="profile_image">
+                    <div class="alert alert-danger" *ngIf="profile_image.invalid && profile_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Profile Image is Required.
+                      </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="Image">Pancard Image</label>
+                    <input formControlName="pancard_image" class="form-control" type="file" id="pancard_image">
+                    <div class="alert alert-danger" *ngIf="pancard_image.invalid && pancard_image.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Pancard Image is Required.
+                      </div>
+            </div>
+            <div class="column">
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+        <button  type="button" (click)="custusers()" class="btn btn-outline-secondary">ADD</button>
+        
+    </div>
+    
+    </form>
+
+</div>
+</body>
+</html>

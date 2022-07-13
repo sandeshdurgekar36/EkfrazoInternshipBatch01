@@ -328,6 +328,8 @@ class StateAPI(APIView):
     permission_classes = (permissions.AllowAny,)
     def get(self, request):
         state = State.objects.all().values()
+        filter_backends = [SearchFilter]
+        Search_fields = ['^name',]
         return Response({'result': state})
     
     def post(self,request):
@@ -342,6 +344,8 @@ class StateAPI(APIView):
             state = State.objects.create(State_name=data['State_name'])
         return Response({'msg':'state_name is created successfully'})
         
+
+            
     def put(self,request,pk):
         data = request.data
         if State.objects.filter(id=pk).exists():
@@ -407,7 +411,7 @@ class StatusAPI(APIView):
         nm = re.search("^[a-zA-z]+",Status_name)
         if not nm:
             return Response('Status_name should be alphabet')
-            return Response({'msg': 'Status_name is created successfully!!'})
+            return Response({'msg': 'Status_name is created successfully!!'},status=status.HTTP_406_NOT_ACCEPTABLE)
         if Status.objects.filter(Status_name=data['Status_name']).exists():
             return Response({'error': 'Status_name already exist'},status=status.HTTP_406_NOT_ACCEPTABLE)
         else:

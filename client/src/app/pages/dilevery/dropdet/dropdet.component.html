@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="dropdetform">
+        <h1>Drop Details</h1><br>
+        <div class="row">
+            <div class="column" id="Customer_address_id">
+                <label for="Customer_address_id" >Customer Address ID</label>
+                <input formControlName="Customer_address_id" type="text" id="Customer_address_id" placeholder="Enter Customer Address ID">
+                <div class="alert alert-danger" *ngIf="Customer_address_id.invalid && Customer_address_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Customer Address ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="drop_data_time">Drop Data Time</label>
+                <input formControlName="drop_data_time" type="drop_data_time" id="drop_data_time" placeholder="Enter  Drop Data Time">
+                <div class="alert alert-danger" *ngIf="drop_data_time.invalid && drop_data_time.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Drop Data Time is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="drop_date">Drop Date</label>
+                <input formControlName="drop_date" type="drop_date" id="drop_date" placeholder="Enter Drop Date">
+                    <div class="alert alert-danger" *ngIf="drop_date.invalid && drop_date.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Drop Date is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="drop_time">Drop Time</label>
+                <input formControlName="drop_time" type="drop_time" id="drop_time" placeholder="Enter Drop Time">
+                <div class="alert alert-danger"  *ngIf="drop_time.invalid && drop_time.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Drop Time is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="priority">Priority</label>
+                <input formControlName="priority" type="priority" id="priority" placeholder="Enter Priority">
+                <div class="alert alert-danger" *ngIf="priority.invalid && priority.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Priority is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="drop_id_list">Drop Id List</label>
+                <input formControlName="drop_id_list" type="drop_id_list" id="drop_id_list" placeholder="Enter Drop Id List">
+                <div class="alert alert-danger" *ngIf="drop_id_list.invalid && drop_id_list.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Drop Id List is Required.
+                  </div>
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="drops()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

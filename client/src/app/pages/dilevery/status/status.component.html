@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+<body>
+    <div class="container3">
+    <h2>Masters Table</h2>
+    <div class="scrollmenu">
+     <a href="masterpage" >User Role Ref</a>
+     <a href="vehicle">vehicle Type</a>
+     <a href="state" >State </a>
+     <a href="status" class="active">Status</a>
+     <a href="subscription">Subscription</a>
+     <a href="#blog"></a>
+     <a href="#blog"></a>
+      <a href="#blog"></a>
+   </div>    
+</div>
+</body>
+
+    
+<div class="container">   
+    <form [formGroup]="statusform">
+        <h1>Status </h1><br>
+        <div class="row">
+            <div class="column" id="Category">
+                <label for="Status_name">Status Name</label>
+                <input formControlName="status_name" type="Status_name" id="Status_name" placeholder="Enter Status Name">
+                <div class="alert alert-danger" *ngIf="status_name.invalid && status_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Status Name is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                
+               
+            </div>
+        </div>
+              
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="status()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

@@ -1,0 +1,58 @@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="pickupdform">
+        <h1>Pickup Details</h1><br>
+        <div class="row">
+            <div class="column" id="Customer_address_id">
+                <label for="Customer_address_id" >Customer Address ID</label>
+                <input formControlName="Customer_address_id" type="text" id="Customer_address_id" placeholder="Enter Customer Address ID">
+                <div class="alert alert-danger" *ngIf="Customer_address_id.invalid && Customer_address_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Customer Address ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="pickup_data_time">Pickup Data Time</label>
+                <input formControlName="pickup_data_time" type="pickup_data_time" id="pickup_data_time" placeholder="Enter  Pickup Data Time">
+                <div class="alert alert-danger" *ngIf="pickup_data_time.invalid && pickup_data_time.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Pickup Data Time is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="pickup_date">Pickup Date</label>
+                <input formControlName="pickup_date" type="pickup_date" id="pickup_date" placeholder="Enter Pickup Date">
+                    <div class="alert alert-danger" *ngIf="pickup_date.invalid && pickup_date.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Pickup Date is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="pickup_time">Pickup Time</label>
+                <input formControlName="pickup_time" type="pickup_time" id="pickup_time" placeholder="Enter Pickup Time">
+                <div class="alert alert-danger"  *ngIf="pickup_time.invalid && pickup_time.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    Pickup Time is Required.
+                  </div>
+            </div>
+            
+        </div>
+       
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="pickups()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>

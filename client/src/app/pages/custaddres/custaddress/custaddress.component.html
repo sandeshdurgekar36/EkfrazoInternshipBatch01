@@ -1,0 +1,74 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+</head>
+    
+<div class="container">   
+    <form [formGroup]="custaddresform">
+        <h1>Customer Address</h1><br>
+        <div class="row">
+            <div class="column" id="id">
+                <label for="id" > ID</label>
+                <input formControlName="id" type="text" id="id" placeholder="Enter  ID">
+                <div class="alert alert-danger" *ngIf="id.invalid && id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                     ID is Required.
+                  </div>
+                
+            </div>
+            <div class="column">
+                <label for="House_number">House Number</label>
+                <input formControlName="House_number" type="House_number" id="House_number" placeholder="Enter House_number Id">
+                <div class="alert alert-danger" *ngIf="House_number.invalid && House_number.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    House Number is Required.
+                  </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="address">Address</label>
+                <input formControlName="address" type="address" id="address" placeholder="Enter Address">
+                    <div class="alert alert-danger" *ngIf="address.invalid && address.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                        Address is Required.
+                      </div>
+            </div>
+            <div class="column">
+                <label for="city_id">City Id</label>
+                <input formControlName="city_id" type="city_id" id="city_id" placeholder="Enter City Id">
+                <div class="alert alert-danger"  *ngIf="city_id.invalid && city_id.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    City Id is Required.
+                  </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <label for="account_table_details">Account Table Details</label>
+                <input formControlName="account_table_details" type="account_table_details" id="account_table_details" placeholder="Enter Account Table Details">
+                <div class="alert alert-danger" *ngIf="account_table_details.invalid && account_table_details.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Account Table Details is Required.
+                  </div>
+            </div>
+            <div class="column">
+                <label for="account_no">Account Number</label>
+                <input formControlName="account_no" type="account_no" id="account_no" placeholder="Enter Account Number">
+                <div class="alert alert-danger" *ngIf="account_no.invalid && account_no.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
+                    Account Number is Required.
+                  </div>
+                
+            </div>
+            
+        </div>
+        
+        
+        <div class="container2">
+            <button  type="button" (click)="custaddrs()" class="btn btn-outline-secondary">ADD</button>
+            
+        </div>
+    
+    </form>
+
+</div>
+
+</html>
