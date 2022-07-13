@@ -1,58 +1,14 @@
-*,
-*:before,
-*:after{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Poppins",sans-serif;
-    font-weight: 500;
-}
-
-.container{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 10px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 48%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
-}
-.container2{
-    text-align: center;
-}
-.container3{
-      width: 100%;
-      padding: 25px 50px;
-      height: auto;
-      text-align: center;
-}
-.container4{
-    background-color: #ffffff;
-    width: 70%;
-    min-width: 420px;
-    padding: 35px 50px;
-    transform: translate(-50%,-50%);
-    position: absolute;
-    left: 50%;
-    top: 140%;
-    border-radius: 10px;
-    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
-}
 
 h1{
-    font-size: 28px;
-    text-align: center;
-    color: #1c093c;
-}
-h2{
     font-size: 30px;
     text-align: center;
     color: #1c093c;
+    padding: 10px 10px;
 }
 
+.container2{
+    text-align: center;
+}
 form{
     width: 100%;
     position: relative;
@@ -64,12 +20,10 @@ form{
     grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
     grid-gap: 20px 30px;
     margin-bottom: 20px;
-    text-align: center;
 }
 label{
     color: #1c093c;
     font-size: 14px;
-    text-align: center;
 }
 textarea,
 input{
@@ -79,7 +33,6 @@ input{
     border-radius: 5px;
     border: 1.2px solid #c4cae0;
     margin-top: 5px;
-    
 }
 textarea{
     resize: none;
@@ -94,7 +47,22 @@ button{
     border-radius: 2px;
     
 }
-
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 16px;
+h2{
+    font-size: 28px;
+    text-align: center;
+    color: #1c093c;
 }
+.container4{
+    background-color: #ffffff;
+    width: 70%;
+    min-width: 420px;
+    padding: 35px 50px;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    border-radius: 10px;
+    box-shadow: 20px 30px 25px rgba(0,0,0,0.15);
+}
+
+

@@ -79,7 +79,6 @@ class Review_Serializer(serializers.ModelSerializer):
         model = Review
         fields = '__all__'
 
-
 # class Vehicles_Serializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Vehicles

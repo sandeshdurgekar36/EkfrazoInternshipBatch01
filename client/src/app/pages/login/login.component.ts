@@ -1,9 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
-import { LoginService } from 'src/app/services/login.service';  '../services/login.service';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router'; 
-
 
 @Component({
   selector: 'app-login',
@@ -12,11 +7,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  
-      
-    constructor(private lService: LoginService,private fb:FormBuilder,private router:Router) { }
- 
+  constructor() { }
+
   ngOnInit(): void {
+<<<<<<< HEAD
+  }
+
+=======
     this.loginform = new FormGroup({
       'email' : new FormControl(null, [Validators.required, Validators.email]),
       'password':new FormControl(null, Validators.required)
@@ -44,4 +41,5 @@ export class LoginComponent implements OnInit {
     })
   }
   
+>>>>>>> 6fc0f60b6683a1c5a200dc2360fb80bb5c99a16c
 }

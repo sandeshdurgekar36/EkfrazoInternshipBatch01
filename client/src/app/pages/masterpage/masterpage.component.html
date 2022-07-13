@@ -7,12 +7,14 @@
     <div class="container3">
     <h2>Masters Table</h2>
     <div class="scrollmenu">
-     <a href="masterpage" class="active">User Role Ref</a>
-     <a href="vehicle">vehicle Type</a>
-     <a href="state">State </a>
-     <a href="status">Status</a>
-     <a href="subscription">Subscription</a>
-     
+     <a href="#addnewpc" class="active">Product Category</a>
+     <a href="#news">Product Sub Category</a>
+     <a href="#contact">Discount</a>
+     <a href="#about">Attributes and its option</a>
+     <a href="#support">Roles and Accsess</a>
+     <a href="#blog">Shipping Charges</a>
+     <a href="#blog">Shipping Charges</a>
+      <a href="#blog">Shipping Charges</a>
    </div>    
 </div>
 </body>
@@ -33,20 +35,64 @@
             
                 
             </div>
-            <div class="column">
-
+            <div class="row">
+                <div class="column">
+                    <label for="subject">Image</label>
+                    <input class="form-control" type="file" id="Image">
+                    <div class="alert alert-danger" role="alert" style="text-align: center;">
+                        Image is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    
+                </div>
             </div>
-        </div>
-              
-        
-        
-        <div class="container2">
-            <button [disabled]="userroleform.invalid"  type="button" (click)="lusers()" class="btn btn-outline-secondary"  >submit</button>
-          
-            
+            <div class="container2">
+            <button type="button" class="btn btn-outline-secondary">Add</button>
+            <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">              
+              </div>
         </div>
     
-    </form>
+    </div>
 
-</div>
-</html>
+    
+
+    <div class="container5">
+        <h1>Update Product Category </h1>        
+        <form>
+            <div class="row">
+                <div class="column" id="Category">
+                    <label for="name" >Product Category Name</label>
+                    <input type="text" id="name" placeholder="Product Category Name">
+                    <div class="alert alert-danger" role="alert" style="text-align: center;">
+                        Product Category Name is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="email">Product Category Description</label>
+                    <input type="email" id="email" placeholder="Product Category Description">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; ">
+                        Product Category Description is Required.
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="subject">Image</label>
+                    <input class="form-control" type="file" id="Image">
+                    <div class="alert alert-danger" role="alert" style="text-align: center;">
+                        Image is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    
+                </div>
+            </div>
+            <div class="container2">
+            <button type="button" class="btn btn-outline-secondary">Update</button>
+            <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">              
+            </div>
+        </div>
+        </form>
+    </div>
+

@@ -41,18 +41,13 @@ class vehicleType(models.Model):
 class FilterVehicleType(models.Model):
     vehicleTypeName= models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
 
-Subscription_TYPES = (
-            ('Basic', 'Basic'),
-            ('Gold', 'Gold'),
-            ('Premium', 'Premium'),
 
-        ) 
 
 class subscription(models.Model):
     
-    sub_plan_name =models.CharField(max_length=100,choices=Subscription_TYPES)
+    sub_plan_name =models.CharField(max_length=100)
     price = models.FloatField(max_length=10, null=True)
-    validity_period = models.DurationField(null=True)
+    validity_period = models.TimeField(null=True)
 
 
 class State(models.Model):
@@ -114,10 +109,10 @@ class Review(models.Model):
     linked_id = models.IntegerField(null=True)
 
 
-class Vehicles(models.Model):
-    name = models.CharField(max_length=100)
-    vehicles_number = models.IntegerField(null=True)
-    vehicles_type_id = models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
+# class Vehicles(models.Model):
+#     name = models.CharField(max_length=100)
+#     vehicles_number = models.IntegerField(null=True)
+#     vehicles_type_id = models.ForeignKey(vehicleType,on_delete=models.CASCADE,null=True)
 
 class Customer_address(models.Model):
     #customer_address_id= models.IntegerField(null=True)

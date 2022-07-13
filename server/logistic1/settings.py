@@ -26,9 +26,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER ='patil6soumya@gmail.com'
-EMAIL_HOST_PASSWORD = '@Soumya1234'
+EMAIL_HOST_USER ='demo.django.login@gmail.com'
+EMAIL_HOST_PASSWORD = 'hnsbungwehfyordt'
 EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'Logistics(Vehicle Transportation) <demo.django.login@gmail.com>'
 
 
 
@@ -79,8 +81,10 @@ ROOT_URLCONF = 'logistic1.urls'
 
 TEMPLATES = [
     {
+        
+        'DIRS': [os.path.join(BASE_DIR, 'sendmail/templates')],
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

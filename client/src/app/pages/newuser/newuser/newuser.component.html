@@ -2,67 +2,110 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
-
 </head>
+<body>
+    <div class="container3">
+    <h2>Add New User</h2>
+            <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1" class = "active">Individual User</mat-radio-button>
+            <mat-radio-button value="2" >Import User</mat-radio-button>
+          </mat-radio-group>        
+</div>
+<hr>
+</body>
     <div class="container">
-        <form [formGroup]="nuser!">
-            <h2>Add User</h2>
-             <div class="row">
+        <form>
+            <div class="row">
                 <div class="column" id="Category">
                     <label for="Username" >Username</label>
-                    <input formControlName="username" type="text" id="Username" placeholder="Enter Username">
-                    <div class="alert alert-danger" *ngIf="username.invalid && username.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem; ">
+                    <input type="text" id="Username" placeholder="Enter Username">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px;">
                         Username is Required.
                       </div>
                 </div>
                 <div class="column">
-                    <label for="first_name">First Name</label>
-                    <input formControlName="first_name" type="first_name" id="first_name" placeholder="Enter First Name">
-                    <div class="alert alert-danger" *ngIf="first_name.invalid && first_name.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
-                        First Name is Required.
-                      </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="last_name">Last Name</label>
-                    <input formControlName="last_name" type="last_name" id="last_name" placeholder="Enter Last Name">
-                    <div class="alert alert-danger" *ngIf="last_name.invalid && last_name.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;  ">
-                        Last Name is Required.
-                      </div>
-                </div>
-                <div class="column">
-                    <label for="email">Email</label>
-                    <input formControlName="email" type="email"  placeholder="Enter Email">
-                    <div class="alert alert-danger" *ngIf="email.invalid && email.touched" role="alert" style="text-align: center; padding: 2px; margin: 1rem;padding: 2px; margin: 1rem;  ">
-                        Email is Required.
-                      </div>
-                </div>
-                
-            </div>
-            <div class="row">
-                <div class="column">
-                    <label for="password">Password</label>
-                    <input formControlName="password"  type="password" id="password" placeholder="Enter Password">
-                    <div class="alert alert-danger" *ngIf="password.invalid && password.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
+                    <label for="Password">Password</label>
+                    <input type="Password" id="Password" placeholder="Enter Password">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
                         Password is Required.
                       </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="column">
-                    <label for="confirm_password">Confirm Password</label>
-                    <input formControlName="confirm_password" type="password" id="confirm_password"  placeholder="Confirm Password">
-                    <div class="alert alert-danger"*ngIf="password.invalid && password.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;  ">
-                         Password is Required.
+                    <label for="Email">Email</label>
+                    <input type="Email" id="Email" placeholder="Enter Email">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Email is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="Phone Number">Phone Number</label>
+                    <input type="Phone Number" id="Phone Number" placeholder="Enter Phone Number">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Phone Number is Required.
                       </div>
                 </div>
                 
             </div>
-            
+            <div class="row">
+                <div class="column">
+                    <label for="Full Name">Full Name</label>
+                    <input type="Full Name" id="Full Name" placeholder="Enter Full Name">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Full Name is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="dateofBirth">Date Of Birth</label>
+                    <input type="date" id="dateofBirth"  placeholder="Enter Password">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Date Of Birth is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="City">City</label>
+                    <input type="City" id="City" placeholder="Enter City">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        City is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="State">State</label>
+                    <input type="State" id="State" placeholder="Enter State">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        State is Required.
+                      </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="column">
+                    <label for="Address">Address</label>
+                    <input type="Address" id="Address" placeholder="Enter Email">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        Address is Required.
+                      </div>
+                </div>
+                <div class="column">
+                    <label for="pincode">Pin Code</label>
+                    <input type="pincode" id="pincode" placeholder="Enter pincode">
+                    <div class="alert alert-danger" role="alert" style="text-align: center; padding: 10px 10px; ">
+                        pincode is Required.
+                      </div>
+                </div>
+                
+            </div>
             <div class="container2">
-            <button [disabled]="nuser!.invalid" type="button" class="btn btn-outline-secondary">Submit</button>
-                  </div>
+            <button type="button" class="btn btn-outline-secondary">Submit</button>
+            <div class="alert alert-danger" role="alert" style="text-align: center; padding: 2px; margin: 1rem;">              
+              </div>
+        </div>
         </form>
-    </div>
 
-   
+    </div>
+ 
 </html>
