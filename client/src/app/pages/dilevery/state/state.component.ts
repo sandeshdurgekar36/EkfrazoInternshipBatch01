@@ -32,6 +32,9 @@ export class StateComponent implements OnInit {
     this.sService.states(this.stateform.value).subscribe(response =>{
       alert("State Added");
       console.log(response)
+    },
+    error =>{
+        console.log(error)
     })
 
   }

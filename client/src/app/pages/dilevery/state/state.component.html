@@ -12,9 +12,7 @@
      <a href="state" class="active">State </a>
      <a href="status">Status</a>
      <a href="subscription">Subscription</a>
-     <a href="#blog"></a>
-     <a href="#blog"></a>
-      <a href="#blog"></a>
+     
    </div>    
 </div>
 </body>
@@ -23,17 +21,17 @@
 <div class="container">   
     <form [formGroup]="stateform">
         <h1>State </h1><br>
-        <div class="row">
-            <div class="column" id="Category">
-                
-                
-            </div>
-            <div class="column">
+        <div class="" style="padding:22px 13px ;">
+            <div class="column" id="Category" >
                 <label for="State_name">State Name</label>
                 <input formControlName="State_name" type="State_name" id="State_name" placeholder="Enter State Name">
                 <div class="alert alert-danger" *ngIf="State_name.invalid && State_name.touched" role="alert" style="text-align: center;padding: 2px; margin: 1rem;">
                     State Name is Required
                   </div>
+                
+            </div>
+            <div class="column" >
+                
                
             </div>
         </div>

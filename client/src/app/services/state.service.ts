@@ -7,10 +7,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 })
 export class StateService {
   
-  api_link: string = "http://127.0.0.1:8000/";
+  api_link: string = "localhost:8000/";
   constructor(private http : HttpClient) { }
 
 states(data:any){ 
-  return this.http.post(this.api_link + 'StateAPI/',data);
+  return this.http.post('http://localhost:8000/StateAPI/',data);
 }
 }
