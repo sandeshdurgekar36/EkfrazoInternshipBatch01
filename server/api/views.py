@@ -100,17 +100,17 @@ class UserRoleApi(APIView):
     def post(self,request):
         data= request.data
         if data:
-            user= subscription.objects.create( User_Role_Name= data['User_Role_Name'])
-            return Response('Subscription added Succesfully')
+            user= UserRole.objects.create( User_Role_Name= data['User_Role_Name'])
+            return Response('User-Role added Succesfully')
 
         
     def put(self,request,pk):
         data = request.data
-        if vehicleType.objects.filter(id=pk).exists():
-            vehicleType.objects.filter(id=pk).update(User_Role_Name=data['User_Role_Name'])
-            return Response('Vehicle data updated ')
+        if UserRole.objects.filter(id=pk).exists():
+            UserRole.objects.filter(id=pk).update(User_Role_Name=data['User_Role_Name'])
+            return Response('Role updated ')
         else:
-            return Response('vehicle_id not Found',status=status.HTTP_404_NOT_FOUND)
+            return Response('User Role_id not Found',status=status.HTTP_404_NOT_FOUND)
 
     # def patch(self,request,pk,  format=None):
     #     id = pk
@@ -283,17 +283,12 @@ class subscriptionApi(APIView):
         else:
             return Response('Subscription_id not Found',status=status.HTTP_404_NOT_FOUND)
 
-    
-    
-    def put(self,request,pk,  format=None):
-        id = pk
-        role = subscription.objects.get(pk=id)
-        serializer = subscriptionSerializer(role,data=request.data)
-        if serializer.is_valid():
-
-            serializer.save()
-            return Response( 'Subscription Data Updated')
-        return Response(serializer.errors,status=status.HTTP_404_BAD_REQUEST)
+    def delete(self,request,pk):
+        if subscription.objects.filter(id=pk).exists():
+            subscription.objects.filter(id=pk).delete()
+            return Response('Deleted successfully')
+        else:
+            return Response('Data not found to delete')
 
 
 class SubscriptionfilterList(ListAPIView):
@@ -1386,11 +1381,11 @@ class verify_registration(APIView):
         
 
 
-# from pgeocode import GeoDistance        
-# import googlemaps
-# import ssl
-# ssl.get_default_verify_paths()
-# ssl._create_default_https_context = ssl._create_unverified_context
+from pgeocode import GeoDistance        
+import googlemaps
+import ssl
+ssl.get_default_verify_paths()
+ssl._create_default_https_context = ssl._create_unverified_context
 
 class find_distance(APIView):
     permission_classes = (AllowAny,)

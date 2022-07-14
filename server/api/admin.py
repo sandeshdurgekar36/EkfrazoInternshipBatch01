@@ -85,7 +85,7 @@ class Drop_details(admin.ModelAdmin):
 
 @admin.register(Place_order)
 class Place_order(admin.ModelAdmin):
-    list_dispaly = ['user_id','pickup_id','drop_id_list','vehicles_type_id','total_estimated_KM','total_estimated_AMT','ristrict_no_of_drop']
+    list_dispaly = ['user_id','pickup_id','drop_id_list','vehicles_type_id','total_estimated_KM','total_estimated_AMT','ristrict_no_of_drop','status']
 
 @admin.register(In_order)
 class In_order(admin.ModelAdmin):

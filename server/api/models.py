@@ -136,6 +136,9 @@ class Pickup_details(models.Model):
     pickup_date = models.DateField(null=True)
     pickup_time = models.TimeField(max_length=10)
 
+    def __str__(self):
+        return self.pickup_data_time
+
 class Drop_details(models.Model):
     Customer_address_id = models.ForeignKey(Customer_address,on_delete=models.CASCADE,null=True)
     drop_data_time = models.CharField(max_length=100,null=True,blank=True)
@@ -152,6 +155,7 @@ class Place_order(models.Model):
     total_estimated_KM = models.IntegerField(null=True)
     total_estimated_AMT = models.IntegerField(null=True)
     ristrict_no_of_drop = models.IntegerField(null=True)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True, blank=True)
 
 class In_order(models.Model):
     place_order_id = models.ForeignKey(Place_order,on_delete=models.CASCADE,null=True)

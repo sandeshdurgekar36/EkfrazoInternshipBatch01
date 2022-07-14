@@ -102,7 +102,7 @@ class Drop_details_serializer(serializers.ModelSerializer):
 class Place_order_serializer(serializers.ModelSerializer):
     class Meta:
         model = Place_order
-        fields = ['user_id','pickup_id','drop_id_list','vehicles_type_id','total_estimated_KM','total_estimated_AMT','ristrict_no_of_drop']
+        fields = ['user_id','pickup_id','drop_id_list','vehicles_type_id','total_estimated_KM','total_estimated_AMT','ristrict_no_of_drop','status']
 
 class In_order_serializer(serializers.ModelSerializer):
     class Meta:
@@ -183,6 +183,7 @@ class registerownerSerializer(serializers.ModelSerializer):
     class Meta:
         model = registerowner
         fields='__all__'    
+        extra_kwargs = {'fullname': {'required': True}}
 
     def create(self, validated_data):
         user = registerowner.objects.create(fullname=validated_data['fullname'],email=validated_data['email'],mobile_number=validated_data['mobile_number'])

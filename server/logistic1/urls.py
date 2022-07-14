@@ -65,6 +65,15 @@ urlpatterns = [
     path('Account_details_API/',views.Account_details_API.as_view()),
     path('Account_details_API/<int:pk>/',views.Account_details_API.as_view()),
 
+    path('registration/', views.RegisterUserAPIView.as_view()),
+    path('login/',views.login1Api.as_view()),
+    path('forgot_password_send_otp/',views.forgot_password_send_otp.as_view()),
+    path('check_otp/',views.check_otp.as_view()),
+    path('ForgotPasswordUpdate/',views.ForgotPasswordUpdate.as_view()),
+    path('registerowner/',views.registerowner.as_view()),
+    path('verify_registration/',views.verify_registration.as_view()),
+    path('find_distance/',views.find_distance.as_view()),
+
     # path('Order_tracker_API/',views.Order_tracker_API.as_view()),
     # path('Order_tracker_API/<int:pk>/',views.Order_tracker_API.as_view()),
 ]
